@@ -1,14 +1,103 @@
 @import "tailwindcss";
 @theme inline { --font-serif: var(--font-lora), Georgia, serif; --font-sans: var(--font-inter), system-ui, sans-serif; }
+
+html { scroll-behavior: smooth; }
 body { background: #f5f5f5; color: #17171a; font-family: var(--font-sans); }
-.card { background: #fff; border: 1px solid #e6e6e6; border-radius: 16px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
-.dark-card { color: #fff; border-radius: 16px; box-shadow: 0 14px 30px rgba(0,0,0,.22);
-  background: radial-gradient(90% 70% at 85% 10%, #35353c 0%, transparent 60%), radial-gradient(60% 50% at 20% 90%, #26262c 0%, transparent 70%), #121215; }
-.btn { display: inline-flex; align-items: center; gap: 6px; border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 600; }
-.btn-dark { background: #17171a; color: #fff; } .btn-light { background: #fff; color: #17171a; border: 1px solid #ddd; }
+
+/* ── Cards ── */
+.card {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05);
+  transition: box-shadow .2s, transform .2s;
+}
+.card-hover:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,.10);
+  transform: translateY(-3px);
+}
+.dark-card {
+  color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(0,0,0,.22);
+  background: radial-gradient(90% 70% at 85% 10%, #35353c 0%, transparent 60%),
+              radial-gradient(60% 50% at 20% 90%, #26262c 0%, transparent 70%),
+              #121215;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: opacity .15s, transform .15s;
+}
+.btn:hover { opacity: .88; transform: translateY(-1px); }
+.btn-dark { background: #17171a; color: #fff; }
+.btn-light { background: #fff; color: #17171a; border: 1px solid #ddd; }
+
+/* ── Marquee ── */
 .marquee { display: flex; width: max-content; animation: marquee 28s linear infinite; }
 @keyframes marquee { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
-details > summary { list-style: none; cursor: pointer; } details > summary::-webkit-details-marker { display: none; }
-details[open] .plus { transform: rotate(45deg); } .plus { transition: transform .2s; }
-.wordmark { background: linear-gradient(#2a2a2e 30%, transparent 95%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* ── FAQ ── */
+details > summary { list-style: none; cursor: pointer; user-select: none; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .plus { transform: rotate(45deg); }
+.plus { transition: transform .2s; }
+
+/* ── Footer wordmark ── */
+.wordmark {
+  background: linear-gradient(#2a2a2e 30%, transparent 95%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ── Pill ── */
+.pill {
+  display: inline-block;
+  border-radius: 9999px;
+  border: 1px solid #e0e0e0;
+  background: #fff;
+  padding: 4px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .03em;
+}
+
+/* ── Nav active link ── */
+.nav-active {
+  border: 1.5px solid #17171a;
+  border-radius: 8px;
+}
+
+/* ── Gradient covers (course cards) hover ── */
+.course-card { transition: transform .22s, box-shadow .22s; }
+.course-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(0,0,0,.14); }
+
+/* ── Form inputs ── */
+.field {
+  width: 100%;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background: #fff;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-family: var(--font-sans);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.field:focus { border-color: #17171a; box-shadow: 0 0 0 3px rgba(23,23,26,.08); }
+.field-error { border-color: #e53e3e !important; }
+
+/* ── Syllabus accordion ── */
+details.module > summary { list-style: none; cursor: pointer; }
+details.module > summary::-webkit-details-marker { display: none; }
+details.module[open] .mod-plus { transform: rotate(45deg); }
+.mod-plus { transition: transform .2s; }
