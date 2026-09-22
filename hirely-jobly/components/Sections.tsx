@@ -116,16 +116,16 @@ export const Hero = () => (
       </div>
 
       {/* Hero student portrait */}
-      <div className="absolute inset-y-0 right-0 hidden w-[45%] md:block overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-y-0 right-0 hidden w-[48%] md:block overflow-hidden rounded-r-[28px]" aria-hidden="true">
         <Image
           src="/images/hero-student.jpg"
           alt="Student learning at Hirely & Jobly"
           fill
-          className="object-cover object-left"
+          className="object-cover object-center"
           priority
         />
         {/* gradient fade on the left edge so text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#e9e9ec] via-transparent to-transparent w-1/3" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#e9e9ec] via-[#e9e9ec]/20 to-transparent" style={{width: '38%'}} />
       </div>
       {/* Frosted glass counselling card */}
       <motion.div
@@ -167,28 +167,38 @@ export const Benefits = () => (
         <Reveal key={b.t} delay={i}>
           <div className="card card-hover overflow-hidden h-full">
             {/* Visual mockup */}
-            <div className="h-44 overflow-hidden bg-neutral-50 p-4">
+            <div className="h-44 overflow-hidden relative">
               {i === 0 && (
-                <div className="space-y-2 text-xs">
-                  {["Module 1: Foundations", "Module 2: Core concepts", "Module 3: Capstone project"].map((m, k) => (
-                    <div key={m} className={`rounded-lg border px-3 py-2 font-medium ${k === 1 ? "bg-neutral-900 text-white border-neutral-900" : "bg-white text-neutral-700"}`}>{m}</div>
-                  ))}
-                </div>
+                <>
+                  <Image src="/images/courses/ai-ml.jpg" alt="Industry-built curriculum" fill className="object-cover" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+                  <div className="absolute bottom-3 left-3 right-3 space-y-1.5 text-xs">
+                    {["Module 1: Foundations", "Module 2: Core concepts", "Module 3: Capstone project"].map((m, k) => (
+                      <div key={m} className={`rounded-lg px-3 py-1.5 font-medium backdrop-blur-sm ${k === 1 ? "bg-white text-neutral-900" : "bg-white/20 text-white border border-white/30"}`}>{m}</div>
+                    ))}
+                  </div>
+                </>
               )}
               {i === 1 && (
-                <svg viewBox="0 0 200 100" className="h-full w-full" aria-hidden="true">
-                  <path d="M0 80 L30 55 L60 65 L90 30 L120 50 L150 20 L200 40 V100 H0Z" fill="#e5e5e5" />
-                  <path d="M0 80 L30 55 L60 65 L90 30 L120 50 L150 20 L200 40" fill="none" stroke="#888" strokeWidth="1.5" />
-                  <circle cx="90" cy="30" r="3" fill="#17171a" />
-                  <circle cx="150" cy="20" r="3" fill="#17171a" />
-                </svg>
+                <>
+                  <Image src="/images/about-mentor-session.jpg" alt="Hands-on projects with mentors" fill className="object-cover object-top" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                  <div className="absolute bottom-3 left-3 flex gap-1.5">
+                    {["React", "Python", "Figma", "Unity"].map((tag) => (
+                      <span key={tag} className="rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-neutral-800">{tag}</span>
+                    ))}
+                  </div>
+                </>
               )}
               {i === 2 && (
-                <div className="card mx-auto max-w-[220px] p-4 text-xs shadow-sm">
-                  <span className="rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold text-emerald-700">Offer received</span>
-                  <div className="mt-3 font-semibold text-neutral-900">Junior Developer</div>
-                  <div className="text-neutral-500 mt-0.5">Hyderabad · ₹4.5 LPA</div>
-                </div>
+                <>
+                  <Image src="/images/counsellor.jpg" alt="Placement support" fill className="object-cover object-top" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                  <div className="absolute bottom-3 left-3">
+                    <span className="rounded-full bg-emerald-400 px-2.5 py-1 text-[10px] font-bold text-emerald-950">✓ Offer received</span>
+                    <div className="mt-1.5 text-xs font-semibold text-white">Junior Developer · ₹4.5 LPA</div>
+                  </div>
+                </>
               )}
             </div>
             <div className="p-5">
@@ -210,10 +220,19 @@ export const Courses = () => (
       {courses.map((c, i) => (
         <Reveal key={c.slug} delay={i * 0.5}>
           <Link href={`/courses/${c.slug}`} className="card course-card group block p-2">
-            <div className={`flex h-56 items-end rounded-xl bg-gradient-to-br p-5 ${c.cover} ${c.dark ? "text-white" : "text-neutral-900"}`}>
-              <div>
-                <div className="font-serif text-2xl leading-tight">{c.name}</div>
-                <div className="mt-1 text-xs opacity-80">{c.meta}</div>
+            <div className="relative h-56 overflow-hidden rounded-xl">
+              <Image
+                src={`/images/courses/${c.slug}.jpg`}
+                alt={c.name}
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div className={`absolute inset-0 bg-gradient-to-br opacity-70 ${c.cover}`} />
+              <div className="absolute inset-0 flex items-end p-5">
+                <div>
+                  <div className={`font-serif text-2xl leading-tight ${c.dark ? "text-white" : "text-neutral-900"}`}>{c.name}</div>
+                  <div className={`mt-1 text-xs opacity-80 ${c.dark ? "text-white" : "text-neutral-900"}`}>{c.meta}</div>
+                </div>
               </div>
             </div>
             <div className="flex items-center justify-between px-2 py-3 text-sm">
@@ -245,15 +264,15 @@ export const Why = () => (
     <div className="grid gap-4 md:grid-cols-3">
       <div className="space-y-4">
         <Reveal>
-          <div className="card card-hover p-4 text-sm">
-            <span className="mr-2 inline-flex -space-x-2">
+          <div className="card card-hover p-4 text-sm flex items-center gap-3">
+            <span className="inline-flex -space-x-3">
               {["/images/avatars/avatar-1.jpg", "/images/avatars/avatar-2.jpg", "/images/avatars/avatar-3.jpg", "/images/avatars/avatar-4.jpg"].map((src, k) => (
-                <span key={k} className="relative inline-block h-7 w-7 rounded-full border-2 border-white overflow-hidden">
-                  <Image src={src} alt={`Mentor ${k + 1}`} fill className="object-cover" />
+                <span key={k} className="relative inline-block h-9 w-9 rounded-full border-2 border-white overflow-hidden shadow-sm">
+                  <Image src={src} alt={`Student ${k + 1}`} fill className="object-cover object-top" />
                 </span>
               ))}
             </span>
-            {why.clients}
+            <span className="font-semibold text-neutral-800">{why.clients}</span>
           </div>
         </Reveal>
         <Reveal delay={1}>
@@ -268,11 +287,15 @@ export const Why = () => (
       </div>
       <div className="space-y-4">
         <Reveal>
-          <div className="card card-hover flex h-56 flex-col justify-between p-5">
-            <p className="text-sm text-neutral-600">Real projects built with mentors, reviewed every week.</p>
-            <div>
-              <div className="font-serif text-5xl font-bold">{why.proj}</div>
-              <div className="text-xs text-neutral-500">{why.projL}</div>
+          <div className="relative overflow-hidden rounded-2xl h-56">
+            <Image src="/images/about-classroom.jpg" alt="Students in class" fill className="object-cover object-center" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+            <div className="absolute inset-0 flex flex-col justify-between p-5">
+              <p className="text-sm text-white/80 font-medium">Real projects built with mentors, reviewed every week.</p>
+              <div>
+                <div className="font-serif text-5xl font-bold text-white">{why.proj}</div>
+                <div className="text-xs text-white/70">{why.projL}</div>
+              </div>
             </div>
           </div>
         </Reveal>
@@ -284,9 +307,20 @@ export const Why = () => (
         </Reveal>
       </div>
       <Reveal delay={1}>
-        <div className="dark-card flex min-h-72 flex-col justify-between p-6">
-          <p className="text-sm text-neutral-200 leading-relaxed">{why.quote}</p>
-          <div className="flex items-end gap-3">
+        <div className="dark-card flex min-h-72 flex-col justify-between p-6 relative overflow-hidden">
+          {/* Student portrait collage in top-right */}
+          <div className="absolute top-0 right-0 w-24 h-32 opacity-40" aria-hidden="true">
+            <div className="grid grid-cols-2 gap-0.5 h-full">
+              {["/images/avatars/ananya.jpg", "/images/avatars/karthik.jpg", "/images/avatars/sneha.jpg", "/images/avatars/avatar-2.jpg"].map((src, k) => (
+                <div key={k} className="relative overflow-hidden">
+                  <Image src={src} alt="" fill className="object-cover object-top" />
+                </div>
+              ))}
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#121215] via-transparent to-transparent" />
+          </div>
+          <p className="relative text-sm text-neutral-200 leading-relaxed max-w-[80%]">{why.quote}</p>
+          <div className="relative flex items-end gap-3">
             <span className="font-serif text-5xl font-bold">{why.rating}</span>
             <span className="pb-1 text-xs text-neutral-400">
               <span className="flex text-amber-400">
@@ -342,33 +376,37 @@ export const Testimonials = () => (
     </div>
     <div className="grid gap-4 md:grid-cols-3">
       <Reveal>
-        <div className="dark-card flex min-h-64 flex-col justify-between p-6">
-          <div>
+        <div className="dark-card flex min-h-64 flex-col justify-between p-6 overflow-hidden relative">
+          {/* Background student photo, subtle */}
+          <div className="absolute inset-0 opacity-15" aria-hidden="true">
+            <Image src="/images/avatars/ananya.jpg" alt="" fill className="object-cover object-top scale-110" />
+          </div>
+          <div className="relative">
             <span className="flex text-amber-400">{[...Array(5)].map((_, k) => <Star key={k} size={12} fill="currentColor" />)}</span>
             <p className="mt-3 text-sm text-neutral-200 leading-relaxed">{testimonials[0].q}</p>
           </div>
-          <div className="flex items-center gap-2 text-xs">
-            <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-white/20">
-              <Image src="/images/avatars/ananya.jpg" alt={testimonials[0].n} fill className="object-cover" />
+          <div className="relative flex items-center gap-3 text-xs">
+            <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-white/30">
+              <Image src="/images/avatars/ananya.jpg" alt={testimonials[0].n} fill className="object-cover object-top" />
             </span>
             <div>
-              <b>{testimonials[0].n}</b>
-              <div className="text-neutral-400">{testimonials[0].r}</div>
+              <b className="text-sm">{testimonials[0].n}</b>
+              <div className="text-neutral-400 mt-0.5">{testimonials[0].r}</div>
             </div>
           </div>
         </div>
       </Reveal>
       <div className="space-y-4">
         <Reveal delay={1}>
-          <div className="card card-hover flex min-h-52 flex-col justify-between p-5">
+          <div className="card card-hover flex min-h-52 flex-col justify-between p-5 overflow-hidden relative">
             <p className="text-sm text-neutral-700 leading-relaxed">{testimonials[1].q}</p>
-            <div className="flex items-center gap-2 text-xs">
-              <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-neutral-200">
-                <Image src="/images/avatars/karthik.jpg" alt={testimonials[1].n} fill className="object-cover" />
+            <div className="flex items-center gap-3 text-xs">
+              <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-neutral-200">
+                <Image src="/images/avatars/karthik.jpg" alt={testimonials[1].n} fill className="object-cover object-top" />
               </span>
               <div>
-                <b>{testimonials[1].n}</b>
-                <div className="text-neutral-500">{testimonials[1].r}</div>
+                <b className="text-sm text-neutral-900">{testimonials[1].n}</b>
+                <div className="text-neutral-500 mt-0.5">{testimonials[1].r}</div>
               </div>
             </div>
           </div>
@@ -386,15 +424,15 @@ export const Testimonials = () => (
           </Link>
         </Reveal>
         <Reveal delay={2}>
-          <div className="card card-hover flex min-h-52 flex-col justify-between p-5">
+          <div className="card card-hover flex min-h-52 flex-col justify-between p-5 overflow-hidden relative">
             <p className="text-sm text-neutral-700 leading-relaxed">{testimonials[2].q}</p>
-            <div className="flex items-center gap-2 text-xs">
-              <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-neutral-200">
-                <Image src="/images/avatars/sneha.jpg" alt={testimonials[2].n} fill className="object-cover" />
+            <div className="flex items-center gap-3 text-xs">
+              <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-neutral-200">
+                <Image src="/images/avatars/sneha.jpg" alt={testimonials[2].n} fill className="object-cover object-top" />
               </span>
               <div>
-                <b>{testimonials[2].n}</b>
-                <div className="text-neutral-500">{testimonials[2].r}</div>
+                <b className="text-sm text-neutral-900">{testimonials[2].n}</b>
+                <div className="text-neutral-500 mt-0.5">{testimonials[2].r}</div>
               </div>
             </div>
           </div>
