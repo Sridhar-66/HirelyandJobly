@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowLeft, ArrowUpRight, Target, MapPin, Sparkles } from "lucide-react";
 import { Nav, Footer } from "@/components/Sections";
 import { site } from "@/data/content";
@@ -22,8 +23,8 @@ export default function AboutPage() {
         </Link>
 
         {/* Hero Banner */}
-        <div className="rounded-[28px] bg-[#e9e9ec] px-6 py-14 md:px-12 md:py-20 mb-16">
-          <div className="max-w-2xl">
+        <div className="relative overflow-hidden rounded-[28px] bg-[#e9e9ec] px-6 py-14 md:px-12 md:py-20 mb-16">
+          <div className="relative z-10 max-w-2xl">
             <span className="pill mb-4 inline-block">Our Story & Mission</span>
             <h1 className="font-serif text-3xl md:text-5xl leading-tight font-bold text-neutral-900">
               Transforming college potential into real-world engineering careers.
@@ -31,6 +32,17 @@ export default function AboutPage() {
             <p className="mt-5 text-sm md:text-base text-neutral-600 leading-relaxed">
               Based in {site.city}, Hirely and Jobly was founded with a singular purpose: to give B.Tech students the exact skills, mentor guidance, and portfolio projects that modern tech companies look for during hiring.
             </p>
+          </div>
+          {/* Classroom photo on the right */}
+          <div className="absolute inset-y-0 right-0 hidden w-[42%] md:block overflow-hidden" aria-hidden="true">
+            <Image
+              src="/images/about-classroom.jpg"
+              alt="Classroom at Hirely and Jobly training centre"
+              fill
+              className="object-cover object-left"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#e9e9ec] via-[#e9e9ec]/30 to-transparent w-2/5" />
           </div>
         </div>
 
@@ -103,9 +115,19 @@ export default function AboutPage() {
 
         {/* Pillars */}
         <section className="mb-16">
-          <div className="mb-8">
-            <span className="pill mb-2 inline-block">Core Pillars</span>
-            <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-900">How we deliver on our promise</h2>
+          {/* Mentor session photo */}
+          <div className="relative h-56 w-full overflow-hidden rounded-2xl mb-8">
+            <Image
+              src="/images/about-mentor-session.jpg"
+              alt="Mentor and student working together at Hirely & Jobly"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+            <div className="absolute bottom-5 left-6 text-white">
+              <span className="pill mb-2 inline-block bg-white/20 text-white border-white/20">Core Pillars</span>
+              <h2 className="font-serif text-2xl md:text-3xl font-bold">How we deliver on our promise</h2>
+            </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-3">
             <div className="card p-6">

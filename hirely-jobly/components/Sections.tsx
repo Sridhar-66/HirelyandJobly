@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Check, Plus, Sparkles, Star, Zap, Users, Briefcase, Award, Clock, Globe, Target } from "lucide-react";
 import { site, stats, partners, courses, benefits, why, tiles, testimonials, plans, faqs } from "@/data/content";
@@ -39,7 +40,7 @@ const Sec = ({ id, children, className }: { id?: string; children: React.ReactNo
 
 export const Logo = () => (
   <Link href="/" className="flex items-center gap-2 font-semibold">
-    <span className="grid h-7 w-7 place-items-center rounded-lg bg-neutral-900 text-sm text-white font-bold">H</span>
+    <Image src="/images/logo-icon.png" alt="Hirely & Jobly logo" width={28} height={28} className="rounded-lg" />
     Hirely & Jobly
   </Link>
 );
@@ -114,11 +115,18 @@ export const Hero = () => (
         </Reveal>
       </div>
 
-      {/* Grayscale portrait placeholder */}
-      <div
-        className="absolute inset-y-0 right-0 hidden w-[45%] bg-gradient-to-l from-neutral-700 via-neutral-500 to-transparent md:block"
-        aria-hidden="true"
-      />
+      {/* Hero student portrait */}
+      <div className="absolute inset-y-0 right-0 hidden w-[45%] md:block overflow-hidden" aria-hidden="true">
+        <Image
+          src="/images/hero-student.jpg"
+          alt="Student learning at Hirely & Jobly"
+          fill
+          className="object-cover object-left"
+          priority
+        />
+        {/* gradient fade on the left edge so text stays readable */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#e9e9ec] via-transparent to-transparent w-1/3" />
+      </div>
       {/* Frosted glass counselling card */}
       <motion.div
         initial={{ opacity: 0, y: 16 }}
@@ -239,8 +247,10 @@ export const Why = () => (
         <Reveal>
           <div className="card card-hover p-4 text-sm">
             <span className="mr-2 inline-flex -space-x-2">
-              {[1, 2, 3, 4].map((k) => (
-                <span key={k} className="inline-block h-7 w-7 rounded-full border-2 border-white bg-neutral-300" />
+              {["/images/avatars/avatar-1.jpg", "/images/avatars/avatar-2.jpg", "/images/avatars/avatar-3.jpg", "/images/avatars/avatar-4.jpg"].map((src, k) => (
+                <span key={k} className="relative inline-block h-7 w-7 rounded-full border-2 border-white overflow-hidden">
+                  <Image src={src} alt={`Mentor ${k + 1}`} fill className="object-cover" />
+                </span>
               ))}
             </span>
             {why.clients}
@@ -337,9 +347,14 @@ export const Testimonials = () => (
             <span className="flex text-amber-400">{[...Array(5)].map((_, k) => <Star key={k} size={12} fill="currentColor" />)}</span>
             <p className="mt-3 text-sm text-neutral-200 leading-relaxed">{testimonials[0].q}</p>
           </div>
-          <div className="text-xs">
-            <b>{testimonials[0].n}</b>
-            <div className="text-neutral-400">{testimonials[0].r}</div>
+          <div className="flex items-center gap-2 text-xs">
+            <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-white/20">
+              <Image src="/images/avatars/ananya.jpg" alt={testimonials[0].n} fill className="object-cover" />
+            </span>
+            <div>
+              <b>{testimonials[0].n}</b>
+              <div className="text-neutral-400">{testimonials[0].r}</div>
+            </div>
           </div>
         </div>
       </Reveal>
@@ -347,9 +362,14 @@ export const Testimonials = () => (
         <Reveal delay={1}>
           <div className="card card-hover flex min-h-52 flex-col justify-between p-5">
             <p className="text-sm text-neutral-700 leading-relaxed">{testimonials[1].q}</p>
-            <div className="text-xs">
-              <b>{testimonials[1].n}</b>
-              <div className="text-neutral-500">{testimonials[1].r}</div>
+            <div className="flex items-center gap-2 text-xs">
+              <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-neutral-200">
+                <Image src="/images/avatars/karthik.jpg" alt={testimonials[1].n} fill className="object-cover" />
+              </span>
+              <div>
+                <b>{testimonials[1].n}</b>
+                <div className="text-neutral-500">{testimonials[1].r}</div>
+              </div>
             </div>
           </div>
         </Reveal>
@@ -368,9 +388,14 @@ export const Testimonials = () => (
         <Reveal delay={2}>
           <div className="card card-hover flex min-h-52 flex-col justify-between p-5">
             <p className="text-sm text-neutral-700 leading-relaxed">{testimonials[2].q}</p>
-            <div className="text-xs">
-              <b>{testimonials[2].n}</b>
-              <div className="text-neutral-500">{testimonials[2].r}</div>
+            <div className="flex items-center gap-2 text-xs">
+              <span className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border border-neutral-200">
+                <Image src="/images/avatars/sneha.jpg" alt={testimonials[2].n} fill className="object-cover" />
+              </span>
+              <div>
+                <b>{testimonials[2].n}</b>
+                <div className="text-neutral-500">{testimonials[2].r}</div>
+              </div>
             </div>
           </div>
         </Reveal>

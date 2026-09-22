@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ArrowUpRight, ArrowLeft } from "lucide-react";
 import { Nav, Footer } from "@/components/Sections";
 import { courses } from "@/data/content";
@@ -35,15 +36,23 @@ export default function CoursesPage() {
               className="card course-card group block p-3 transition-all"
             >
               <div
-                className={`flex h-64 items-end rounded-xl bg-gradient-to-br p-6 ${c.cover} ${
+                className={`relative flex h-64 items-end rounded-xl overflow-hidden p-6 bg-gradient-to-br ${c.cover} ${
                   c.dark ? "text-white" : "text-neutral-900"
                 }`}
               >
-                <div>
-                  <span className="inline-block rounded-md bg-white/20 backdrop-blur px-2.5 py-1 text-[11px] font-medium tracking-wide mb-3">
+                {/* Real course image with gradient overlay */}
+                <Image
+                  src={`/images/courses/${c.slug}.jpg`}
+                  alt={c.name}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className={`absolute inset-0 bg-gradient-to-t ${c.dark ? "from-black/70 via-black/20" : "from-black/50 via-black/10"} to-transparent`} />
+                <div className="relative z-10">
+                  <span className={`inline-block rounded-md bg-white/20 backdrop-blur px-2.5 py-1 text-[11px] font-medium tracking-wide mb-3 ${c.dark ? "text-white" : "text-white"}`}>
                     {c.meta}
                   </span>
-                  <div className="font-serif text-2xl md:text-3xl leading-snug">
+                  <div className={`font-serif text-2xl md:text-3xl leading-snug text-white`}>
                     {c.name}
                   </div>
                 </div>
@@ -59,19 +68,28 @@ export default function CoursesPage() {
         </div>
 
         {/* Counselling CTA */}
-        <div className="mt-16 rounded-2xl bg-neutral-900 text-white p-8 md:p-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
-          <div className="max-w-xl">
-            <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs text-neutral-300 mb-3">
+        <div className="mt-16 rounded-2xl bg-neutral-900 text-white overflow-hidden flex flex-col md:flex-row items-stretch shadow-xl">
+          <div className="flex-1 p-8 md:p-12 flex flex-col justify-center">
+            <span className="inline-block rounded-full bg-white/10 px-3 py-1 text-xs text-neutral-300 mb-3 w-fit">
               Need guidance?
             </span>
             <h2 className="font-serif text-2xl md:text-3xl">Not sure which track matches your goals?</h2>
             <p className="mt-2 text-sm text-neutral-300">
               Speak with our senior academic counsellor in Hyderabad. We review your background, career interests, and recommend the best roadmap.
             </p>
+            <Link href="/contact" className="btn bg-white text-black hover:bg-neutral-100 mt-6 w-fit text-sm py-3 px-6">
+              Book Free Demo Class <ArrowUpRight size={15} />
+            </Link>
           </div>
-          <Link href="/contact" className="btn bg-white text-black hover:bg-neutral-100 shrink-0 text-sm py-3 px-6">
-            Book Free Demo Class <ArrowUpRight size={15} />
-          </Link>
+          {/* Counsellor photo */}
+          <div className="relative hidden md:block w-64 shrink-0">
+            <Image
+              src="/images/counsellor.jpg"
+              alt="Academic counsellor at Hirely & Jobly"
+              fill
+              className="object-cover object-top"
+            />
+          </div>
         </div>
       </main>
       <Footer />
