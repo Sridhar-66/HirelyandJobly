@@ -1,535 +1,1012 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { ArrowUpRight, Check, Plus, Sparkles, Star, Zap, Users, Briefcase, Award, Clock, Globe, Target } from "lucide-react";
-import { site, stats, partners, courses, benefits, why, tiles, testimonials, plans, faqs } from "@/data/content";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  ArrowUpRight,
+  Check,
+  Plus,
+  Sparkles,
+  Star,
+  Zap,
+  Users,
+  Briefcase,
+  Award,
+  Clock,
+  Globe,
+  Target,
+  MessageCircle,
+  Building2,
+  ChevronRight,
+  ShieldCheck,
+  GraduationCap,
+  TrendingUp,
+  MapPin,
+  CheckCircle2,
+  BookOpen,
+} from "lucide-react";
+import {
+  site,
+  stats,
+  trustBadges,
+  partners,
+  courseCategories,
+  courses,
+  twoFeatureCards,
+  benefits,
+  why,
+  tiles,
+  testimonials,
+  hubs,
+  plans,
+  faqCategories,
+  faqs,
+} from "@/data/content";
 
 // ─── Animation helpers ───────────────────────────────────────────────────────
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
+  hidden: { opacity: 0, y: 24 },
   show: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.55, delay: i * 0.08, ease: "easeOut" as const },
+    transition: { duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] as const },
   }),
 };
-const Reveal = ({ children, delay = 0, className }: { children: React.ReactNode; delay?: number; className?: string }) => (
-  <motion.div variants={fadeUp} initial="hidden" whileInView="show" custom={delay} viewport={{ once: true, margin: "-60px" }} className={className}>
+
+const Reveal = ({
+  children,
+  delay = 0,
+  className,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  className?: string;
+}) => (
+  <motion.div
+    variants={fadeUp}
+    initial="hidden"
+    whileInView="show"
+    custom={delay}
+    viewport={{ once: true, margin: "-50px" }}
+    className={className}
+  >
     {children}
   </motion.div>
 );
 
 // ─── Shared primitives ───────────────────────────────────────────────────────
-const Pill = ({ children }: { children: React.ReactNode }) => (
-  <span className="pill">{children}</span>
+export const Pill = ({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <span className={`pill ${className}`}>
+    <span className="h-1.5 w-1.5 rounded-full bg-blue-600 animate-pulse" />
+    {children}
+  </span>
 );
 
-const Head = ({ pill, title, sub }: { pill: string; title: string; sub?: string }) => (
-  <div className="mb-10 text-center">
-    <Reveal><Pill>{pill}</Pill></Reveal>
-    <Reveal delay={1}><h2 className="font-serif mt-4 text-3xl tracking-tight md:text-4xl">{title}</h2></Reveal>
-    {sub && <Reveal delay={2}><p className="mx-auto mt-3 max-w-xl text-sm text-neutral-500">{sub}</p></Reveal>}
+export const Head = ({
+  pill,
+  title,
+  highlight,
+  sub,
+}: {
+  pill: string;
+  title: string;
+  highlight?: string;
+  sub?: string;
+}) => (
+  <div className="mb-12 text-center">
+    <Reveal>
+      <Pill>{pill}</Pill>
+    </Reveal>
+    <Reveal delay={1}>
+      <h2 className="mt-4 text-3xl font-bold tracking-tight text-slate-900 md:text-4xl lg:text-5xl">
+        {title}{" "}
+        {highlight && <span className="gradient-text">{highlight}</span>}
+      </h2>
+    </Reveal>
+    {sub && (
+      <Reveal delay={2}>
+        <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-slate-600 md:text-base">
+          {sub}
+        </p>
+      </Reveal>
+    )}
   </div>
 );
 
-const Sec = ({ id, children, className }: { id?: string; children: React.ReactNode; className?: string }) => (
-  <section id={id} className={`mx-auto max-w-6xl px-4 py-16 ${className ?? ""}`}>{children}</section>
+export const Sec = ({
+  id,
+  children,
+  className,
+}: {
+  id?: string;
+  children: React.ReactNode;
+  className?: string;
+}) => (
+  <section id={id} className={`relative mx-auto max-w-6xl px-4 py-16 md:py-24 ${className ?? ""}`}>
+    {children}
+  </section>
 );
 
 export const Logo = () => (
-  <Link href="/" className="flex items-center gap-2 font-semibold">
-    <Image src="/images/brand/logo-icon.png" alt="Hirely & Jobly logo" width={28} height={28} className="rounded-lg" />
-    Hirely & Jobly
+  <Link href="/" className="flex items-center gap-2.5 font-bold text-slate-900 group">
+    <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
+      <GraduationCap size={18} />
+    </div>
+    <span className="text-base tracking-tight font-extrabold">
+      Hirely <span className="text-blue-600">&amp;</span> Jobly
+    </span>
   </Link>
 );
 
-// ─── Nav ─────────────────────────────────────────────────────────────────────
+// ─── Sticky Navbar ───────────────────────────────────────────────────────────
 const NAV_LINKS = [
-  ["Home",            "/"],
-  ["About",           "/about"],
-  ["Courses",         "/courses"],
+  ["Home", "/"],
+  ["Courses", "/courses"],
   ["Success Stories", "/#stories"],
-  ["Contact",         "/contact"],
+  ["Centers & Hubs", "/#centers"],
+  ["About", "/about"],
+  ["Contact", "/contact"],
 ];
 
-export const Nav = ({ activePath = "/" }: { activePath?: string }) => (
-  <header className="sticky top-0 z-20 border-b border-neutral-200/60 bg-[#f5f5f5]/90 backdrop-blur">
-    <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
-      <Logo />
-      <nav className="hidden gap-1 text-xs md:flex" aria-label="Main navigation">
-        {NAV_LINKS.map(([label, href]) => (
+export const Nav = ({ activePath = "/" }: { activePath?: string }) => {
+  return (
+    <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/90 backdrop-blur-md transition-all">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+        <Logo />
+
+        <nav className="hidden items-center gap-1 text-xs font-semibold text-slate-600 md:flex" aria-label="Main navigation">
+          {NAV_LINKS.map(([label, href]) => {
+            const isActive = activePath === href;
+            return (
+              <Link
+                key={label}
+                href={href}
+                className={`rounded-full px-3.5 py-1.5 transition-all ${
+                  isActive
+                    ? "bg-blue-50 font-bold text-blue-700 shadow-xs"
+                    : "hover:bg-slate-50 hover:text-slate-900"
+                }`}
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="flex items-center gap-3">
           <Link
-            key={label}
-            href={href}
-            className={`rounded-lg px-3 py-1.5 font-medium transition-colors hover:bg-white ${
-              activePath === href ? "border-[1.5px] border-neutral-900 bg-white" : ""
-            }`}
+            href="/contact"
+            className="btn btn-primary text-xs py-2 px-5"
           >
-            {label}
-          </Link>
-        ))}
-      </nav>
-      <Link href="/contact" className="btn btn-dark text-xs">
-        Enroll now <ArrowUpRight size={13} />
-      </Link>
-    </div>
-  </header>
-);
-
-// ─── Hero ─────────────────────────────────────────────────────────────────────
-export const Hero = () => (
-  <Sec>
-    <div className="relative overflow-hidden rounded-[28px] bg-[#e9e9ec] px-6 py-14 md:px-12 md:py-24">
-      <div className="relative z-10 max-w-lg">
-        <Reveal>
-          <span className="pill mb-4 inline-block">🎓 Now enrolling — batch starts soon</span>
-        </Reveal>
-        <Reveal delay={1}>
-          <h1 className="font-serif text-4xl leading-[1.06] tracking-tight md:text-6xl">
-            Launch your tech career,{" "}
-            <span className="text-neutral-400">faster</span>
-          </h1>
-        </Reveal>
-        <Reveal delay={2}>
-          <p className="mt-5 text-sm leading-relaxed text-neutral-600 max-w-sm">
-            Industry-ready courses in AI, Cybersecurity, UI/UX and more, built for B.Tech students in Hyderabad and beyond.
-          </p>
-        </Reveal>
-        <Reveal delay={3}>
-          <div className="mt-6 flex flex-wrap gap-3">
-            <Link href="/courses" className="btn btn-dark">Explore courses <ArrowUpRight size={14} /></Link>
-            <Link href="/contact" className="btn btn-light">Talk to us</Link>
-          </div>
-        </Reveal>
-        <Reveal delay={4}>
-          <div className="mt-10 flex gap-8">
-            {stats.map(([n, l]) => (
-              <div key={l}>
-                <div className="font-serif text-2xl font-bold">{n}</div>
-                <div className="text-xs text-neutral-500">{l}</div>
-              </div>
-            ))}
-          </div>
-        </Reveal>
-      </div>
-
-      {/* Hero student portrait */}
-      <div className="absolute inset-y-0 right-0 hidden w-[48%] md:block overflow-hidden rounded-r-[28px]" aria-hidden="true">
-        <Image
-          src="/images/heroes/hero-student.jpg"
-          alt="Student learning at Hirely & Jobly"
-          fill
-          className="object-cover object-center"
-          priority
-        />
-        {/* gradient fade on the left edge so text stays readable */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#e9e9ec] via-[#e9e9ec]/20 to-transparent" style={{width: '38%'}} />
-      </div>
-      {/* Frosted glass counselling card */}
-      <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
-        className="relative z-10 mt-10 max-w-xs rounded-2xl border border-white/20 bg-neutral-900/70 p-4 text-white backdrop-blur md:absolute md:bottom-8 md:right-8 md:mt-0"
-      >
-        <div className="text-[11px] opacity-70 font-medium uppercase tracking-wider">Free counselling</div>
-        <div className="mt-1 text-sm font-semibold">Book a free demo class</div>
-        <div className="mt-2 flex items-end justify-between gap-4 text-[11px] opacity-80">
-          <span>Share a few details and we will call you back.</span>
-          <Link href="/contact" className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-white text-black hover:bg-neutral-100 transition-colors" aria-label="Book demo">
-            <ArrowUpRight size={16} />
+            Book Free Demo <ArrowUpRight size={14} />
           </Link>
         </div>
-      </motion.div>
-    </div>
+      </div>
+    </header>
+  );
+};
 
-    {/* Partner marquee */}
-    <Reveal>
-      <div className="mt-8 overflow-hidden text-neutral-400" aria-label="Hiring partners">
-        <div className="marquee select-none">
-          {[...partners, ...partners].map((p, i) => (
-            <span key={i} className="mx-8 text-sm font-semibold tracking-wide">{p}</span>
+// ─── Hero Section ─────────────────────────────────────────────────────────────
+export const Hero = () => {
+  return (
+    <div className="relative overflow-hidden bg-gradient-to-b from-blue-50/50 via-white to-white pt-8 pb-16 md:pt-14 md:pb-24">
+      {/* Decorative gradient blobs */}
+      <div className="blob blob-blue -top-24 -left-24 h-96 w-96" />
+      <div className="blob blob-indigo top-12 right-0 h-[450px] w-[450px]" />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-4">
+        <div className="grid items-center gap-12 lg:grid-cols-12">
+          {/* Left Column: Headline, CTAs, Trust Badges */}
+          <div className="lg:col-span-7">
+            <Reveal>
+              <span className="pill mb-5 inline-flex">
+                🚀 Admissions Open for 2026 Batches
+              </span>
+            </Reveal>
+
+            <Reveal delay={1}>
+              <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl lg:leading-[1.12]">
+                Launch your tech career with{" "}
+                <span className="gradient-text">guaranteed industry skills</span>
+              </h1>
+            </Reveal>
+
+            <Reveal delay={2}>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
+                Industry-crafted courses in Full-Stack, AI/ML, DSA, and UI/UX built specifically for B.Tech &amp; engineering students in Hyderabad with 1-on-1 mentorship and direct placement referrals.
+              </p>
+            </Reveal>
+
+            <Reveal delay={3}>
+              <div className="mt-8 flex flex-wrap items-center gap-3.5">
+                <Link
+                  href="/contact"
+                  className="btn btn-primary py-3 px-7 text-sm font-semibold"
+                >
+                  Book Free Counselling <ArrowUpRight size={15} />
+                </Link>
+                <Link
+                  href="/courses"
+                  className="btn btn-secondary py-3 px-6 text-sm"
+                >
+                  Explore 7 Tracks
+                </Link>
+              </div>
+            </Reveal>
+
+            {/* Trust Badges */}
+            <Reveal delay={4}>
+              <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 border-t border-slate-200/80 pt-6">
+                {trustBadges.map((badge) => (
+                  <div key={badge.label} className="flex flex-col">
+                    <span className="text-xs font-bold text-slate-900">
+                      {badge.label}
+                    </span>
+                    <span className="text-[11px] text-slate-500">
+                      {badge.desc}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Right Column: Hero Visual & Floating Highlights */}
+          <div className="relative lg:col-span-5">
+            <Reveal delay={2}>
+              <div className="relative mx-auto max-w-md overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-2xl shadow-blue-500/10">
+                <div className="relative h-80 w-full overflow-hidden rounded-2xl md:h-96">
+                  <Image
+                    src="/images/heroes/hero-student.jpg"
+                    alt="Student learning at Hirely and Jobly"
+                    fill
+                    className="object-cover object-center"
+                    priority
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
+                  
+                  {/* Overlay Bottom Banner */}
+                  <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/95 p-3.5 backdrop-blur-md shadow-lg border border-white/60">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-[11px] font-bold uppercase tracking-wider text-blue-600">
+                          Upcoming Batch
+                        </div>
+                        <div className="text-xs font-semibold text-slate-900">
+                          Weekend &amp; Evening Batches in Hyderabad
+                        </div>
+                      </div>
+                      <Link
+                        href="/contact"
+                        className="rounded-full bg-blue-600 p-2 text-white hover:bg-blue-700 transition-colors"
+                        aria-label="Book Demo"
+                      >
+                        <ArrowUpRight size={15} />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Achievement Card Top Right */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                  className="absolute -top-3 -right-3 rounded-2xl bg-white p-3 shadow-xl border border-slate-100 flex items-center gap-3"
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                    <TrendingUp size={20} />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-medium text-slate-500">Highest CTC</div>
+                    <div className="text-sm font-extrabold text-slate-900">₹18.5 LPA</div>
+                  </div>
+                </motion.div>
+
+                {/* Floating Mentor Support Badge Bottom Left */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8, duration: 0.6 }}
+                  className="absolute -bottom-3 -left-3 hidden sm:flex items-center gap-2.5 rounded-2xl bg-slate-900 text-white p-3 shadow-xl border border-slate-800"
+                >
+                  <ShieldCheck size={20} className="text-blue-400" />
+                  <div>
+                    <div className="text-[10px] text-slate-300">Hyderabad Centers</div>
+                    <div className="text-xs font-bold">Madhapur &amp; Ameerpet</div>
+                  </div>
+                </motion.div>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        {/* 2-Tile Quick Feature Cards */}
+        <div className="mt-14 grid gap-5 md:grid-cols-2">
+          {twoFeatureCards.map((card, idx) => (
+            <Reveal key={card.title} delay={idx * 2}>
+              <div className="card-feature group flex h-full flex-col justify-between p-6 md:p-8">
+                <div>
+                  <span className="pill mb-3 inline-block bg-blue-50 text-blue-700 border-blue-200">
+                    {card.badge}
+                  </span>
+                  <h3 className="text-xl font-bold text-slate-900 md:text-2xl">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                    {card.desc}
+                  </p>
+                  <ul className="mt-5 space-y-2 text-xs font-medium text-slate-700">
+                    {card.features.map((f) => (
+                      <li key={f} className="flex items-center gap-2">
+                        <CheckCircle2 size={15} className="text-blue-600 shrink-0" />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+                  <Link
+                    href={card.link}
+                    className="inline-flex items-center gap-2 font-bold text-sm text-blue-600 transition-colors group-hover:text-blue-800"
+                  >
+                    {card.cta} <ChevronRight size={16} />
+                  </Link>
+                  <span className="text-xs font-semibold text-slate-400">
+                    Hyderabad &amp; Live Online
+                  </span>
+                </div>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Partner Marquee */}
+        <Reveal delay={2}>
+          <div className="mt-14 text-center">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+              Our alumni work at top technology companies &amp; high-growth startups
+            </p>
+            <div className="mt-6 overflow-hidden text-slate-500 select-none py-2" aria-label="Hiring partners">
+              <div className="marquee">
+                {[...partners, ...partners].map((p, i) => (
+                  <span
+                    key={i}
+                    className="mx-6 text-sm md:text-base font-bold tracking-tight text-slate-600 hover:text-blue-600 transition-colors"
+                  >
+                    {p}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </div>
+  );
+};
+
+// ─── Stats Bar ────────────────────────────────────────────────────────────────
+export const StatsBar = () => {
+  return (
+    <div className="border-y border-slate-100 bg-slate-50/70 py-12">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
+          {stats.map(([num, label, desc], idx) => (
+            <Reveal key={label} delay={idx}>
+              <div className="text-center">
+                <div className="text-3xl font-extrabold text-blue-600 sm:text-4xl lg:text-5xl tracking-tight">
+                  {num}
+                </div>
+                <div className="mt-1 text-sm font-bold text-slate-900">{label}</div>
+                <div className="mt-0.5 text-xs text-slate-500">{desc}</div>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
-    </Reveal>
-  </Sec>
-);
-
-// ─── Benefits ─────────────────────────────────────────────────────────────────
-export const Benefits = () => (
-  <Sec id="why-us">
-    <Head pill="Benefits" title="Discover why students choose us" sub="Practical training that communicates clearly, builds real skills and supports your career goals." />
-    <div className="grid gap-4 md:grid-cols-3">
-      {benefits.map((b, i) => (
-        <Reveal key={b.t} delay={i}>
-          <div className="card card-hover overflow-hidden h-full">
-            {/* Visual mockup */}
-            <div className="h-44 overflow-hidden relative">
-              {i === 0 && (
-                <>
-                  <Image src="/images/courses/ai-ml.jpg" alt="Industry-built curriculum" fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
-                  <div className="absolute bottom-3 left-3 right-3 space-y-1.5 text-xs">
-                    {["Module 1: Foundations", "Module 2: Core concepts", "Module 3: Capstone project"].map((m, k) => (
-                      <div key={m} className={`rounded-lg px-3 py-1.5 font-medium backdrop-blur-sm ${k === 1 ? "bg-white text-neutral-900" : "bg-white/20 text-white border border-white/30"}`}>{m}</div>
-                    ))}
-                  </div>
-                </>
-              )}
-              {i === 1 && (
-                <>
-                  <Image src="/images/about/about-mentor-session.jpg" alt="Hands-on projects with mentors" fill className="object-cover object-top" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div className="absolute bottom-3 left-3 flex gap-1.5">
-                    {["React", "Python", "Figma", "Unity"].map((tag) => (
-                      <span key={tag} className="rounded-full bg-white/90 px-2 py-0.5 text-[10px] font-semibold text-neutral-800">{tag}</span>
-                    ))}
-                  </div>
-                </>
-              )}
-              {i === 2 && (
-                <>
-                  <Image src="/images/about/counsellor.jpg" alt="Placement support" fill className="object-cover object-top" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                  <div className="absolute bottom-3 left-3">
-                    <span className="rounded-full bg-emerald-400 px-2.5 py-1 text-[10px] font-bold text-emerald-950">✓ Offer received</span>
-                    <div className="mt-1.5 text-xs font-semibold text-white">Junior Developer · ₹4.5 LPA</div>
-                  </div>
-                </>
-              )}
-            </div>
-            <div className="p-5">
-              <h3 className="font-semibold">{b.t}</h3>
-              <p className="mt-1 text-sm text-neutral-500">{b.d}</p>
-            </div>
-          </div>
-        </Reveal>
-      ))}
     </div>
-  </Sec>
-);
+  );
+};
 
-// ─── Courses ──────────────────────────────────────────────────────────────────
-export const Courses = () => (
-  <Sec id="courses">
-    <Head pill="Our courses" title="Courses built for your career" sub="Seven job-focused tracks for B.Tech students — from first steps to portfolio-ready projects." />
-    <div className="grid gap-4 sm:grid-cols-2">
-      {courses.map((c, i) => (
-        <Reveal key={c.slug} delay={i * 0.5}>
-          <Link href={`/courses/${c.slug}`} className="card course-card group block p-2">
-            <div className="relative h-56 overflow-hidden rounded-xl">
-              <Image
-                src={`/images/courses/${c.slug}.jpg`}
-                alt={c.name}
-                fill
-                className="object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-              <div className={`absolute inset-0 bg-gradient-to-br opacity-70 ${c.cover}`} />
-              <div className="absolute inset-0 flex items-end p-5">
+// ─── Tabbed Course Catalog (AccioJob Style) ───────────────────────────────────
+export const Courses = () => {
+  const [activeTab, setActiveTab] = useState("all");
+
+  const filteredCourses =
+    activeTab === "all"
+      ? courses
+      : courses.filter((c) => c.category === activeTab);
+
+  return (
+    <Sec id="courses">
+      <Head
+        pill="Our Tech Tracks"
+        title="Courses designed for"
+        highlight="real industry hiring"
+        sub="Practical, mentor-led programs with weekly hands-on sprints, code reviews, and guaranteed placement drives."
+      />
+
+      {/* Tab Switcher */}
+      <Reveal>
+        <div className="mb-10 flex flex-wrap items-center justify-center gap-2">
+          {courseCategories.map((cat) => {
+            const isActive = activeTab === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveTab(cat.id)}
+                className={`rounded-full px-5 py-2 text-xs md:text-sm font-semibold transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-blue-600 text-white shadow-md shadow-blue-500/30"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
+      </Reveal>
+
+      {/* Course Cards Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <AnimatePresence mode="popLayout">
+          {filteredCourses.map((c, i) => (
+            <motion.div
+              key={c.slug}
+              layout
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.96 }}
+              transition={{ duration: 0.35, delay: i * 0.05 }}
+            >
+              <div className="card card-hover flex h-full flex-col justify-between overflow-hidden p-5">
                 <div>
-                  <div className={`font-serif text-2xl leading-tight ${c.dark ? "text-white" : "text-neutral-900"}`}>{c.name}</div>
-                  <div className={`mt-1 text-xs opacity-80 ${c.dark ? "text-white" : "text-neutral-900"}`}>{c.meta}</div>
-                </div>
-              </div>
-            </div>
-            <div className="flex items-center justify-between px-2 py-3 text-sm">
-              <span className="font-medium">{c.name}</span>
-              <ArrowUpRight size={16} className="text-neutral-400 transition-colors group-hover:text-black" />
-            </div>
-          </Link>
-        </Reveal>
-      ))}
-    </div>
-    <Reveal delay={2}>
-      <div className="mt-8 text-center">
-        <Link href="/courses" className="btn btn-light">View all courses <ArrowUpRight size={14} /></Link>
-      </div>
-    </Reveal>
-  </Sec>
-);
+                  {/* Top Badges */}
+                  <div className="flex items-center justify-between gap-2 mb-3">
+                    <span className="ribbon-scholarship">{c.scholarship}</span>
+                    <span className="text-[11px] font-semibold text-slate-500">
+                      ⏱ {c.duration}
+                    </span>
+                  </div>
 
-// ─── Why ──────────────────────────────────────────────────────────────────────
-export const Why = () => (
-  <Sec id="why">
-    <div className="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
-      <div>
-        <Reveal><Pill>Why choose us</Pill></Reveal>
-        <Reveal delay={1}><h2 className="font-serif mt-4 text-3xl md:text-4xl">Training built around<br />real outcomes</h2></Reveal>
+                  {/* Course Image Banner */}
+                  <div className="relative h-44 w-full overflow-hidden rounded-xl">
+                    <Image
+                      src={`/images/courses/${c.slug}.jpg`}
+                      alt={c.name}
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+                    
+                    <div className="absolute bottom-3 left-3 right-3 text-white">
+                      <div className="text-[11px] font-medium text-blue-300">
+                        {c.highlight}
+                      </div>
+                      <h3 className="text-lg font-bold leading-tight text-white">
+                        {c.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  {/* Tagline */}
+                  <p className="mt-3 text-xs text-slate-600 leading-relaxed">
+                    {c.tagline}
+                  </p>
+
+                  {/* Tech Stack Pills */}
+                  <div className="mt-4 flex flex-wrap gap-1.5">
+                    {c.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Card Action Footer */}
+                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+                  <span className="text-[11px] font-medium text-emerald-600 flex items-center gap-1">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
+                    {c.startingBatch}
+                  </span>
+                  <Link
+                    href={`/courses/${c.slug}`}
+                    className="btn btn-primary text-xs py-1.5 px-4"
+                  >
+                    View Syllabus <ArrowUpRight size={13} />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
-      <Reveal delay={2}><p className="max-w-sm text-sm text-neutral-500">Strategy, mentoring and hands-on practice together, so your skills show up in interviews.</p></Reveal>
-    </div>
-    <div className="grid gap-4 md:grid-cols-3">
-      <div className="space-y-4">
-        <Reveal>
-          <div className="card card-hover p-4 text-sm flex items-center gap-3">
-            <span className="inline-flex -space-x-3">
-              {["/images/avatars/avatar-1.jpg", "/images/avatars/avatar-2.jpg", "/images/avatars/avatar-3.jpg", "/images/avatars/avatar-4.jpg"].map((src, k) => (
-                <span key={k} className="relative inline-block h-9 w-9 rounded-full border-2 border-white overflow-hidden shadow-sm">
-                  <Image src={src} alt={`Student ${k + 1}`} fill className="object-cover object-top" />
+
+      <Reveal delay={2}>
+        <div className="mt-12 text-center">
+          <Link href="/courses" className="btn btn-secondary py-3 px-8 text-sm">
+            View All 7 Course Syllabi <ArrowUpRight size={14} />
+          </Link>
+        </div>
+      </Reveal>
+    </Sec>
+  );
+};
+
+// ─── Hyderabad Training Hubs Section ──────────────────────────────────────────
+export const LocationsHub = () => {
+  const [activeHub, setActiveHub] = useState("madhapur");
+
+  const currentHub = hubs.find((h) => h.id === activeHub) || hubs[0];
+
+  return (
+    <Sec id="centers" className="bg-slate-50/70 rounded-3xl my-8">
+      <Head
+        pill="Hyderabad Training Hubs"
+        title="Learn offline in Hyderabad or"
+        highlight="live interactive online"
+        sub="State-of-the-art coding labs, high-speed workstations, and dedicated mentor desks across prime Hyderabad tech corridors."
+      />
+
+      {/* Hub Tabs */}
+      <Reveal>
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          {hubs.map((h) => {
+            const isActive = activeHub === h.id;
+            return (
+              <button
+                key={h.id}
+                onClick={() => setActiveHub(h.id)}
+                className={`flex items-center gap-2 rounded-full px-5 py-2.5 text-xs md:text-sm font-semibold transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-slate-900 text-white shadow-md"
+                    : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
+                }`}
+              >
+                <Building2 size={14} />
+                {h.name}
+              </button>
+            );
+          })}
+        </div>
+      </Reveal>
+
+      {/* Selected Hub Card */}
+      <Reveal delay={1}>
+        <div className="card overflow-hidden bg-white p-6 md:p-8">
+          <div className="grid gap-8 md:grid-cols-12 items-center">
+            <div className="md:col-span-7 space-y-4">
+              <div className="flex items-center gap-2 text-blue-600 font-bold text-xs">
+                <MapPin size={16} />
+                {currentHub.area}
+              </div>
+              <h3 className="text-2xl font-bold text-slate-900">
+                {currentHub.name}
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                {currentHub.address}
+              </p>
+              
+              <div className="pt-3">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                  Center Highlights &amp; Facilities
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {currentHub.features.map((feat) => (
+                    <div key={feat} className="flex items-center gap-2 text-xs font-medium text-slate-700">
+                      <Check size={14} className="text-blue-600 shrink-0" />
+                      {feat}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-4 flex flex-wrap items-center gap-3">
+                <Link href="/contact" className="btn btn-primary text-xs py-2.5 px-5">
+                  Book Center Visit &amp; Demo <ArrowUpRight size={14} />
+                </Link>
+                <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
+                  ✓ {currentHub.batch}
                 </span>
-              ))}
-            </span>
-            <span className="font-semibold text-neutral-800">{why.clients}</span>
-          </div>
-        </Reveal>
-        <Reveal delay={1}>
-          <div className="card card-hover flex h-44 flex-col justify-between p-5">
-            <p className="text-sm text-neutral-600">Clear learning paths shaped around every student goal.</p>
-            <div>
-              <div className="font-serif text-5xl font-bold">{why.sat}</div>
-              <div className="text-xs text-neutral-500">{why.satL}</div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-      <div className="space-y-4">
-        <Reveal>
-          <div className="relative overflow-hidden rounded-2xl h-56">
-            <Image src="/images/about/about-classroom.jpg" alt="Students in class" fill className="object-cover object-center" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-            <div className="absolute inset-0 flex flex-col justify-between p-5">
-              <p className="text-sm text-white/80 font-medium">Real projects built with mentors, reviewed every week.</p>
-              <div>
-                <div className="font-serif text-5xl font-bold text-white">{why.proj}</div>
-                <div className="text-xs text-white/70">{why.projL}</div>
               </div>
             </div>
-          </div>
-        </Reveal>
-        <Reveal delay={1}>
-          <div className="card card-hover flex items-center gap-2 p-4 text-sm font-medium">
-            <span className="h-2 w-2 rounded-full bg-lime-500 animate-pulse" />
-            Now enrolling
-          </div>
-        </Reveal>
-      </div>
-      <Reveal delay={1}>
-        <div className="dark-card flex min-h-72 flex-col justify-between p-6 relative overflow-hidden">
-          {/* Student portrait collage in top-right */}
-          <div className="absolute top-0 right-0 w-24 h-32 opacity-40" aria-hidden="true">
-            <div className="grid grid-cols-2 gap-0.5 h-full">
-              {["/images/avatars/ananya.jpg", "/images/avatars/karthik.jpg", "/images/avatars/sneha.jpg", "/images/avatars/avatar-2.jpg"].map((src, k) => (
-                <div key={k} className="relative overflow-hidden">
-                  <Image src={src} alt="" fill className="object-cover object-top" />
+
+            <div className="md:col-span-5">
+              <div className="relative h-60 w-full overflow-hidden rounded-2xl md:h-72">
+                <Image
+                  src="/images/about/about-classroom.jpg"
+                  alt="Hirely and Jobly classroom center"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
+                <div className="absolute bottom-4 left-4 text-white">
+                  <div className="text-xs font-bold">Offline &amp; Hybrid Lab</div>
+                  <div className="text-[11px] text-slate-200">Equipped for deep technical practice</div>
                 </div>
-              ))}
+              </div>
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#121215] via-transparent to-transparent" />
-          </div>
-          <p className="relative text-sm text-neutral-200 leading-relaxed max-w-[80%]">{why.quote}</p>
-          <div className="relative flex items-end gap-3">
-            <span className="font-serif text-5xl font-bold">{why.rating}</span>
-            <span className="pb-1 text-xs text-neutral-400">
-              <span className="flex text-amber-400">
-                {[...Array(5)].map((_, k) => <Star key={k} size={12} fill="currentColor" />)}
-              </span>
-              {why.ratingL}
-            </span>
           </div>
         </div>
       </Reveal>
-    </div>
-  </Sec>
-);
+    </Sec>
+  );
+};
 
-// ─── Expertise ────────────────────────────────────────────────────────────────
-const tileIcons = [Sparkles, Users, Target, Zap, Clock, Globe, Briefcase, Award];
+// ─── Placement Success Stories & Testimonials ─────────────────────────────────
+export const Testimonials = () => {
+  return (
+    <Sec id="stories">
+      <Head
+        pill="Proven Placement Track Record"
+        title="Stories of students who"
+        highlight="cracked top tech roles"
+        sub="Read how engineering students from Hyderabad colleges turned practical mentorship into life-changing job offers."
+      />
 
-export const Expertise = () => (
-  <Sec>
-    <Head pill="Expertise" title="Learning support with clear direction" sub="A focused mix of teaching, projects and career support to help you reach job-ready with confidence." />
-    <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-      {tiles.map(([t, d], i) => {
-        const Icon = tileIcons[i] ?? Sparkles;
-        const isDark = i === 7;
-        const isWide = i === 4;
-        return (
-          <Reveal key={t} delay={i * 0.4} className={`${isWide ? "md:col-span-2" : ""}`}>
-            <div className={`${isDark ? "dark-card" : "card card-hover"} ${isWide ? "" : ""} flex min-h-40 flex-col justify-between p-4 h-full`}>
-              <span className={`grid h-8 w-8 place-items-center rounded-lg shadow ${isDark ? "bg-white/15" : "bg-white"}`}>
-                <Icon size={14} />
-              </span>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {testimonials.map((t, idx) => (
+          <Reveal key={t.n} delay={idx}>
+            <div className="card card-hover flex h-full flex-col justify-between p-6">
               <div>
-                <div className="text-sm font-semibold">{t}</div>
-                <p className={`mt-1 text-xs ${isDark ? "text-neutral-300" : "text-neutral-500"}`}>{d}</p>
+                {/* CTC Package & Verification Badge */}
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 border border-emerald-200">
+                    🎯 {t.ctc}
+                  </span>
+                  <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+                    ✓ Verified Offer
+                  </span>
+                </div>
+
+                {/* Student Quote */}
+                <p className="text-xs leading-relaxed text-slate-700 italic">
+                  &ldquo;{t.q}&rdquo;
+                </p>
+              </div>
+
+              {/* Student Bio */}
+              <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-blue-200 shadow-sm">
+                  <Image
+                    src={t.image}
+                    alt={t.n}
+                    fill
+                    className="object-cover object-top"
+                  />
+                </div>
+                <div className="overflow-hidden">
+                  <div className="text-xs font-bold text-slate-900 truncate">
+                    {t.n}
+                  </div>
+                  <div className="text-[11px] font-semibold text-blue-600 truncate">
+                    {t.role} @ {t.company}
+                  </div>
+                  <div className="text-[10px] text-slate-400 truncate">
+                    {t.college}
+                  </div>
+                </div>
               </div>
             </div>
           </Reveal>
-        );
-      })}
-    </div>
-  </Sec>
-);
-
-// ─── Testimonials ─────────────────────────────────────────────────────────────
-export const Testimonials = () => (
-  <Sec id="stories">
-    <div className="mb-8 flex items-end justify-between">
-      <div>
-        <Reveal><Pill>Testimonials</Pill></Reveal>
-        <Reveal delay={1}><h2 className="font-serif mt-4 text-3xl md:text-4xl">What students say</h2></Reveal>
+        ))}
       </div>
-      <Reveal delay={2}><p className="hidden max-w-xs text-sm text-neutral-500 md:block">Thoughtful feedback from students who trusted the process and reached their goals.</p></Reveal>
-    </div>
-    <div className="grid gap-4 md:grid-cols-3">
-      <Reveal>
-        <div className="dark-card flex min-h-64 flex-col justify-between p-6 overflow-hidden relative">
-          {/* Background student photo, subtle */}
-          <div className="absolute inset-0 opacity-15" aria-hidden="true">
-            <Image src="/images/avatars/ananya.jpg" alt="" fill className="object-cover object-top scale-110" />
-          </div>
-          <div className="relative">
-            <span className="flex text-amber-400">{[...Array(5)].map((_, k) => <Star key={k} size={12} fill="currentColor" />)}</span>
-            <p className="mt-3 text-sm text-neutral-200 leading-relaxed">{testimonials[0].q}</p>
-          </div>
-          <div className="relative flex items-center gap-3 text-xs">
-            <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-white/30">
-              <Image src="/images/avatars/ananya.jpg" alt={testimonials[0].n} fill className="object-cover object-top" />
-            </span>
-            <div>
-              <b className="text-sm">{testimonials[0].n}</b>
-              <div className="text-neutral-400 mt-0.5">{testimonials[0].r}</div>
-            </div>
-          </div>
-        </div>
-      </Reveal>
-      <div className="space-y-4">
-        <Reveal delay={1}>
-          <div className="card card-hover flex min-h-52 flex-col justify-between p-5 overflow-hidden relative">
-            <p className="text-sm text-neutral-700 leading-relaxed">{testimonials[1].q}</p>
-            <div className="flex items-center gap-3 text-xs">
-              <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-neutral-200">
-                <Image src="/images/avatars/karthik.jpg" alt={testimonials[1].n} fill className="object-cover object-top" />
-              </span>
-              <div>
-                <b className="text-sm text-neutral-900">{testimonials[1].n}</b>
-                <div className="text-neutral-500 mt-0.5">{testimonials[1].r}</div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-        <Reveal delay={2}>
-          <div className="card p-4 text-center text-sm font-medium text-neutral-600">
-            ⭐ Trusted by 5000+ students across Telangana
-          </div>
-        </Reveal>
-      </div>
-      <div className="space-y-4">
-        <Reveal delay={1}>
-          <Link href="/contact" className="btn btn-dark w-full justify-center py-3 text-sm">
-            Join our next batch <ArrowUpRight size={14} />
-          </Link>
-        </Reveal>
-        <Reveal delay={2}>
-          <div className="card card-hover flex min-h-52 flex-col justify-between p-5 overflow-hidden relative">
-            <p className="text-sm text-neutral-700 leading-relaxed">{testimonials[2].q}</p>
-            <div className="flex items-center gap-3 text-xs">
-              <span className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border-2 border-neutral-200">
-                <Image src="/images/avatars/sneha.jpg" alt={testimonials[2].n} fill className="object-cover object-top" />
-              </span>
-              <div>
-                <b className="text-sm text-neutral-900">{testimonials[2].n}</b>
-                <div className="text-neutral-500 mt-0.5">{testimonials[2].r}</div>
-              </div>
-            </div>
-          </div>
-        </Reveal>
-      </div>
-    </div>
-  </Sec>
-);
-
-// ─── Pricing ──────────────────────────────────────────────────────────────────
-export const Pricing = () => (
-  <Sec id="pricing">
-    <Head pill="Pricing" title="Simple plans, clear outcomes" sub="Focused plans for learning, projects and placement." />
-    <div className="mx-auto grid max-w-3xl gap-4 md:grid-cols-2">
-      {plans.map((p, i) => (
-        <Reveal key={p.name} delay={i}>
-          <div className={`${p.dark ? "dark-card" : "card"} p-6 h-full flex flex-col`}>
-            <div className="font-semibold text-base">{p.name}</div>
-            <p className={`mt-1 text-xs ${p.dark ? "text-neutral-300" : "text-neutral-500"}`}>{p.desc}</p>
-            <div className="font-serif mt-5 text-5xl font-bold">{p.price}</div>
-            <p className={`mt-1 text-[11px] ${p.dark ? "text-neutral-400" : "text-neutral-400"}`}>per student · one-time</p>
-            <Link href="/contact" className={`btn mt-5 w-full justify-center ${p.dark ? "bg-white text-black hover:bg-neutral-100" : "btn-dark"}`}>
-              {p.cta} <ArrowUpRight size={14} />
-            </Link>
-            <ul className="mt-5 space-y-2.5 text-xs flex-1">
-              {p.f.map((f) => (
-                <li key={f} className="flex items-center gap-2">
-                  <Check size={13} className={p.dark ? "text-lime-400" : "text-neutral-700"} />
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Reveal>
-      ))}
-    </div>
-  </Sec>
-);
-
-// ─── FAQ ──────────────────────────────────────────────────────────────────────
-export const Faq = () => (
-  <Sec id="faq">
-    <Head pill="FAQ" title="Explore our FAQs" sub="Answers to questions about batches, fees, placements and enrollment." />
-    <div className="mx-auto max-w-xl space-y-3">
-      {faqs.map(([q, a]) => (
-        <Reveal key={q}>
-          <details className="card px-4 py-3 group">
-            <summary className="flex items-center justify-between text-sm font-medium cursor-pointer">
-              {q}
-              <Plus size={16} className="plus shrink-0 text-neutral-400" />
-            </summary>
-            <p className="mt-2 text-sm text-neutral-500 leading-relaxed">{a}</p>
-          </details>
-        </Reveal>
-      ))}
-    </div>
-  </Sec>
-);
-
-// ─── Footer ───────────────────────────────────────────────────────────────────
-const FOOTER_LINKS = {
-  Pages:  [["Home", "/"], ["About", "/about"], ["Courses", "/courses"], ["Pricing", "/#pricing"], ["Contact", "/contact"]],
-  Social: [["Instagram", "#"], ["LinkedIn", "#"], ["YouTube", "#"]],
+    </Sec>
+  );
 };
 
-export const Footer = () => (
-  <footer className="mx-auto max-w-6xl px-4 pb-6">
-    <div className="card overflow-hidden">
-      <div className="flex flex-col justify-between gap-8 p-6 md:flex-row">
-        <div className="max-w-xs">
-          <Logo />
-          <p className="mt-3 text-xs text-neutral-500 leading-relaxed">
-            Job-ready tech training for B.Tech students in {site.city}.
-          </p>
-          <p className="mt-2 text-xs text-neutral-400">
-            {site.email} · {site.phone}
-          </p>
-        </div>
-        <div className="flex gap-16 text-xs">
-          {(Object.entries(FOOTER_LINKS) as [string, [string, string][]][]).map(([heading, links]) => (
-            <div key={heading}>
-              <div className="mb-2 font-semibold">{heading}</div>
-              {links.map(([label, href]) => (
-                <div key={label} className="py-0.5">
-                  <Link href={href} className="text-neutral-500 hover:text-neutral-900 transition-colors">{label}</Link>
+// ─── Why Choose Us / Value Proposition ────────────────────────────────────────
+export const Why = () => {
+  return (
+    <Sec id="why">
+      <Head
+        pill="The Hirely & Jobly Advantage"
+        title="Why engineering students"
+        highlight="choose our academy"
+        sub="We bridge the gap between traditional college curriculums and high-growth technology engineering teams."
+      />
+
+      <div className="grid gap-5 md:grid-cols-3">
+        {tiles.map(([title, desc], i) => (
+          <Reveal key={title} delay={i}>
+            <div className="card card-hover flex h-full flex-col justify-between p-6">
+              <div>
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                  <Sparkles size={18} />
                 </div>
-              ))}
+                <h3 className="text-base font-bold text-slate-900">{title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-slate-600">{desc}</p>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </Sec>
+  );
+};
+
+// ─── Pricing Plans ────────────────────────────────────────────────────────────
+export const Pricing = () => {
+  return (
+    <Sec id="pricing">
+      <Head
+        pill="Transparent Investment"
+        title="Simple, transparent plans for"
+        highlight="serious career growth"
+        sub="Zero hidden costs. Includes live mentorship, lab access, project reviews, and placement drive participation."
+      />
+
+      <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2 items-stretch">
+        {plans.map((p, i) => (
+          <Reveal key={p.name} delay={i}>
+            <div
+              className={`flex h-full flex-col justify-between rounded-3xl p-8 transition-all ${
+                p.popular
+                  ? "bg-slate-900 text-white shadow-2xl ring-2 ring-blue-600 relative overflow-hidden"
+                  : "card p-8"
+              }`}
+            >
+              {p.popular && (
+                <div className="blob blob-indigo -top-20 -right-20 h-60 w-60 opacity-30" />
+              )}
+
+              <div className="relative z-10">
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`rounded-full px-3 py-1 text-xs font-bold ${
+                      p.popular
+                        ? "bg-blue-600 text-white"
+                        : "bg-blue-50 text-blue-700"
+                    }`}
+                  >
+                    {p.badge}
+                  </span>
+                  <span className="text-xs text-slate-400 line-through">
+                    {p.originalPrice}
+                  </span>
+                </div>
+
+                <h3 className="mt-4 text-2xl font-bold">{p.name}</h3>
+                <p
+                  className={`mt-1 text-xs leading-relaxed ${
+                    p.popular ? "text-slate-300" : "text-slate-500"
+                  }`}
+                >
+                  {p.desc}
+                </p>
+
+                <div className="mt-6 flex items-baseline gap-2">
+                  <span className="text-4xl font-extrabold tracking-tight">
+                    {p.price}
+                  </span>
+                  <span
+                    className={`text-xs ${
+                      p.popular ? "text-slate-400" : "text-slate-500"
+                    }`}
+                  >
+                    + Zero-Cost EMI Available
+                  </span>
+                </div>
+
+                <Link
+                  href="/contact"
+                  className={`btn mt-6 w-full py-3 text-sm font-semibold ${
+                    p.popular
+                      ? "btn-primary"
+                      : "btn-secondary"
+                  }`}
+                >
+                  {p.cta} <ArrowUpRight size={14} />
+                </Link>
+
+                <ul className="mt-8 space-y-3 text-xs">
+                  {p.f.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2.5">
+                      <Check
+                        size={15}
+                        className={p.popular ? "text-blue-400 shrink-0" : "text-blue-600 shrink-0"}
+                      />
+                      <span className={p.popular ? "text-slate-200" : "text-slate-700"}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </Sec>
+  );
+};
+
+// ─── FAQ Section with Subcategory Tabs ────────────────────────────────────────
+export const Faq = () => {
+  const [activeFaqTab, setActiveFaqTab] = useState("all");
+
+  const filteredFaqs =
+    activeFaqTab === "all"
+      ? faqs
+      : faqs.filter((f) => f.category === activeFaqTab);
+
+  return (
+    <Sec id="faq">
+      <Head
+        pill="Frequently Asked Questions"
+        title="Got questions? We have"
+        highlight="clear answers"
+        sub="Everything you need to know about course tracks, batches, Hyderabad centers, fees, and placement guarantees."
+      />
+
+      {/* FAQ Sub-Tabs */}
+      <Reveal>
+        <div className="mb-8 flex flex-wrap justify-center gap-2">
+          {faqCategories.map((cat) => {
+            const isActive = activeFaqTab === cat.id;
+            return (
+              <button
+                key={cat.id}
+                onClick={() => setActiveFaqTab(cat.id)}
+                className={`rounded-full px-4 py-2 text-xs font-semibold transition-all cursor-pointer ${
+                  isActive
+                    ? "bg-blue-600 text-white shadow-xs"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                }`}
+              >
+                {cat.label}
+              </button>
+            );
+          })}
+        </div>
+      </Reveal>
+
+      {/* Accordion list */}
+      <div className="mx-auto max-w-3xl space-y-3">
+        {filteredFaqs.map((faq, idx) => (
+          <Reveal key={faq.q} delay={idx * 0.5}>
+            <details className="card group p-5 transition-all open:border-blue-200 open:shadow-md">
+              <summary className="flex items-center justify-between text-sm md:text-base font-bold text-slate-900 cursor-pointer">
+                <span>{faq.q}</span>
+                <Plus size={18} className="plus-icon shrink-0 text-slate-400" />
+              </summary>
+              <p className="mt-3 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
+                {faq.a}
+              </p>
+            </details>
+          </Reveal>
+        ))}
+      </div>
+    </Sec>
+  );
+};
+
+// ─── Sticky Floating WhatsApp Widget ──────────────────────────────────────────
+export const WhatsAppButton = () => {
+  return (
+    <a
+      href={`https://wa.me/${site.whatsapp.replace(/\+/g, "")}?text=Hi%20Hirely%20%26%20Jobly%20team%2C%20I%20would%20like%20to%20know%20more%20about%20the%20courses%20and%20counselling.`}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="whatsapp-float group"
+      aria-label="Chat with Counsellor on WhatsApp"
+    >
+      <MessageCircle size={18} className="animate-bounce" />
+      <span className="hidden sm:inline">Chat with Counsellor</span>
+    </a>
+  );
+};
+
+// ─── Footer ───────────────────────────────────────────────────────────────────
+const FOOTER_SECTIONS = {
+  "Tech Tracks": [
+    ["AI & Machine Learning", "/courses/ai-ml"],
+    ["Full-Stack Web Dev", "/courses/full-stack"],
+    ["Data Structures & Algorithms", "/courses/dsa"],
+    ["UI/UX Design", "/courses/ui-ux"],
+    ["Cybersecurity & Ethical Hacking", "/courses/cybersecurity"],
+  ],
+  "Quick Links": [
+    ["Home", "/"],
+    ["All Courses", "/courses"],
+    ["About Mission", "/about"],
+    ["Hyderabad Centers", "/#centers"],
+    ["Placement Network", "/#stories"],
+    ["Book Counselling", "/contact"],
+  ],
+};
+
+export const Footer = () => {
+  return (
+    <footer className="border-t border-slate-100 bg-slate-900 text-white pt-16 pb-12">
+      <div className="mx-auto max-w-6xl px-4">
+        <div className="grid gap-10 md:grid-cols-12 pb-12 border-b border-slate-800">
+          {/* Brand Column */}
+          <div className="md:col-span-5 space-y-4">
+            <div className="flex items-center gap-2.5 font-bold text-white">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
+                <GraduationCap size={18} />
+              </div>
+              <span className="text-lg font-extrabold tracking-tight">
+                Hirely <span className="text-blue-400">&amp;</span> Jobly
+              </span>
+            </div>
+            <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
+              Hyderabad’s premier outcome-driven tech academy for engineering and B.Tech students. Industry capstones, FAANG mentorship, and guaranteed placement assistance.
+            </p>
+            <div className="text-xs text-slate-300 space-y-1">
+              <div>📍 <b>Campus:</b> {site.address}</div>
+              <div>📞 <b>Phone:</b> {site.phone}</div>
+              <div>✉️ <b>Email:</b> {site.email}</div>
+            </div>
+          </div>
+
+          {/* Links Columns */}
+          {Object.entries(FOOTER_SECTIONS).map(([title, links]) => (
+            <div key={title} className="md:col-span-3">
+              <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
+                {title}
+              </div>
+              <ul className="space-y-2.5 text-xs text-slate-400">
+                {links.map(([label, href]) => (
+                  <li key={label}>
+                    <Link
+                      href={href}
+                      className="hover:text-white transition-colors"
+                    >
+                      {label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
+
+          {/* Trust Badges in Footer */}
+          <div className="md:col-span-1 space-y-3">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
+              Trust
+            </div>
+            <div className="rounded-xl bg-slate-800/80 p-3 text-center border border-slate-700/60">
+              <div className="text-xs font-bold text-amber-400">⭐ 4.9/5</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">5,000+ Reviews</div>
+            </div>
+            <div className="rounded-xl bg-slate-800/80 p-3 text-center border border-slate-700/60">
+              <div className="text-xs font-bold text-blue-400">40+</div>
+              <div className="text-[10px] text-slate-400 mt-0.5">Hiring Partners</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-slate-500 sm:flex-row">
+          <div>
+            © {new Date().getFullYear()} {site.name}. All rights reserved. Hyderabad, Telangana.
+          </div>
+          <div className="flex gap-6">
+            <Link href="/privacy" className="hover:text-slate-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-slate-400 transition-colors">
+              Terms of Service
+            </Link>
+          </div>
         </div>
       </div>
-      <div className="wordmark font-serif select-none whitespace-nowrap px-4 text-center text-[13vw] font-bold leading-none md:text-[120px]">
-        HIRELY &amp; JOBLY
-      </div>
-      <div className="bg-neutral-900 px-6 py-3 text-xs text-neutral-400">
-        © {new Date().getFullYear()} {site.name}. All rights reserved. · Hyderabad, Telangana
-      </div>
-    </div>
-  </footer>
-);
+      <WhatsAppButton />
+    </footer>
+  );
+};

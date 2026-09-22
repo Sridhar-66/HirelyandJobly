@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowLeft, ArrowUpRight, CheckCircle2, Mail, Phone, MapPin, Clock } from "lucide-react";
-import { Nav, Footer } from "@/components/Sections";
-import { site, courses } from "@/data/content";
+import { ArrowLeft, ArrowUpRight, CheckCircle2, Mail, Phone, MapPin, Clock, MessageCircle, Sparkles } from "lucide-react";
+import { Nav, Footer, Pill } from "@/components/Sections";
+import { site, courses, hubs } from "@/data/content";
 
 interface FormData {
   name: string;
@@ -12,6 +12,7 @@ interface FormData {
   phone: string;
   college: string;
   course: string;
+  centerPreference: string;
   message: string;
 }
 
@@ -30,6 +31,7 @@ export default function ContactPage() {
     phone: "",
     college: "",
     course: "",
+    centerPreference: "madhapur",
     message: "",
   });
 
@@ -73,11 +75,9 @@ export default function ContactPage() {
     if (!validate()) return;
 
     setSubmitting(true);
-    // Simulate async submission
     setTimeout(() => {
       setSubmitting(false);
       setSubmitted(true);
-      console.log("Contact form submitted successfully:", form);
     }, 600);
   };
 
@@ -97,235 +97,235 @@ export default function ContactPage() {
       <main className="mx-auto max-w-6xl px-4 py-10 md:py-16">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-neutral-500 hover:text-neutral-900 transition-colors mb-6"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors mb-6"
         >
           <ArrowLeft size={14} /> Back to home
         </Link>
 
-        <div className="mb-10">
-          <span className="pill mb-3 inline-block">Get in touch</span>
-          <h1 className="font-serif text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">
-            Book a free demo or speak with our team
+        {/* Header */}
+        <div className="mb-12">
+          <Pill>Free Career Guidance</Pill>
+          <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-5xl">
+            Book your <span className="gradient-text">free demo &amp; counselling</span>
           </h1>
-          <p className="mt-3 max-w-xl text-sm text-neutral-600">
-            Have questions about batch schedules, syllabus details, or Hyderabad campus visits? Leave your details and an academic counsellor will reach out within 24 hours.
+          <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
+            Speak directly with our senior academic counsellor in Hyderabad. We help you choose the right course track, discuss batch timings, and evaluate your eligibility for up to 40% scholarships.
           </p>
         </div>
 
-        <div className="grid gap-10 lg:grid-cols-3">
-          {/* Left Form (2 cols) */}
-          <div className="lg:col-span-2">
-            <div className="card p-6 md:p-10">
+        <div className="grid gap-10 lg:grid-cols-12">
+          {/* Form Column */}
+          <div className="lg:col-span-7">
+            <div className="card p-6 md:p-8">
               {submitted ? (
                 <div className="py-12 text-center">
-                  <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-full bg-emerald-100 text-emerald-600">
+                  <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
                     <CheckCircle2 size={32} />
                   </div>
-                  <h2 className="font-serif text-2xl md:text-3xl font-bold text-neutral-900">
-                    Thank you, {form.name.split(" ")[0]}!
+                  <h2 className="text-2xl font-bold text-slate-900">
+                    Counselling Request Received!
                   </h2>
-                  <p className="mx-auto mt-3 max-w-md text-sm text-neutral-600">
-                    We have received your enquiry for the <b>{courses.find((c) => c.slug === form.course)?.name || form.course}</b> track. Our counsellor will call or WhatsApp you at <b>{form.phone}</b> shortly.
+                  <p className="mt-3 text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+                    Thank you, <b>{form.name}</b>. Our academic counselor will call you at <b>{form.phone}</b> within 2 business hours to schedule your free demo class.
                   </p>
                   <button
                     onClick={() => {
                       setSubmitted(false);
-                      setForm({ name: "", email: "", phone: "", college: "", course: "", message: "" });
+                      setForm({
+                        name: "",
+                        email: "",
+                        phone: "",
+                        college: "",
+                        course: "",
+                        centerPreference: "madhapur",
+                        message: "",
+                      });
                     }}
-                    className="btn btn-light mt-8 text-xs"
+                    className="btn btn-secondary mt-8 text-xs"
                   >
-                    Submit another response
+                    Submit another enquiry
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} noValidate className="space-y-5">
+                <form onSubmit={handleSubmit} noValidate className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="block text-xs font-semibold text-neutral-800 mb-1.5">
-                        Full Name <span className="text-rose-500">*</span>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        Full Name *
                       </label>
                       <input
-                        id="name"
                         type="text"
                         name="name"
-                        placeholder="e.g. Rahul Sharma"
                         value={form.name}
                         onChange={handleChange}
+                        placeholder="e.g. Rahul Sharma"
                         className={`field ${errors.name ? "field-error" : ""}`}
                       />
-                      {errors.name && <p className="mt-1 text-xs text-rose-500">{errors.name}</p>}
+                      {errors.name && (
+                        <p className="mt-1 text-[11px] text-red-500">{errors.name}</p>
+                      )}
                     </div>
 
                     <div>
-                      <label htmlFor="email" className="block text-xs font-semibold text-neutral-800 mb-1.5">
-                        Email Address <span className="text-rose-500">*</span>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        Phone / WhatsApp Number *
                       </label>
                       <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        placeholder="e.g. rahul@example.com"
-                        value={form.email}
+                        type="tel"
+                        name="phone"
+                        value={form.phone}
                         onChange={handleChange}
-                        className={`field ${errors.email ? "field-error" : ""}`}
+                        placeholder="e.g. +91 98765 43210"
+                        className={`field ${errors.phone ? "field-error" : ""}`}
                       />
-                      {errors.email && <p className="mt-1 text-xs text-rose-500">{errors.email}</p>}
+                      {errors.phone && (
+                        <p className="mt-1 text-[11px] text-red-500">{errors.phone}</p>
+                      )}
                     </div>
                   </div>
 
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="phone" className="block text-xs font-semibold text-neutral-800 mb-1.5">
-                        Phone / WhatsApp <span className="text-rose-500">*</span>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        Email Address *
                       </label>
                       <input
-                        id="phone"
-                        type="tel"
-                        name="phone"
-                        placeholder="e.g. +91 98765 43210"
-                        value={form.phone}
+                        type="email"
+                        name="email"
+                        value={form.email}
                         onChange={handleChange}
-                        className={`field ${errors.phone ? "field-error" : ""}`}
+                        placeholder="e.g. rahul@example.com"
+                        className={`field ${errors.email ? "field-error" : ""}`}
                       />
-                      {errors.phone && <p className="mt-1 text-xs text-rose-500">{errors.phone}</p>}
+                      {errors.email && (
+                        <p className="mt-1 text-[11px] text-red-500">{errors.email}</p>
+                      )}
                     </div>
 
                     <div>
-                      <label htmlFor="college" className="block text-xs font-semibold text-neutral-800 mb-1.5">
-                        College / University <span className="text-rose-500">*</span>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        College / University Name *
                       </label>
                       <input
-                        id="college"
                         type="text"
                         name="college"
-                        placeholder="e.g. JNTU Hyderabad / CBIT"
                         value={form.college}
                         onChange={handleChange}
+                        placeholder="e.g. JNTUH / CBIT / VNR VJIET"
                         className={`field ${errors.college ? "field-error" : ""}`}
                       />
-                      {errors.college && <p className="mt-1 text-xs text-rose-500">{errors.college}</p>}
+                      {errors.college && (
+                        <p className="mt-1 text-[11px] text-red-500">{errors.college}</p>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        Interested Track *
+                      </label>
+                      <select
+                        name="course"
+                        value={form.course}
+                        onChange={handleChange}
+                        className={`field ${errors.course ? "field-error" : ""}`}
+                      >
+                        <option value="">Select a tech course</option>
+                        {courses.map((c) => (
+                          <option key={c.slug} value={c.slug}>
+                            {c.name} ({c.duration})
+                          </option>
+                        ))}
+                      </select>
+                      {errors.course && (
+                        <p className="mt-1 text-[11px] text-red-500">{errors.course}</p>
+                      )}
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                        Preferred Mode / Center
+                      </label>
+                      <select
+                        name="centerPreference"
+                        value={form.centerPreference}
+                        onChange={handleChange}
+                        className="field"
+                      >
+                        <option value="madhapur">Madhapur (HITEC City Center)</option>
+                        <option value="ameerpet">Ameerpet Metro Hub</option>
+                        <option value="online">Live Interactive Online</option>
+                      </select>
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="course" className="block text-xs font-semibold text-neutral-800 mb-1.5">
-                      Course Interested In <span className="text-rose-500">*</span>
-                    </label>
-                    <select
-                      id="course"
-                      name="course"
-                      value={form.course}
-                      onChange={handleChange}
-                      className={`field cursor-pointer ${errors.course ? "field-error" : ""}`}
-                    >
-                      <option value="">Select a course track...</option>
-                      {courses.map((c) => (
-                        <option key={c.slug} value={c.slug}>
-                          {c.name} ({c.meta})
-                        </option>
-                      ))}
-                      <option value="career-bundle">Career Bundle (2 Courses + Placement Prep)</option>
-                      <option value="not-sure">Not sure yet — need counselling</option>
-                    </select>
-                    {errors.course && <p className="mt-1 text-xs text-rose-500">{errors.course}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="block text-xs font-semibold text-neutral-800 mb-1.5">
-                      Message or Questions <span className="text-neutral-400 font-normal">(optional)</span>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5">
+                      Any questions or specific career goals? (Optional)
                     </label>
                     <textarea
-                      id="message"
                       name="message"
-                      rows={4}
-                      placeholder="Let us know your branch, semester, or specific questions about the batch schedule..."
+                      rows={3}
                       value={form.message}
                       onChange={handleChange}
-                      className="field resize-y"
+                      placeholder="e.g. Looking for weekend batch with placement assistance..."
+                      className="field resize-none"
                     />
                   </div>
 
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="btn btn-dark w-full justify-center py-3 text-sm cursor-pointer disabled:opacity-70"
+                    className="btn btn-primary w-full py-3.5 text-sm font-semibold mt-2"
                   >
-                    {submitting ? "Sending details..." : "Request Free Demo & Callback"} <ArrowUpRight size={15} />
+                    {submitting ? "Booking Your Demo..." : "Book Free Demo & Counselling Session"}
                   </button>
-
-                  <p className="text-[11px] text-center text-neutral-400">
-                    We respect your privacy. No spam — only genuine admissions assistance from our Hyderabad campus team.
-                  </p>
                 </form>
               )}
             </div>
           </div>
 
-          {/* Right Contact Details Sidebar */}
-          <div className="space-y-6">
+          {/* Contact Details & Centers Sidebar */}
+          <div className="lg:col-span-5 space-y-6">
             <div className="card p-6">
-              <span className="pill mb-3 inline-block">Contact Info</span>
-              <h3 className="font-serif text-lg font-bold text-neutral-900 mb-4">Hyderabad Training Hub</h3>
-
-              <div className="space-y-4 text-xs text-neutral-600">
-                <div className="flex items-start gap-3">
-                  <MapPin size={16} className="text-neutral-800 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-semibold text-neutral-800">Address</div>
-                    {/* TODO: replace with exact Hyderabad centre address */}
-                    <div>Madhapur, HITEC City, Hyderabad, Telangana 500081</div>
+              <h3 className="font-bold text-slate-900 text-base mb-4">
+                Hyderabad Training Centers
+              </h3>
+              <div className="space-y-4 text-xs">
+                {hubs.map((hub) => (
+                  <div key={hub.id} className="pb-3 border-b border-slate-100 last:border-0 last:pb-0">
+                    <div className="font-bold text-slate-900 flex items-center gap-1.5 text-xs">
+                      <MapPin size={14} className="text-blue-600" />
+                      {hub.name}
+                    </div>
+                    <p className="mt-1 text-slate-600 leading-relaxed pl-5">
+                      {hub.address}
+                    </p>
+                    <span className="mt-1.5 inline-block text-[11px] font-semibold text-emerald-600 pl-5">
+                      ✓ {hub.batch}
+                    </span>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail size={16} className="text-neutral-800 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-semibold text-neutral-800">Email</div>
-                    {/* TODO: replace with active contact inbox */}
-                    <a href={`mailto:${site.email}`} className="text-neutral-900 underline hover:text-black">
-                      {site.email}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Phone size={16} className="text-neutral-800 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-semibold text-neutral-800">Phone / WhatsApp</div>
-                    {/* TODO: replace with active contact number */}
-                    <a href={`tel:${site.phone}`} className="text-neutral-900 hover:text-black">
-                      {site.phone}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Clock size={16} className="text-neutral-800 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-semibold text-neutral-800">Counselling Hours</div>
-                    <div>Monday – Saturday: 9:00 AM – 7:30 PM</div>
-                    <div>Sunday: 10:00 AM – 4:00 PM (By appointment)</div>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
-            <div className="dark-card p-6">
-              <span className="inline-block rounded-full bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-lime-400 mb-2">
-                Fast Response
-              </span>
-              <h4 className="font-serif text-lg font-bold text-white mb-2">Instant WhatsApp Counselling</h4>
-              <p className="text-xs text-neutral-300 leading-relaxed">
-                Need quick answers right away? Chat directly with an admissions mentor on WhatsApp for batch dates and course brochures.
+            {/* Quick WhatsApp Support */}
+            <div className="rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 p-6 text-white shadow-md">
+              <div className="flex items-center gap-2 font-bold text-sm mb-2">
+                <MessageCircle size={18} />
+                Instant WhatsApp Assistance
+              </div>
+              <p className="text-xs text-emerald-100 leading-relaxed">
+                Need immediate response regarding syllabus, fees, or demo timings? Chat directly with our admission counselor.
               </p>
-              {/* TODO: replace href with active wa.me link */}
               <a
-                href="https://wa.me/910000000000?text=Hi%20Hirely%20and%20Jobly,%20I'm%20interested%20in%20your%20tech%20courses"
+                href={`https://wa.me/${site.whatsapp.replace(/\+/g, "")}?text=Hi%20Hirely%20%26%20Jobly%20team%2C%20I%20would%20like%20to%20know%20more%20about%20the%20courses.`}
                 target="_blank"
-                rel="noreferrer"
-                className="btn bg-white text-black hover:bg-neutral-100 text-xs w-full justify-center mt-4"
+                rel="noopener noreferrer"
+                className="btn mt-4 w-full bg-white text-emerald-900 hover:bg-emerald-50 text-xs font-bold justify-center"
               >
-                Chat on WhatsApp <ArrowUpRight size={13} />
+                Chat on WhatsApp Now
               </a>
             </div>
           </div>
