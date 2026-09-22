@@ -40,7 +40,7 @@ const Sec = ({ id, children, className }: { id?: string; children: React.ReactNo
 
 export const Logo = () => (
   <Link href="/" className="flex items-center gap-2 font-semibold">
-    <Image src="/images/logo-icon.png" alt="Hirely & Jobly logo" width={28} height={28} className="rounded-lg" />
+    <Image src="/images/brand/logo-icon.png" alt="Hirely & Jobly logo" width={28} height={28} className="rounded-lg" />
     Hirely & Jobly
   </Link>
 );
@@ -118,7 +118,7 @@ export const Hero = () => (
       {/* Hero student portrait */}
       <div className="absolute inset-y-0 right-0 hidden w-[48%] md:block overflow-hidden rounded-r-[28px]" aria-hidden="true">
         <Image
-          src="/images/hero-student.jpg"
+          src="/images/heroes/hero-student.jpg"
           alt="Student learning at Hirely & Jobly"
           fill
           className="object-cover object-center"
@@ -181,7 +181,7 @@ export const Benefits = () => (
               )}
               {i === 1 && (
                 <>
-                  <Image src="/images/about-mentor-session.jpg" alt="Hands-on projects with mentors" fill className="object-cover object-top" />
+                  <Image src="/images/about/about-mentor-session.jpg" alt="Hands-on projects with mentors" fill className="object-cover object-top" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute bottom-3 left-3 flex gap-1.5">
                     {["React", "Python", "Figma", "Unity"].map((tag) => (
@@ -192,7 +192,7 @@ export const Benefits = () => (
               )}
               {i === 2 && (
                 <>
-                  <Image src="/images/counsellor.jpg" alt="Placement support" fill className="object-cover object-top" />
+                  <Image src="/images/about/counsellor.jpg" alt="Placement support" fill className="object-cover object-top" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <div className="absolute bottom-3 left-3">
                     <span className="rounded-full bg-emerald-400 px-2.5 py-1 text-[10px] font-bold text-emerald-950">✓ Offer received</span>
@@ -288,7 +288,7 @@ export const Why = () => (
       <div className="space-y-4">
         <Reveal>
           <div className="relative overflow-hidden rounded-2xl h-56">
-            <Image src="/images/about-classroom.jpg" alt="Students in class" fill className="object-cover object-center" />
+            <Image src="/images/about/about-classroom.jpg" alt="Students in class" fill className="object-cover object-center" />
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
             <div className="absolute inset-0 flex flex-col justify-between p-5">
               <p className="text-sm text-white/80 font-medium">Real projects built with mentors, reviewed every week.</p>

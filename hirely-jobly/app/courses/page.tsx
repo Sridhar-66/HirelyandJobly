@@ -84,7 +84,7 @@ export default function CoursesPage() {
           {/* Counsellor photo */}
           <div className="relative hidden md:block w-64 shrink-0">
             <Image
-              src="/images/counsellor.jpg"
+              src="/images/about/counsellor.jpg"
               alt="Academic counsellor at Hirely & Jobly"
               fill
               className="object-cover object-top"

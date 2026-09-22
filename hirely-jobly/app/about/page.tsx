@@ -36,7 +36,7 @@ export default function AboutPage() {
           {/* Classroom photo on the right */}
           <div className="absolute inset-y-0 right-0 hidden w-[42%] md:block overflow-hidden" aria-hidden="true">
             <Image
-              src="/images/about-classroom.jpg"
+              src="/images/about/about-classroom.jpg"
               alt="Classroom at Hirely and Jobly training centre"
               fill
               className="object-cover object-left"
@@ -118,7 +118,7 @@ export default function AboutPage() {
           {/* Mentor session photo */}
           <div className="relative h-56 w-full overflow-hidden rounded-2xl mb-8">
             <Image
-              src="/images/about-mentor-session.jpg"
+              src="/images/about/about-mentor-session.jpg"
               alt="Mentor and student working together at Hirely & Jobly"
               fill
               className="object-cover"
