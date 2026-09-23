@@ -12,6 +12,8 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## 1. Project Overview
 **Hirely and Jobly** is a high-converting, modern EdTech & placement marketing web application built for engineering students (B.Tech) and job seekers in Telangana / Hyderabad. It offers career-oriented courses in Full-Stack, AI/ML, DSA, UI/UX, Game Design, AR/VR, and Cybersecurity with both **Classroom Learning (Madhapur & Ameerpet, Hyderabad)** and **Live Interactive Online** delivery modes.
+- **Production URL**: https://hirelyandjobly.vercel.app/
+- **Live Deployment**: Linked with Git to Vercel. Pushing to `main` deploys automatically.
 
 ## 2. Technology Stack
 - **Framework**: Next.js (App Router) + TypeScript (.tsx)
@@ -49,8 +51,9 @@ hirely-jobly/
 3. **Company & Partner Logos**: Use authentic vector SVG components from `CompanyLogos.tsx` rather than low-resolution images or plain text.
 4. **Responsive & Accessible**: Ensure all components are responsive across mobile, tablet, and desktop views with semantic HTML tags.
 5. **Build Validation**: Always verify code changes by running `npm run build` inside `hirely-jobly/` to ensure zero type errors or broken imports.
+6. **Deploy to Vercel (Git Push Rule)**: **The project is git linked to Vercel.** Every time you finish making changes, you must commit and push to Git (`git push origin main`) at the end so the user can see live updates immediately on Vercel.
 
-## 5. Common Commands
+## 5. Development & Deployment Workflow
 ```bash
 # Start development server
 npm run dev
@@ -58,6 +61,8 @@ npm run dev
 # Run production build & typecheck
 npm run build
 
-# Run linting
-npm run lint
+# Push to Git to trigger live Vercel deployment
+git add -A
+git commit -m "feat/fix: descriptive commit message"
+git push origin main
 ```
