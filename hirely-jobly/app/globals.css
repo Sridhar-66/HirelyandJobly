@@ -224,11 +224,11 @@ details[open] .plus-icon {
 }
 
 /* ── Sticky WhatsApp floating button ── */
-/* Positioned bottom-LEFT to avoid overlapping course CTAs and footer links on bottom-right */
+/* Positioned bottom-RIGHT so it's always accessible for counsellor chat */
 .whatsapp-float {
   position: fixed;
   bottom: 24px;
-  left: 24px;
+  right: 24px;
   z-index: 50;
   display: flex;
   align-items: center;

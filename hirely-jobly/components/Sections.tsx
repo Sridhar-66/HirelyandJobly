@@ -63,7 +63,7 @@ import {
   faqs,
 } from "@/data/content";
 import { AnimatedCounter } from "./AnimatedCounter";
-import { PartnerLogosMarquee } from "./CompanyLogos";
+import { PartnerLogosMarquee, BackerLogos } from "./CompanyLogos";
 import { TrustedByLearners } from "./TrustedByLearners";
 
 // ─── Animation helpers ───────────────────────────────────────────────────────
@@ -263,21 +263,7 @@ export const Hero = () => {
               </div>
             </Reveal>
 
-            {/* Trust Badges */}
-            <Reveal delay={4}>
-              <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4 border-t border-slate-200/80 pt-6">
-                {trustBadges.map((badge) => (
-                  <div key={badge.label} className="flex flex-col">
-                    <span className="text-xs font-bold text-slate-900">
-                      {badge.label}
-                    </span>
-                    <span className="text-[11px] text-slate-500">
-                      {badge.desc}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
+
           </div>
 
           {/* Right Column: Hero Visual & Floating Highlights */}
@@ -290,7 +276,7 @@ export const Hero = () => {
                     src="/images/heroes/hero-student.jpg"
                     alt="Student learning at Hirely and Jobly"
                     fill
-                    className="object-cover object-center"
+                    className="object-cover object-right-center"
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
@@ -317,19 +303,32 @@ export const Hero = () => {
                   </div>
                 </div>
 
-                {/* Floating Achievement Card Top Right — overflow-visible keeps it from clipping */}
+                {/* Floating Salary Success Card — Ananya Reddy @ Zomato */}
                 <motion.div
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: 20, y: -10 }}
+                  animate={{ opacity: 1, x: 0, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.6 }}
-                  className="absolute -top-4 -right-4 z-10 rounded-2xl bg-white p-3 shadow-xl border border-slate-100 flex items-center gap-3 whitespace-nowrap"
+                  className="absolute -top-5 -right-5 z-10 rounded-2xl bg-white shadow-2xl border border-slate-100 overflow-hidden whitespace-nowrap"
+                  style={{ minWidth: "200px" }}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
-                    <TrendingUp size={20} />
+                  {/* Card header bar */}
+                  <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-4 py-2 flex items-center justify-between gap-2">
+                    <span className="text-white text-[10px] font-bold uppercase tracking-wider">✓ Verified Offer</span>
+                    <TrendingUp size={14} className="text-white opacity-80" />
                   </div>
-                  <div>
-                    <div className="text-[11px] font-medium text-slate-500">Highest CTC</div>
-                    <div className="text-sm font-extrabold text-slate-900">₹18.5 LPA</div>
+                  {/* Card body */}
+                  <div className="px-4 py-3">
+                    <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider mb-0.5">Placed at</div>
+                    <div className="flex items-center justify-between gap-4">
+                      <div>
+                        <div className="text-sm font-extrabold text-slate-900 leading-tight">Zomato</div>
+                        <div className="text-[11px] text-slate-500 font-medium">Software Engineer</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xl font-black text-emerald-600 leading-none">₹12.5<span className="text-xs font-bold"> LPA</span></div>
+                        <div className="text-[10px] text-slate-400 font-medium">Ananya Reddy</div>
+                      </div>
+                    </div>
                   </div>
                 </motion.div>
 
@@ -436,6 +435,142 @@ export const StatsBar = () => {
 export { TrustedByLearners };
 
 // ─── Tabbed Course Catalog (AccioJob Style) ───────────────────────────────────
+// ─── Per-course pricing tiers ─────────────────────────────────────────────────
+const COURSE_TIERS = [
+  {
+    id: "recorded",
+    label: "Recorded",
+    price: "₹2,999",
+    badge: "Self-Paced",
+    color: "slate",
+    features: ["Full recorded lectures", "Study material & notes", "Lifetime LMS access", "Certificate on completion"],
+  },
+  {
+    id: "live",
+    label: "Live + Mentor",
+    price: "₹4,999",
+    badge: "Most Popular",
+    color: "blue",
+    features: ["Live instructor-led classes", "1:1 mentor sessions", "Daily doubt clearing", "Project review & feedback"],
+  },
+  {
+    id: "placement",
+    label: "Job Placement",
+    price: "₹8,999",
+    badge: "Best Value",
+    color: "emerald",
+    features: ["Everything in Live+Mentor", "Placement cell access", "Soft skills & communication", "Mock interviews + referrals"],
+  },
+];
+
+const CourseCard = ({ c }: { c: typeof courses[0] }) => {
+  const [selectedTier, setSelectedTier] = useState("live");
+  const tier = COURSE_TIERS.find((t) => t.id === selectedTier)!;
+
+  const tierColorMap: Record<string, { btn: string; border: string; badge: string }> = {
+    slate: { btn: "bg-slate-700 text-white", border: "border-slate-700 bg-slate-50", badge: "bg-slate-100 text-slate-700" },
+    blue: { btn: "bg-blue-600 text-white", border: "border-blue-500 bg-blue-50", badge: "bg-blue-100 text-blue-700" },
+    emerald: { btn: "bg-emerald-600 text-white", border: "border-emerald-500 bg-emerald-50", badge: "bg-emerald-100 text-emerald-700" },
+  };
+  const colors = tierColorMap[tier.color];
+
+  return (
+    <div className="card card-hover flex h-full flex-col justify-between overflow-hidden p-5">
+      <div>
+        {/* Top Badges */}
+        <div className="flex items-center justify-between gap-2 mb-3">
+          <span className="ribbon-scholarship">{c.scholarship}</span>
+          <span className="text-[11px] font-semibold text-slate-500">⏱ {c.duration}</span>
+        </div>
+
+        {/* Course Image Banner */}
+        <div className="relative h-44 w-full overflow-hidden rounded-xl">
+          <Image
+            src={`/images/courses/${c.slug}.jpg`}
+            alt={c.name}
+            fill
+            className="object-cover transition-transform duration-500 hover:scale-105"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
+          <div className="absolute bottom-3 left-3 right-3 text-white">
+            <div className="text-[11px] font-medium text-blue-300">{c.highlight}</div>
+            <h3 className="text-lg font-bold leading-tight text-white">{c.name}</h3>
+          </div>
+        </div>
+
+        {/* Tagline */}
+        <p className="mt-3 text-xs text-slate-600 leading-relaxed">{c.tagline}</p>
+
+        {/* 3-Tier Pricing Selector */}
+        <div className="mt-4">
+          <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Choose Your Plan</div>
+          <div className="grid grid-cols-3 gap-1.5">
+            {COURSE_TIERS.map((t) => {
+              const isActive = selectedTier === t.id;
+              return (
+                <button
+                  key={t.id}
+                  onClick={() => setSelectedTier(t.id)}
+                  className={`rounded-lg border-2 p-2 text-center transition-all cursor-pointer ${
+                    isActive
+                      ? tierColorMap[t.color].border + " shadow-sm"
+                      : "border-slate-200 bg-white hover:border-slate-300"
+                  }`}
+                >
+                  <div className={`text-[9px] font-bold uppercase mb-0.5 ${isActive ? "text-" + t.color + "-600" : "text-slate-400"}`}>
+                    {t.label}
+                  </div>
+                  <div className={`text-xs font-extrabold ${isActive ? "text-slate-900" : "text-slate-500"}`}>
+                    {t.price}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* Selected Tier Features */}
+          <div className={`mt-3 rounded-xl border ${colors.border} p-3`}>
+            <div className={`text-[10px] font-bold mb-2 ${colors.badge.includes("blue") ? "text-blue-700" : colors.badge.includes("emerald") ? "text-emerald-700" : "text-slate-700"}`}>
+              {tier.badge} · {tier.price}
+            </div>
+            <ul className="space-y-1">
+              {tier.features.map((f) => (
+                <li key={f} className="flex items-center gap-1.5 text-[10px] text-slate-700">
+                  <Check size={10} className={colors.badge.includes("blue") ? "text-blue-500 shrink-0" : colors.badge.includes("emerald") ? "text-emerald-500 shrink-0" : "text-slate-500 shrink-0"} />
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Tech Stack Pills */}
+        <div className="mt-3 flex flex-wrap gap-1.5">
+          {c.tags.map((tag) => (
+            <span key={tag} className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Card Action Footer */}
+      <div className="mt-4 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+        <span className="text-[11px] font-medium text-emerald-600 flex items-center gap-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
+          {c.startingBatch}
+        </span>
+        <Link
+          href={`/contact?course=${c.slug}&tier=${selectedTier}&price=${tier.price}`}
+          className={`btn text-xs py-1.5 px-4 ${colors.btn}`}
+        >
+          Enroll {tier.price} <ArrowUpRight size={13} />
+        </Link>
+      </div>
+    </div>
+  );
+};
+
 export const Courses = () => {
   const [activeTab, setActiveTab] = useState("all");
 
@@ -487,68 +622,7 @@ export const Courses = () => {
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.35, delay: i * 0.05 }}
             >
-              <div className="card card-hover flex h-full flex-col justify-between overflow-hidden p-5">
-                <div>
-                  {/* Top Badges */}
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="ribbon-scholarship">{c.scholarship}</span>
-                    <span className="text-[11px] font-semibold text-slate-500">
-                      ⏱ {c.duration}
-                    </span>
-                  </div>
-
-                  {/* Course Image Banner */}
-                  <div className="relative h-44 w-full overflow-hidden rounded-xl">
-                    <Image
-                      src={`/images/courses/${c.slug}.jpg`}
-                      alt={c.name}
-                      fill
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-                    
-                    <div className="absolute bottom-3 left-3 right-3 text-white">
-                      <div className="text-[11px] font-medium text-blue-300">
-                        {c.highlight}
-                      </div>
-                      <h3 className="text-lg font-bold leading-tight text-white">
-                        {c.name}
-                      </h3>
-                    </div>
-                  </div>
-
-                  {/* Tagline */}
-                  <p className="mt-3 text-xs text-slate-600 leading-relaxed">
-                    {c.tagline}
-                  </p>
-
-                  {/* Tech Stack Pills */}
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {c.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-slate-100 px-2 py-0.5 text-[10px] font-semibold text-slate-700"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Card Action Footer */}
-                <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between gap-2">
-                  <span className="text-[11px] font-medium text-emerald-600 flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-ping" />
-                    {c.startingBatch}
-                  </span>
-                  <Link
-                    href={`/courses/${c.slug}`}
-                    className="btn btn-primary text-xs py-1.5 px-4"
-                  >
-                    View Syllabus <ArrowUpRight size={13} />
-                  </Link>
-                </div>
-              </div>
+              <CourseCard c={c} />
             </motion.div>
           ))}
         </AnimatePresence>
@@ -564,6 +638,8 @@ export const Courses = () => {
     </Sec>
   );
 };
+
+
 
 // ─── Hyderabad Training Hubs Section ──────────────────────────────────────────
 export const LocationsHub = () => {
@@ -999,19 +1075,12 @@ export const Footer = () => {
             </div>
           ))}
 
-          {/* Trust Badges in Footer */}
-          <div className="md:col-span-1 space-y-3">
+          {/* Backers Column */}
+          <div className="md:col-span-1">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
-              Trust
+              Backed By
             </div>
-            <div className="rounded-xl bg-slate-800/80 p-3 text-center border border-slate-700/60">
-              <div className="text-xs font-bold text-amber-400">⭐ 4.9/5</div>
-              <div className="text-[10px] text-slate-400 mt-0.5">5,000+ Reviews</div>
-            </div>
-            <div className="rounded-xl bg-slate-800/80 p-3 text-center border border-slate-700/60">
-              <div className="text-xs font-bold text-blue-400">40+</div>
-              <div className="text-[10px] text-slate-400 mt-0.5">Hiring Partners</div>
-            </div>
+            <BackerLogos />
           </div>
         </div>
 
