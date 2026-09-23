@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import {
   SiGoogle,
   SiMeta,
@@ -121,31 +122,22 @@ export const PartnerLogosMarquee = () => (
 // ─── Footer backer logos ───────────────────────────────────────────────────────
 export const BackerLogos = () => (
   <div className="flex flex-col gap-4">
-    {/* IIT Delhi — Academic incubation badge */}
+    {/* IIT Delhi — Academic incubation badge with official logo */}
     <div className="flex items-center gap-2.5 opacity-90 hover:opacity-100 transition-opacity">
-      <div className="w-8 h-8 rounded-lg bg-[#002B7F] flex items-center justify-center shrink-0 shadow-xs">
-        <span className="text-white font-black text-[11px] tracking-tighter leading-tight text-center">
-          IIT
-        </span>
+      <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 shadow-xs">
+        <Image
+          src="/images/iit-delhi.svg"
+          alt="IIT Delhi"
+          width={26}
+          height={26}
+          className="object-contain"
+        />
       </div>
       <div>
         <div className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">
           Incubated at
         </div>
         <div className="text-white text-xs font-bold">IIT Delhi</div>
-      </div>
-    </div>
-
-    {/* Antler India */}
-    <div className="flex items-center gap-2.5 opacity-90 hover:opacity-100 transition-opacity">
-      <div className="w-8 h-8 rounded-lg bg-[#121212] flex items-center justify-center shrink-0 shadow-xs border border-slate-700">
-        <span className="text-[#FF385C] font-black text-base leading-none">A</span>
-      </div>
-      <div>
-        <div className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">
-          Backed by
-        </div>
-        <div className="text-white text-xs font-bold">Antler India</div>
       </div>
     </div>
 
@@ -156,7 +148,7 @@ export const BackerLogos = () => (
       </div>
       <div>
         <div className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">
-          Hiring Partner
+          Backed up by
         </div>
         <div className="text-white text-xs font-bold">Tech Mahindra</div>
       </div>

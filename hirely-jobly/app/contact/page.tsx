@@ -175,7 +175,7 @@ export default function ContactPage() {
                         name="phone"
                         value={form.phone}
                         onChange={handleChange}
-                        placeholder="e.g. +91 98765 43210"
+                        placeholder="e.g. +91 95536 85395"
                         className={`field ${errors.phone ? "field-error" : ""}`}
                       />
                       {errors.phone && (
@@ -253,8 +253,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         className="field"
                       >
-                        <option value="madhapur">Madhapur (HITEC City Center)</option>
-                        <option value="ameerpet">Ameerpet Metro Hub</option>
+                        <option value="madhapur">Madhapur (HITEC City Campus)</option>
                         <option value="online">Live Interactive Online</option>
                       </select>
                     </div>
@@ -309,6 +308,23 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
+            </div>
+
+            {/* Direct Phone Assistance */}
+            <div className="card p-6 bg-blue-50/70 border-blue-200">
+              <div className="flex items-center gap-2 font-bold text-sm text-slate-900 mb-2">
+                <Phone size={18} strokeWidth={2} className="text-blue-600" />
+                Admissions &amp; Counselling Helpline
+              </div>
+              <p className="text-xs text-slate-600 leading-relaxed mb-4">
+                Have questions about program tracks, scholarships, or batch timings? Call our academic team directly.
+              </p>
+              <a
+                href={`tel:${site.phone.replace(/[\s\-]/g, "")}`}
+                className="btn btn-primary w-full text-xs font-bold justify-center py-2.5"
+              >
+                Call {site.phone}
+              </a>
             </div>
 
             {/* Quick WhatsApp Support */}

@@ -345,7 +345,7 @@ export const Hero = () => {
                   </div>
                 </motion.div>
 
-                {/* Floating Hyderabad Centers Badge Bottom Left */}
+                {/* Floating Hyderabad Campus Badge Bottom Left */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -354,8 +354,8 @@ export const Hero = () => {
                 >
                   <ShieldCheck size={20} strokeWidth={1.75} className="text-blue-400 shrink-0" />
                   <div>
-                    <div className="text-[10px] text-slate-300">Hyderabad Centers</div>
-                    <div className="text-xs font-bold">Madhapur &amp; Ameerpet</div>
+                    <div className="text-[10px] text-slate-300">Hyderabad Campus</div>
+                    <div className="text-xs font-bold">Madhapur Tech Campus</div>
                   </div>
                 </motion.div>
               </div>
@@ -865,13 +865,13 @@ export const Pricing = () => {
   return (
     <Sec id="pricing">
       <Head
-        pill="Transparent Investment"
-        title="Simple, transparent plans for"
-        highlight="serious career growth"
-        sub="Zero hidden costs. Includes live mentorship, lab access, project reviews, and placement drive participation."
+        pill="Program Tiers & Tracks"
+        title="Choose the level of mentorship and"
+        highlight="support that fits your goals"
+        sub="Transparent cohort pricing with zero hidden fees. Select the track that matches your pace and career ambition."
       />
 
-      <div className="mx-auto grid max-w-4xl gap-8 md:grid-cols-2 items-stretch">
+      <div className="mx-auto grid max-w-6xl gap-6 lg:grid-cols-3 md:grid-cols-2 items-stretch">
         {plans.map((p, i) => (
           <Reveal key={p.name} delay={i}>
             <div
@@ -885,70 +885,74 @@ export const Pricing = () => {
                 <div className="blob blob-indigo -top-20 -right-20 h-60 w-60 opacity-30" />
               )}
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-between">
-                  <span
-                    className={`rounded-full px-3 py-1 text-xs font-bold flex items-center gap-1.5 ${
-                      p.popular
-                        ? "bg-blue-600 text-white"
-                        : "bg-blue-50 text-blue-700"
-                    }`}
-                  >
-                    {p.popular && <Sparkles size={12} strokeWidth={2} className="text-blue-200" />}
-                    {p.badge}
-                  </span>
-                  <span className="text-xs text-slate-400 line-through">
-                    {p.originalPrice}
-                  </span>
-                </div>
-
-                <h3 className="mt-4 text-2xl font-bold">{p.name}</h3>
-                <p
-                  className={`mt-1 text-xs leading-relaxed ${
-                    p.popular ? "text-slate-300" : "text-slate-500"
-                  }`}
-                >
-                  {p.desc}
-                </p>
-
-                <div className="mt-6 flex items-baseline gap-2">
-                  <span className="text-4xl font-extrabold tracking-tight">
-                    {p.price}
-                  </span>
-                  <span
-                    className={`text-xs ${
-                      p.popular ? "text-slate-400" : "text-slate-500"
-                    }`}
-                  >
-                    + Zero-Cost EMI Available
-                  </span>
-                </div>
-
-                <Link
-                  href="/contact"
-                  className={`btn mt-6 w-full py-3 text-sm font-semibold ${
-                    p.popular
-                      ? "btn-primary"
-                      : "btn-secondary"
-                  }`}
-                >
-                  {p.cta} <ArrowUpRight size={14} strokeWidth={2} />
-                </Link>
-
-                <ul className="mt-8 space-y-3 text-xs">
-                  {p.f.map((feature) => (
-                    <li key={feature} className="flex items-center gap-2.5">
-                      <Check
-                        size={15}
-                        strokeWidth={2}
-                        className={p.popular ? "text-blue-400 shrink-0" : "text-blue-600 shrink-0"}
-                      />
-                      <span className={p.popular ? "text-slate-200" : "text-slate-700"}>
-                        {feature}
+              <div className="relative z-10 flex flex-col h-full justify-between">
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span
+                      className={`rounded-full px-3 py-1 text-xs font-bold flex items-center gap-1.5 ${
+                        p.popular
+                          ? "bg-blue-600 text-white"
+                          : "bg-blue-50 text-blue-700"
+                      }`}
+                    >
+                      {p.popular && <Sparkles size={12} strokeWidth={2} className="text-blue-200" />}
+                      {p.badge}
+                    </span>
+                    {p.originalPrice && (
+                      <span className="text-xs text-slate-400 line-through">
+                        {p.originalPrice}
                       </span>
-                    </li>
-                  ))}
-                </ul>
+                    )}
+                  </div>
+
+                  <h3 className="mt-4 text-2xl font-bold">{p.name}</h3>
+                  <p
+                    className={`mt-1 text-xs leading-relaxed ${
+                      p.popular ? "text-slate-300" : "text-slate-500"
+                    }`}
+                  >
+                    {p.desc}
+                  </p>
+
+                  <div className="mt-6 flex items-baseline gap-2">
+                    <span className="text-4xl font-extrabold tracking-tight">
+                      {p.price}
+                    </span>
+                    <span
+                      className={`text-xs ${
+                        p.popular ? "text-slate-400" : "text-slate-500"
+                      }`}
+                    >
+                      + Zero-Cost EMI Available
+                    </span>
+                  </div>
+
+                  <Link
+                    href={`/contact?track=${encodeURIComponent(p.name)}`}
+                    className={`btn mt-6 w-full py-3 text-sm font-semibold justify-center ${
+                      p.popular
+                        ? "btn-primary"
+                        : "btn-secondary"
+                    }`}
+                  >
+                    {p.cta} <ArrowUpRight size={14} strokeWidth={2} />
+                  </Link>
+
+                  <ul className="mt-8 space-y-3 text-xs">
+                    {p.f.map((feature) => (
+                      <li key={feature} className="flex items-start gap-2.5">
+                        <Check
+                          size={15}
+                          strokeWidth={2}
+                          className={p.popular ? "text-blue-400 shrink-0 mt-0.5" : "text-blue-600 shrink-0 mt-0.5"}
+                        />
+                        <span className={p.popular ? "text-slate-200" : "text-slate-700"}>
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
             </div>
           </Reveal>
@@ -1059,7 +1063,7 @@ export const Footer = () => {
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid gap-10 md:grid-cols-12 pb-12 border-b border-slate-800">
           {/* Brand Column */}
-          <div className="md:col-span-5 space-y-4">
+          <div className="md:col-span-4 space-y-4">
             <div className="flex items-center gap-2.5 font-bold text-white">
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
                 <GraduationCap size={18} strokeWidth={2} />
@@ -1078,7 +1082,9 @@ export const Footer = () => {
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={14} strokeWidth={1.75} className="text-blue-400 shrink-0" />
-                <span><b>Phone:</b> {site.phone}</span>
+                <a href={`tel:${site.phone.replace(/[\s\-]/g, "")}`} className="hover:text-white transition-colors">
+                  <b>Phone:</b> {site.phone}
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail size={14} strokeWidth={1.75} className="text-blue-400 shrink-0" />
@@ -1109,7 +1115,7 @@ export const Footer = () => {
           ))}
 
           {/* Backers Column */}
-          <div className="md:col-span-1">
+          <div className="md:col-span-2">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
               Backed By
             </div>
