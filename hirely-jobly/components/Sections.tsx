@@ -1093,29 +1093,40 @@ export const Footer = () => {
             </div>
           </div>
 
-          {/* Links Columns */}
-          {Object.entries(FOOTER_SECTIONS).map(([title, links]) => (
-            <div key={title} className="md:col-span-3">
-              <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
-                {title}
-              </div>
-              <ul className="space-y-2.5 text-xs text-slate-400">
-                {links.map(([label, href]) => (
-                  <li key={label}>
-                    <Link
-                      href={href}
-                      className="hover:text-white transition-colors"
-                    >
-                      {label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          {/* Tech Tracks Links Column */}
+          <div className="md:col-span-3">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
+              Tech Tracks
             </div>
-          ))}
+            <ul className="space-y-2.5 text-xs text-slate-400">
+              {FOOTER_SECTIONS["Tech Tracks"].map(([label, href]) => (
+                <li key={label}>
+                  <Link href={href} className="hover:text-white transition-colors">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Quick Links Column */}
+          <div className="md:col-span-2">
+            <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
+              Quick Links
+            </div>
+            <ul className="space-y-2.5 text-xs text-slate-400">
+              {FOOTER_SECTIONS["Quick Links"].map(([label, href]) => (
+                <li key={label}>
+                  <Link href={href} className="hover:text-white transition-colors">
+                    {label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
           {/* Backers Column */}
-          <div className="md:col-span-2">
+          <div className="md:col-span-3">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-4">
               Backed By
             </div>

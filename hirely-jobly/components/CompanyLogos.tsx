@@ -121,36 +121,36 @@ export const PartnerLogosMarquee = () => (
 
 // ─── Footer backer logos ───────────────────────────────────────────────────────
 export const BackerLogos = () => (
-  <div className="flex flex-col gap-4">
-    {/* IIT Delhi — Academic incubation badge with official logo */}
-    <div className="flex items-center gap-2.5 opacity-90 hover:opacity-100 transition-opacity">
-      <div className="w-8 h-8 rounded-lg bg-white p-1 flex items-center justify-center shrink-0 shadow-xs">
-        <Image
-          src="/images/iit-delhi.svg"
-          alt="IIT Delhi"
-          width={26}
-          height={26}
-          className="object-contain"
-        />
-      </div>
+  <div className="flex flex-col gap-5">
+    {/* IIT Delhi — Backgroundless & Much Bigger */}
+    <div className="flex items-center gap-3.5 opacity-95 hover:opacity-100 transition-opacity">
+      <Image
+        src="/images/iit-delhi.svg"
+        alt="IIT Delhi"
+        width={70}
+        height={50}
+        className="h-12 w-auto object-contain shrink-0"
+      />
       <div>
-        <div className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">
+        <div className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">
           Incubated at
         </div>
-        <div className="text-white text-xs font-bold">IIT Delhi</div>
+        <div className="text-white text-sm font-bold tracking-tight">
+          IIT Delhi
+        </div>
       </div>
     </div>
 
-    {/* Tech Mahindra — Official SiMahindra icon from react-icons/si */}
-    <div className="flex items-center gap-2.5 opacity-90 hover:opacity-100 transition-opacity">
-      <div className="w-8 h-8 rounded-lg bg-slate-800 flex items-center justify-center shrink-0 shadow-xs">
-        <SiMahindra className="text-red-500 text-lg" />
-      </div>
+    {/* Tech Mahindra — Backgroundless & Much Bigger */}
+    <div className="flex items-center gap-3.5 opacity-95 hover:opacity-100 transition-opacity">
+      <SiMahindra size={48} className="text-red-500 shrink-0" />
       <div>
-        <div className="text-slate-400 text-[9px] font-bold uppercase tracking-wider">
+        <div className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">
           Backed up by
         </div>
-        <div className="text-white text-xs font-bold">Tech Mahindra</div>
+        <div className="text-white text-sm font-bold tracking-tight">
+          Tech Mahindra
+        </div>
       </div>
     </div>
   </div>
