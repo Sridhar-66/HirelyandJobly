@@ -120,7 +120,7 @@ export default function CoursesPage() {
                   Book Free Demo Class <ArrowUpRight size={14} />
                 </Link>
                 <Link
-                  href="/about"
+                  href="/#centers"
                   className="btn btn-secondary py-3 px-6 text-sm"
                 >
                   Our Hyderabad Centers

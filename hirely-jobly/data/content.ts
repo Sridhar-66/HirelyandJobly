@@ -196,7 +196,8 @@ export const twoFeatureCards = [
     title: "Learn Offline in Hyderabad",
     desc: "Intensive in-person training with daily mentor guidance at our state-of-the-art tech hubs in Madhapur & Ameerpet.",
     cta: "Visit Campus",
-    link: "/about",
+    link: "/contact#centers",
+    footerLabel: "Madhapur & Ameerpet",
     features: [
       "1-on-1 In-Person Mentorship & Code Reviews",
       "Dedicated High-Speed Coding Labs & Wi-Fi",
@@ -209,6 +210,7 @@ export const twoFeatureCards = [
     desc: "Interactive live classes with real-time doubt clearing, screen sharing, and flexible weekend batches for college students & pros.",
     cta: "Join Live Batch",
     link: "/courses",
+    footerLabel: "Anywhere in India",
     features: [
       "100% Live Instructor-Led Classes",
       "Instant TA Doubt Resolution on Discord",
@@ -246,13 +248,13 @@ export const why = {
   ratingL: "Rated by students across Telangana",
 };
 
-export const tiles: [string, string][] = [
-  ["Live Mentor Sessions", "Learn directly from senior engineers who build production systems daily."],
-  ["Capstone Architecture", "Architect end-to-end full-stack systems and deploy to AWS and Vercel."],
-  ["1-on-1 Doubt Clearing", "Never get stuck. Daily office hours with dedicated teaching assistants."],
-  ["Placement Network", "Direct referrals to top product startups and MNCs in HITEC City."],
-  ["Weekend & Evening Flexibility", "Specially scheduled batches so you can excel alongside your college studies."],
-  ["Recognized Certification", "Industry-validated certificates respected by hiring managers across India."],
+export const tiles: [string, string, string][] = [
+  ["Live Mentor Sessions", "Learn directly from senior engineers who build production systems daily.", "MonitorPlay"],
+  ["Capstone Architecture", "Architect end-to-end full-stack systems and deploy to AWS and Vercel.", "Code2"],
+  ["1-on-1 Doubt Clearing", "Never get stuck. Daily office hours with dedicated teaching assistants.", "HelpCircle"],
+  ["Placement Network", "Direct referrals to top product startups and MNCs in HITEC City.", "Network"],
+  ["Weekend & Evening Flexibility", "Specially scheduled batches so you can excel alongside your college studies.", "CalendarDays"],
+  ["Recognized Certification", "Industry-validated certificates respected by hiring managers across India.", "BadgeCheck"],
 ];
 
 export const testimonials = [
@@ -404,8 +406,23 @@ export const faqs = [
   },
   {
     q: "How do I book a free demo or counselling session?",
-    a: "Click on 'Book Free Counselling' or tap the WhatsApp button. Our senior academic counsellor in Hyderabad will reach out to discuss your goals and schedule your free demo class.",
+    a: "Click on 'Book Free Demo' or tap the WhatsApp button. Our senior academic counsellor in Hyderabad will reach out to discuss your goals and schedule your free demo class.",
     category: "placements",
+  },
+  {
+    q: "What is the course fee and are there EMI options?",
+    a: "The Standard Track starts at ₹14,999 and the Career & Placement Pro bundle is ₹34,999. We offer zero-interest monthly EMI for both plans. Scholarships of up to 40% are available based on assessment or GPA.",
+    category: "admissions",
+  },
+  {
+    q: "Is there a job guarantee after completing the course?",
+    a: "We provide a 100% placement assistance guarantee — including resume building, 3-5 mock technical interviews, and warm referrals to our 40+ hiring partners. While we cannot guarantee final hiring decisions (made by companies), our 92% placement rate within 90 days speaks for itself.",
+    category: "placements",
+  },
+  {
+    q: "What is the batch size and student-to-mentor ratio?",
+    a: "Each live cohort is capped at 30 students to ensure every student gets individual attention. The student-to-TA ratio is 10:1 for daily doubt clearing sessions.",
+    category: "courses",
   },
 ];
 

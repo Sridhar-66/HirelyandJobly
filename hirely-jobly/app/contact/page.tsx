@@ -288,7 +288,7 @@ export default function ContactPage() {
 
           {/* Contact Details & Centers Sidebar */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="card p-6">
+            <div className="card p-6" id="centers">
               <h3 className="font-bold text-slate-900 text-base mb-4">
                 Hyderabad Training Centers
               </h3>

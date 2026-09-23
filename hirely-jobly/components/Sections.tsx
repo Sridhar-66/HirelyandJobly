@@ -26,7 +26,24 @@ import {
   MapPin,
   CheckCircle2,
   BookOpen,
+  MonitorPlay,
+  Code2,
+  HelpCircle,
+  Network,
+  CalendarDays,
+  BadgeCheck,
 } from "lucide-react";
+
+// Icon lookup map for tiles
+const TILE_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+  MonitorPlay,
+  Code2,
+  HelpCircle,
+  Network,
+  CalendarDays,
+  BadgeCheck,
+  Sparkles,
+};
 import {
   site,
   stats,
@@ -235,7 +252,7 @@ export const Hero = () => {
                   href="/contact"
                   className="btn btn-primary py-3 px-7 text-sm font-semibold"
                 >
-                  Book Free Counselling <ArrowUpRight size={15} />
+                  Book Free Demo <ArrowUpRight size={15} />
                 </Link>
                 <Link
                   href="/courses"
@@ -266,7 +283,8 @@ export const Hero = () => {
           {/* Right Column: Hero Visual & Floating Highlights */}
           <div className="relative lg:col-span-5">
             <Reveal delay={2}>
-              <div className="relative mx-auto max-w-md overflow-hidden rounded-3xl border border-slate-200 bg-white p-3 shadow-2xl shadow-blue-500/10">
+              {/* overflow-visible so floating badges are not clipped */}
+              <div className="relative mx-auto max-w-md overflow-visible rounded-3xl border border-slate-200 bg-white p-3 shadow-2xl shadow-blue-500/10">
                 <div className="relative h-80 w-full overflow-hidden rounded-2xl md:h-96">
                   <Image
                     src="/images/heroes/hero-student.jpg"
@@ -299,14 +317,14 @@ export const Hero = () => {
                   </div>
                 </div>
 
-                {/* Floating Achievement Card Top Right */}
+                {/* Floating Achievement Card Top Right — overflow-visible keeps it from clipping */}
                 <motion.div
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.6, duration: 0.6 }}
-                  className="absolute -top-3 -right-3 rounded-2xl bg-white p-3 shadow-xl border border-slate-100 flex items-center gap-3"
+                  className="absolute -top-4 -right-4 z-10 rounded-2xl bg-white p-3 shadow-xl border border-slate-100 flex items-center gap-3 whitespace-nowrap"
                 >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
                     <TrendingUp size={20} />
                   </div>
                   <div>
@@ -315,14 +333,14 @@ export const Hero = () => {
                   </div>
                 </motion.div>
 
-                {/* Floating Mentor Support Badge Bottom Left */}
+                {/* Floating Hyderabad Centers Badge Bottom Left */}
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.8, duration: 0.6 }}
-                  className="absolute -bottom-3 -left-3 hidden sm:flex items-center gap-2.5 rounded-2xl bg-slate-900 text-white p-3 shadow-xl border border-slate-800"
+                  className="absolute -bottom-4 -left-4 z-10 hidden sm:flex items-center gap-2.5 rounded-2xl bg-slate-900 text-white p-3 shadow-xl border border-slate-800 whitespace-nowrap"
                 >
-                  <ShieldCheck size={20} className="text-blue-400" />
+                  <ShieldCheck size={20} className="text-blue-400 shrink-0" />
                   <div>
                     <div className="text-[10px] text-slate-300">Hyderabad Centers</div>
                     <div className="text-xs font-bold">Madhapur &amp; Ameerpet</div>
@@ -365,7 +383,7 @@ export const Hero = () => {
                     {card.cta} <ChevronRight size={16} />
                   </Link>
                   <span className="text-xs font-semibold text-slate-400">
-                    Hyderabad &amp; Live Online
+                    {card.footerLabel}
                   </span>
                 </div>
               </div>
@@ -689,14 +707,14 @@ export const Testimonials = () => {
                     className="object-cover object-top"
                   />
                 </div>
-                <div className="overflow-hidden">
-                  <div className="text-xs font-bold text-slate-900 truncate">
+                <div className="min-w-0">
+                  <div className="text-xs font-bold text-slate-900 leading-snug">
                     {t.n}
                   </div>
-                  <div className="text-[11px] font-semibold text-blue-600 truncate">
+                  <div className="text-[11px] font-semibold text-blue-600 line-clamp-1">
                     {t.role} @ {t.company}
                   </div>
-                  <div className="text-[10px] text-slate-400 truncate">
+                  <div className="text-[10px] text-slate-400 line-clamp-1">
                     {t.college}
                   </div>
                 </div>
@@ -721,19 +739,22 @@ export const Why = () => {
       />
 
       <div className="grid gap-5 md:grid-cols-3">
-        {tiles.map(([title, desc], i) => (
-          <Reveal key={title} delay={i}>
-            <div className="card card-hover flex h-full flex-col justify-between p-6">
-              <div>
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                  <Sparkles size={18} />
+        {tiles.map(([title, desc, iconKey], i) => {
+          const TileIcon = TILE_ICONS[iconKey] ?? Sparkles;
+          return (
+            <Reveal key={title} delay={i}>
+              <div className="card card-hover flex h-full flex-col justify-between p-6">
+                <div>
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+                    <TileIcon size={18} />
+                  </div>
+                  <h3 className="text-base font-bold text-slate-900">{title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-600">{desc}</p>
                 </div>
-                <h3 className="text-base font-bold text-slate-900">{title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-slate-600">{desc}</p>
               </div>
-            </div>
-          </Reveal>
-        ))}
+            </Reveal>
+          );
+        })}
       </div>
     </Sec>
   );
@@ -910,6 +931,8 @@ export const WhatsAppButton = () => {
     </a>
   );
 };
+
+// Note: WhatsApp button is positioned bottom-left in CSS to avoid overlapping course CTAs
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 const FOOTER_SECTIONS = {
