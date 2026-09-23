@@ -70,10 +70,9 @@ export const trustBadges = [
 ];
 
 export const partners = [
-  "Microsoft", "Google", "Amazon", "Swiggy",
-  "Razorpay", "Zomato", "Cred", "PhonePe",
-  "TCS", "Infosys", "Cognizant", "Deloitte",
-  "Adobe", "Uber", "Salesforce",
+  "Google", "Meta", "Apple", "Netflix", "Uber", "Spotify",
+  "Swiggy", "Zomato", "Razorpay", "PhonePe", "Paytm", "TCS",
+  "Infosys", "Wipro", "Accenture", "Cisco", "NVIDIA", "Samsung",
 ];
 
 export const courseCategories = [

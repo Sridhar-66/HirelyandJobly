@@ -3,8 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Star } from "lucide-react";
-import { SiTrustpilot, SiReddit } from "react-icons/si";
-import { FaGoogle } from "react-icons/fa6";
+import { SiTrustpilot, SiReddit, SiGoogle, SiGlassdoor } from "react-icons/si";
 
 interface ReviewPlatform {
   platform: string;
@@ -52,7 +51,7 @@ const reviewsData: ReviewPlatform[] = [
     rating: 4.7,
     logo: (
       <div className="flex items-center gap-2">
-        <FaGoogle className="text-[#4285F4] text-base shrink-0" />
+        <SiGoogle className="text-[#4285F4] text-base shrink-0" />
         <span className="font-bold text-slate-900 text-sm tracking-tight">Google Reviews</span>
       </div>
     ),
@@ -76,20 +75,16 @@ const reviewsData: ReviewPlatform[] = [
     role: "Software Engineer @ Zoho",
   },
   {
-    platform: "Course Report",
-    rating: 4.5,
+    platform: "Glassdoor",
+    rating: 4.8,
     logo: (
       <div className="flex items-center gap-2">
-        <div className="w-5 h-5 rounded-md bg-[#00b074] flex items-center justify-center shrink-0 shadow-xs">
-          <svg className="w-3 h-3 text-white fill-current" viewBox="0 0 24 24">
-            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10H7v-2h10v2zm0-4H7V7h10v2z" />
-          </svg>
-        </div>
-        <span className="font-bold text-slate-900 text-xs tracking-tight">Course Report</span>
+        <SiGlassdoor className="text-[#0CAA41] text-lg shrink-0" />
+        <span className="font-bold text-slate-900 text-sm tracking-tight">Glassdoor</span>
       </div>
     ),
     quote:
-      "Hirely and Jobly's Evolve program and mentorship boosted my interview confidence, helping me clear technical rounds and join Salesforce.",
+      "Hirely and Jobly's career mentorship and mock interview prep boosted my confidence, helping me clear technical rounds and join Salesforce.",
     author: "Harsh Gupta",
     role: "Associate Engineer @ Salesforce",
   },
