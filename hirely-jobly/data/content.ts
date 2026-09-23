@@ -11,11 +11,55 @@ export const site = {
   address: "Plot 42, Silicon Valley, Madhapur, Hyderabad, Telangana 500081",
 };
 
+export interface StatItem {
+  target: number;
+  decimals?: number;
+  prefix?: string;
+  suffix?: string;
+  label: string;
+  desc: string;
+}
+
 export const stats: [string, string, string][] = [
   ["5,000+", "Students Trained", "Across top colleges in Telangana"],
   ["92%", "Placement Rate", "Within 90 days of graduation"],
   ["₹18.5 LPA", "Highest CTC", "Average package ₹6.2 LPA"],
   ["40+", "Hiring Partners", "Startups, Unicorns & MNCs"],
+];
+
+export const animatedStatsData: StatItem[] = [
+  {
+    target: 5000,
+    decimals: 0,
+    prefix: "",
+    suffix: "+",
+    label: "Students Trained",
+    desc: "Across top colleges in Telangana",
+  },
+  {
+    target: 92,
+    decimals: 0,
+    prefix: "",
+    suffix: "%",
+    label: "Placement Rate",
+    desc: "Within 90 days of graduation",
+  },
+  {
+    target: 18.5,
+    decimals: 1,
+    prefix: "₹",
+    suffix: " LPA",
+    label: "Highest CTC",
+    desc: "Average package ₹6.2 LPA",
+  },
+  {
+    target: 40,
+    decimals: 0,
+    prefix: "",
+    suffix: "+",
+    label: "Hiring Partners",
+    desc: "Startups, Unicorns & MNCs",
+  },
 ];
 
 export const trustBadges = [
@@ -148,20 +192,28 @@ export const courses = [
 
 export const twoFeatureCards = [
   {
-    badge: "🎓 For Engineering Students",
-    title: "Job-Ready Tech Tracks",
-    desc: "100% practical, project-based curriculums designed directly with tech leads and hiring managers in Hyderabad.",
-    cta: "Explore All Tracks",
-    link: "/courses",
-    features: ["Live Mentor Classes", "Industry Capstone Projects", "1-on-1 Code Reviews"],
+    badge: "🏢 Classroom Learning",
+    title: "Learn Offline in Hyderabad",
+    desc: "Intensive in-person training with daily mentor guidance at our state-of-the-art tech hubs in Madhapur & Ameerpet.",
+    cta: "Visit Campus",
+    link: "/about",
+    features: [
+      "1-on-1 In-Person Mentorship & Code Reviews",
+      "Dedicated High-Speed Coding Labs & Wi-Fi",
+      "Daily Walk-in Doubt Clearing Sessions",
+    ],
   },
   {
-    badge: "💼 For Job Seekers & Final Years",
-    title: "Placement Assistance Guarantee",
-    desc: "Unlimited mock interviews, ATS resume optimisation, and direct interview referrals to our 40+ partner network.",
-    cta: "Join Placement Drive",
-    link: "/contact",
-    features: ["3+ Guaranteed Referrals", "FAANG Mock Interviews", "Salary Negotiation Support"],
+    badge: "💻 Flexible & Remote",
+    title: "Live Interactive Online",
+    desc: "Interactive live classes with real-time doubt clearing, screen sharing, and flexible weekend batches for college students & pros.",
+    cta: "Join Live Batch",
+    link: "/courses",
+    features: [
+      "100% Live Instructor-Led Classes",
+      "Instant TA Doubt Resolution on Discord",
+      "24/7 Access to Session Recordings & Notes",
+    ],
   },
 ];
 

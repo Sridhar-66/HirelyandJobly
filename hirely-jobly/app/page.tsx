@@ -2,6 +2,7 @@ import {
   Nav,
   Hero,
   StatsBar,
+  TrustedByLearners,
   Courses,
   LocationsHub,
   Why,
@@ -18,6 +19,7 @@ export default function Home() {
       <main>
         <Hero />
         <StatsBar />
+        <TrustedByLearners />
         <Courses />
         <LocationsHub />
         <Why />

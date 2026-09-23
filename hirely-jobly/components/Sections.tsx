@@ -30,6 +30,7 @@ import {
 import {
   site,
   stats,
+  animatedStatsData,
   trustBadges,
   partners,
   courseCategories,
@@ -44,6 +45,9 @@ import {
   faqCategories,
   faqs,
 } from "@/data/content";
+import { AnimatedCounter } from "./AnimatedCounter";
+import { PartnerLogosMarquee } from "./CompanyLogos";
+import { TrustedByLearners } from "./TrustedByLearners";
 
 // ─── Animation helpers ───────────────────────────────────────────────────────
 const fadeUp = {
@@ -372,21 +376,10 @@ export const Hero = () => {
         {/* Partner Marquee */}
         <Reveal delay={2}>
           <div className="mt-14 text-center">
-            <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+            <p className="text-xs font-bold uppercase tracking-wider text-slate-500">
               Our alumni work at top technology companies &amp; high-growth startups
             </p>
-            <div className="mt-6 overflow-hidden text-slate-500 select-none py-2" aria-label="Hiring partners">
-              <div className="marquee">
-                {[...partners, ...partners].map((p, i) => (
-                  <span
-                    key={i}
-                    className="mx-6 text-sm md:text-base font-bold tracking-tight text-slate-600 hover:text-blue-600 transition-colors"
-                  >
-                    {p}
-                  </span>
-                ))}
-              </div>
-            </div>
+            <PartnerLogosMarquee />
           </div>
         </Reveal>
       </div>
@@ -394,20 +387,25 @@ export const Hero = () => {
   );
 };
 
-// ─── Stats Bar ────────────────────────────────────────────────────────────────
+// ─── Stats Bar (Animated Count-Up) ─────────────────────────────────────────────
 export const StatsBar = () => {
   return (
     <div className="border-y border-slate-100 bg-slate-50/70 py-12">
       <div className="mx-auto max-w-6xl px-4">
         <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-          {stats.map(([num, label, desc], idx) => (
-            <Reveal key={label} delay={idx}>
+          {animatedStatsData.map((s, idx) => (
+            <Reveal key={s.label} delay={idx}>
               <div className="text-center">
                 <div className="text-3xl font-extrabold text-blue-600 sm:text-4xl lg:text-5xl tracking-tight">
-                  {num}
+                  <AnimatedCounter
+                    value={s.target}
+                    decimals={s.decimals}
+                    prefix={s.prefix}
+                    suffix={s.suffix}
+                  />
                 </div>
-                <div className="mt-1 text-sm font-bold text-slate-900">{label}</div>
-                <div className="mt-0.5 text-xs text-slate-500">{desc}</div>
+                <div className="mt-1.5 text-sm font-bold text-slate-900">{s.label}</div>
+                <div className="mt-0.5 text-xs text-slate-500">{s.desc}</div>
               </div>
             </Reveal>
           ))}
@@ -416,6 +414,8 @@ export const StatsBar = () => {
     </div>
   );
 };
+
+export { TrustedByLearners };
 
 // ─── Tabbed Course Catalog (AccioJob Style) ───────────────────────────────────
 export const Courses = () => {
