@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowUpRight, ArrowLeft, CheckCircle2, Sparkles, BookOpen } from "lucide-react";
+import { ArrowUpRight, ArrowLeft, Clock, Sparkles } from "lucide-react";
 import { Nav, Footer, Pill } from "@/components/Sections";
 import { courses } from "@/data/content";
 
@@ -20,7 +20,7 @@ export default function CoursesPage() {
           href="/"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors mb-6"
         >
-          <ArrowLeft size={14} /> Back to home
+          <ArrowLeft size={14} strokeWidth={2} /> Back to home
         </Link>
 
         {/* Header */}
@@ -43,9 +43,13 @@ export default function CoursesPage() {
             >
               <div>
                 <div className="flex items-center justify-between gap-2 mb-3">
-                  <span className="ribbon-scholarship">{c.scholarship}</span>
-                  <span className="text-[11px] font-semibold text-slate-500">
-                    ⏱ {c.duration}
+                  <span className="ribbon-scholarship flex items-center gap-1">
+                    <Sparkles size={11} strokeWidth={2} className="text-amber-500" />
+                    {c.scholarship}
+                  </span>
+                  <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1">
+                    <Clock size={13} strokeWidth={1.75} className="text-slate-400" />
+                    {c.duration}
                   </span>
                 </div>
 
@@ -92,7 +96,7 @@ export default function CoursesPage() {
                   href={`/courses/${c.slug}`}
                   className="btn btn-primary text-xs py-1.5 px-4"
                 >
-                  View Curriculum <ArrowUpRight size={13} />
+                  View Curriculum <ArrowUpRight size={13} strokeWidth={2} />
                 </Link>
               </div>
             </div>
@@ -117,7 +121,7 @@ export default function CoursesPage() {
                   href="/contact"
                   className="btn btn-primary py-3 px-6 text-sm font-semibold"
                 >
-                  Book Free Demo Class <ArrowUpRight size={14} />
+                  Book Free Demo Class <ArrowUpRight size={14} strokeWidth={2} />
                 </Link>
                 <Link
                   href="/#centers"

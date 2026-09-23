@@ -99,7 +99,7 @@ export default function ContactPage() {
           href="/"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors mb-6"
         >
-          <ArrowLeft size={14} /> Back to home
+          <ArrowLeft size={14} strokeWidth={2} /> Back to home
         </Link>
 
         {/* Header */}
@@ -120,7 +120,7 @@ export default function ContactPage() {
               {submitted ? (
                 <div className="py-12 text-center">
                   <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
-                    <CheckCircle2 size={32} />
+                    <CheckCircle2 size={32} strokeWidth={1.75} />
                   </div>
                   <h2 className="text-2xl font-bold text-slate-900">
                     Counselling Request Received!
@@ -296,14 +296,15 @@ export default function ContactPage() {
                 {hubs.map((hub) => (
                   <div key={hub.id} className="pb-3 border-b border-slate-100 last:border-0 last:pb-0">
                     <div className="font-bold text-slate-900 flex items-center gap-1.5 text-xs">
-                      <MapPin size={14} className="text-blue-600" />
+                      <MapPin size={14} strokeWidth={1.75} className="text-blue-600 shrink-0" />
                       {hub.name}
                     </div>
                     <p className="mt-1 text-slate-600 leading-relaxed pl-5">
                       {hub.address}
                     </p>
-                    <span className="mt-1.5 inline-block text-[11px] font-semibold text-emerald-600 pl-5">
-                      ✓ {hub.batch}
+                    <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-600 pl-5">
+                      <CheckCircle2 size={13} strokeWidth={2} className="text-emerald-600 shrink-0" />
+                      {hub.batch}
                     </span>
                   </div>
                 ))}
@@ -313,7 +314,7 @@ export default function ContactPage() {
             {/* Quick WhatsApp Support */}
             <div className="rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 p-6 text-white shadow-md">
               <div className="flex items-center gap-2 font-bold text-sm mb-2">
-                <MessageCircle size={18} />
+                <MessageCircle size={18} strokeWidth={2} />
                 Instant WhatsApp Assistance
               </div>
               <p className="text-xs text-emerald-100 leading-relaxed">

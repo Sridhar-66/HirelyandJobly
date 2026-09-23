@@ -1,20 +1,16 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
   ArrowUpRight,
   CheckCircle2,
-  Layers,
   Briefcase,
-  Award,
   Wrench,
   FolderCheck,
   Clock,
-  MapPin,
   Check,
-  ShieldCheck,
+  Plus,
 } from "lucide-react";
 import { Nav, Footer, Pill } from "@/components/Sections";
 import { courseDetails } from "@/data/content";
@@ -56,7 +52,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
           href="/courses"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors mb-6"
         >
-          <ArrowLeft size={14} /> Back to all courses
+          <ArrowLeft size={14} strokeWidth={2} /> Back to all courses
         </Link>
 
         {/* Hero Banner */}
@@ -65,8 +61,9 @@ export default async function CourseDetailPage({ params }: PageProps) {
           <div className="blob blob-indigo -bottom-20 -left-20 h-80 w-80 opacity-30" />
 
           <div className="relative z-10 max-w-2xl">
-            <span className="pill mb-4 inline-flex bg-blue-500/20 text-blue-300 border-blue-400/30">
-              ⏱ {course.meta}
+            <span className="pill mb-4 inline-flex items-center gap-1.5 bg-blue-500/20 text-blue-300 border-blue-400/30">
+              <Clock size={13} strokeWidth={1.75} className="text-blue-300" />
+              {course.meta}
             </span>
             <h1 className="text-3xl font-extrabold tracking-tight md:text-5xl">
               {course.name}
@@ -80,7 +77,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                 href="/contact"
                 className="btn btn-primary py-3 px-6 text-sm font-semibold"
               >
-                Enroll in this Track <ArrowUpRight size={14} />
+                Enroll in this Track <ArrowUpRight size={14} strokeWidth={2} />
               </Link>
               <a
                 href="#syllabus"
@@ -132,7 +129,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                 {course.modules.map((mod, idx) => (
                   <details
                     key={mod.title}
-                    className="module card p-5 group open:border-blue-200 open:shadow-sm"
+                    className="module card p-5 group open:border-blue-200 open:shadow-xs"
                     open={idx === 0}
                   >
                     <summary className="flex items-center justify-between font-bold text-slate-900 cursor-pointer text-sm md:text-base select-none">
@@ -142,7 +139,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                         </span>
                         {mod.title}
                       </span>
-                      <span className="mod-plus text-slate-400 text-lg leading-none">+</span>
+                      <Plus size={16} strokeWidth={1.75} className="text-slate-400 transition-transform duration-200 group-open:rotate-45" />
                     </summary>
                     <div className="mt-4 pt-4 border-t border-slate-100 pl-9">
                       <ul className="grid sm:grid-cols-2 gap-2 text-xs md:text-sm text-slate-600">
@@ -169,13 +166,14 @@ export default async function CourseDetailPage({ params }: PageProps) {
                   <div key={proj} className="card p-5 flex flex-col justify-between">
                     <div>
                       <div className="flex items-center gap-2 text-blue-600 text-xs font-bold mb-2">
-                        <FolderCheck size={16} />
+                        <FolderCheck size={16} strokeWidth={1.75} />
                         Project {idx + 1}
                       </div>
                       <h3 className="font-bold text-slate-900 text-sm">{proj}</h3>
                     </div>
-                    <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-medium">
-                      ✓ GitHub Repository &amp; Live Deployment Ready
+                    <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-500 font-medium flex items-center gap-1.5">
+                      <CheckCircle2 size={13} strokeWidth={2} className="text-emerald-600 shrink-0" />
+                      GitHub Repository &amp; Live Deployment Ready
                     </div>
                   </div>
                 ))}
@@ -188,7 +186,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
             {/* Tools & Tech Stack */}
             <div className="card p-6">
               <div className="flex items-center gap-2 font-bold text-slate-900 text-sm mb-4">
-                <Wrench size={16} className="text-blue-600" />
+                <Wrench size={16} strokeWidth={1.75} className="text-blue-600" />
                 Tools &amp; Tech Stack
               </div>
               <div className="flex flex-wrap gap-1.5">
@@ -206,13 +204,13 @@ export default async function CourseDetailPage({ params }: PageProps) {
             {/* Target Career Outcomes */}
             <div className="card p-6">
               <div className="flex items-center gap-2 font-bold text-slate-900 text-sm mb-4">
-                <Briefcase size={16} className="text-blue-600" />
+                <Briefcase size={16} strokeWidth={1.75} className="text-blue-600" />
                 Target Job Roles
               </div>
               <ul className="space-y-2 text-xs font-medium text-slate-700">
                 {course.outcomes.map((out) => (
                   <li key={out} className="flex items-center gap-2">
-                    <Check size={14} className="text-emerald-600 shrink-0" />
+                    <Check size={14} strokeWidth={2} className="text-emerald-600 shrink-0" />
                     {out}
                   </li>
                 ))}
@@ -232,7 +230,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                 href="/contact"
                 className="btn btn-secondary mt-5 w-full py-2.5 text-xs font-bold"
               >
-                Book Free Counselling <ArrowUpRight size={13} />
+                Book Free Counselling <ArrowUpRight size={13} strokeWidth={2} />
               </Link>
             </div>
           </div>

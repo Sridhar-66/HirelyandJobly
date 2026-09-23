@@ -19,7 +19,7 @@ export default function AboutPage() {
           href="/"
           className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-blue-600 transition-colors mb-6"
         >
-          <ArrowLeft size={14} /> Back to home
+          <ArrowLeft size={14} strokeWidth={2} /> Back to home
         </Link>
 
         {/* Hero Banner */}

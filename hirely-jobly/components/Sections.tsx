@@ -32,10 +32,14 @@ import {
   Network,
   CalendarDays,
   BadgeCheck,
+  Laptop,
+  Phone,
+  Mail,
+  Rocket,
 } from "lucide-react";
 
 // Icon lookup map for tiles
-const TILE_ICONS: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
+const TILE_ICONS: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
   MonitorPlay,
   Code2,
   HelpCircle,
@@ -44,6 +48,14 @@ const TILE_ICONS: Record<string, React.ComponentType<{ size?: number; className?
   BadgeCheck,
   Sparkles,
 };
+
+// Icon lookup map for feature cards
+const FEATURE_ICONS: Record<string, React.ComponentType<{ size?: number; strokeWidth?: number; className?: string }>> = {
+  Building2,
+  Laptop,
+  MonitorPlay,
+};
+
 import {
   site,
   stats,
@@ -159,7 +171,7 @@ export const Sec = ({
 export const Logo = () => (
   <Link href="/" className="flex items-center gap-2.5 font-bold text-slate-900 group">
     <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
-      <GraduationCap size={18} />
+      <GraduationCap size={18} strokeWidth={2} />
     </div>
     <span className="text-base tracking-tight font-extrabold">
       Hirely <span className="text-blue-600">&amp;</span> Jobly
@@ -207,7 +219,7 @@ export const Nav = ({ activePath = "/" }: { activePath?: string }) => {
             href="/contact"
             className="btn btn-primary text-xs py-2 px-5"
           >
-            Book Free Demo <ArrowUpRight size={14} />
+            Book Free Demo <ArrowUpRight size={14} strokeWidth={2} />
           </Link>
         </div>
       </div>
@@ -228,8 +240,9 @@ export const Hero = () => {
           {/* Left Column: Headline, CTAs, Trust Badges */}
           <div className="lg:col-span-7">
             <Reveal>
-              <span className="pill mb-5 inline-flex">
-                🚀 Admissions Open for 2026 Batches
+              <span className="pill mb-5 inline-flex items-center gap-1.5">
+                <Rocket size={14} strokeWidth={2} className="text-blue-600" />
+                Admissions Open for 2026 Batches
               </span>
             </Reveal>
 
@@ -252,7 +265,7 @@ export const Hero = () => {
                   href="/contact"
                   className="btn btn-primary py-3 px-7 text-sm font-semibold"
                 >
-                  Book Free Demo <ArrowUpRight size={15} />
+                  Book Free Demo <ArrowUpRight size={15} strokeWidth={2} />
                 </Link>
                 <Link
                   href="/courses"
@@ -262,8 +275,6 @@ export const Hero = () => {
                 </Link>
               </div>
             </Reveal>
-
-
           </div>
 
           {/* Right Column: Hero Visual & Floating Highlights */}
@@ -297,7 +308,7 @@ export const Hero = () => {
                         className="rounded-full bg-blue-600 p-2 text-white hover:bg-blue-700 transition-colors"
                         aria-label="Book Demo"
                       >
-                        <ArrowUpRight size={15} />
+                        <ArrowUpRight size={15} strokeWidth={2} />
                       </Link>
                     </div>
                   </div>
@@ -313,8 +324,10 @@ export const Hero = () => {
                 >
                   {/* Card header bar */}
                   <div className="bg-gradient-to-r from-emerald-500 to-teal-500 px-4 py-2 flex items-center justify-between gap-2">
-                    <span className="text-white text-[10px] font-bold uppercase tracking-wider">✓ Verified Offer</span>
-                    <TrendingUp size={14} className="text-white opacity-80" />
+                    <span className="text-white text-[10px] font-bold uppercase tracking-wider flex items-center gap-1">
+                      <CheckCircle2 size={13} strokeWidth={2} className="text-white shrink-0" /> Verified Offer
+                    </span>
+                    <TrendingUp size={14} strokeWidth={2} className="text-white opacity-85" />
                   </div>
                   {/* Card body */}
                   <div className="px-4 py-3">
@@ -339,7 +352,7 @@ export const Hero = () => {
                   transition={{ delay: 0.8, duration: 0.6 }}
                   className="absolute -bottom-4 -left-4 z-10 hidden sm:flex items-center gap-2.5 rounded-2xl bg-slate-900 text-white p-3 shadow-xl border border-slate-800 whitespace-nowrap"
                 >
-                  <ShieldCheck size={20} className="text-blue-400 shrink-0" />
+                  <ShieldCheck size={20} strokeWidth={1.75} className="text-blue-400 shrink-0" />
                   <div>
                     <div className="text-[10px] text-slate-300">Hyderabad Centers</div>
                     <div className="text-xs font-bold">Madhapur &amp; Ameerpet</div>
@@ -352,42 +365,46 @@ export const Hero = () => {
 
         {/* 2-Tile Quick Feature Cards */}
         <div className="mt-14 grid gap-5 md:grid-cols-2">
-          {twoFeatureCards.map((card, idx) => (
-            <Reveal key={card.title} delay={idx * 2}>
-              <div className="card-feature group flex h-full flex-col justify-between p-6 md:p-8">
-                <div>
-                  <span className="pill mb-3 inline-block bg-blue-50 text-blue-700 border-blue-200">
-                    {card.badge}
-                  </span>
-                  <h3 className="text-xl font-bold text-slate-900 md:text-2xl">
-                    {card.title}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-600">
-                    {card.desc}
-                  </p>
-                  <ul className="mt-5 space-y-2 text-xs font-medium text-slate-700">
-                    {card.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2">
-                        <CheckCircle2 size={15} className="text-blue-600 shrink-0" />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
+          {twoFeatureCards.map((card, idx) => {
+            const FeatureIcon = (card.icon && FEATURE_ICONS[card.icon]) || Building2;
+            return (
+              <Reveal key={card.title} delay={idx * 2}>
+                <div className="card-feature group flex h-full flex-col justify-between p-6 md:p-8">
+                  <div>
+                    <span className="pill mb-3 inline-flex items-center gap-1.5 bg-blue-50 text-blue-700 border-blue-200">
+                      <FeatureIcon size={13} strokeWidth={2} />
+                      {card.badge}
+                    </span>
+                    <h3 className="text-xl font-bold text-slate-900 md:text-2xl">
+                      {card.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                      {card.desc}
+                    </p>
+                    <ul className="mt-5 space-y-2 text-xs font-medium text-slate-700">
+                      {card.features.map((f) => (
+                        <li key={f} className="flex items-center gap-2">
+                          <CheckCircle2 size={15} strokeWidth={2} className="text-blue-600 shrink-0" />
+                          {f}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
+                    <Link
+                      href={card.link}
+                      className="inline-flex items-center gap-2 font-bold text-sm text-blue-600 transition-colors group-hover:text-blue-800"
+                    >
+                      {card.cta} <ChevronRight size={16} strokeWidth={2} />
+                    </Link>
+                    <span className="text-xs font-semibold text-slate-400">
+                      {card.footerLabel}
+                    </span>
+                  </div>
                 </div>
-                <div className="mt-6 pt-5 border-t border-slate-100 flex items-center justify-between">
-                  <Link
-                    href={card.link}
-                    className="inline-flex items-center gap-2 font-bold text-sm text-blue-600 transition-colors group-hover:text-blue-800"
-                  >
-                    {card.cta} <ChevronRight size={16} />
-                  </Link>
-                  <span className="text-xs font-semibold text-slate-400">
-                    {card.footerLabel}
-                  </span>
-                </div>
-              </div>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
 
         {/* Partner Marquee */}
@@ -479,8 +496,14 @@ const CourseCard = ({ c }: { c: typeof courses[0] }) => {
       <div>
         {/* Top Badges */}
         <div className="flex items-center justify-between gap-2 mb-3">
-          <span className="ribbon-scholarship">{c.scholarship}</span>
-          <span className="text-[11px] font-semibold text-slate-500">⏱ {c.duration}</span>
+          <span className="ribbon-scholarship flex items-center gap-1">
+            <Sparkles size={11} strokeWidth={2} className="text-amber-500" />
+            {c.scholarship}
+          </span>
+          <span className="text-[11px] font-semibold text-slate-500 flex items-center gap-1">
+            <Clock size={13} strokeWidth={1.75} className="text-slate-400" />
+            {c.duration}
+          </span>
         </div>
 
         {/* Course Image Banner */}
@@ -513,7 +536,7 @@ const CourseCard = ({ c }: { c: typeof courses[0] }) => {
                   onClick={() => setSelectedTier(t.id)}
                   className={`rounded-lg border-2 p-2 text-center transition-all cursor-pointer ${
                     isActive
-                      ? tierColorMap[t.color].border + " shadow-sm"
+                      ? tierColorMap[t.color].border + " shadow-xs"
                       : "border-slate-200 bg-white hover:border-slate-300"
                   }`}
                 >
@@ -536,7 +559,7 @@ const CourseCard = ({ c }: { c: typeof courses[0] }) => {
             <ul className="space-y-1">
               {tier.features.map((f) => (
                 <li key={f} className="flex items-center gap-1.5 text-[10px] text-slate-700">
-                  <Check size={10} className={colors.badge.includes("blue") ? "text-blue-500 shrink-0" : colors.badge.includes("emerald") ? "text-emerald-500 shrink-0" : "text-slate-500 shrink-0"} />
+                  <Check size={11} strokeWidth={2} className={colors.badge.includes("blue") ? "text-blue-500 shrink-0" : colors.badge.includes("emerald") ? "text-emerald-500 shrink-0" : "text-slate-500 shrink-0"} />
                   {f}
                 </li>
               ))}
@@ -564,7 +587,7 @@ const CourseCard = ({ c }: { c: typeof courses[0] }) => {
           href={`/contact?course=${c.slug}&tier=${selectedTier}&price=${tier.price}`}
           className={`btn text-xs py-1.5 px-4 ${colors.btn}`}
         >
-          Enroll {tier.price} <ArrowUpRight size={13} />
+          Enroll {tier.price} <ArrowUpRight size={13} strokeWidth={2} />
         </Link>
       </div>
     </div>
@@ -631,15 +654,13 @@ export const Courses = () => {
       <Reveal delay={2}>
         <div className="mt-12 text-center">
           <Link href="/courses" className="btn btn-secondary py-3 px-8 text-sm">
-            View All 7 Course Syllabi <ArrowUpRight size={14} />
+            View All 7 Course Syllabi <ArrowUpRight size={14} strokeWidth={2} />
           </Link>
         </div>
       </Reveal>
     </Sec>
   );
 };
-
-
 
 // ─── Hyderabad Training Hubs Section ──────────────────────────────────────────
 export const LocationsHub = () => {
@@ -671,7 +692,7 @@ export const LocationsHub = () => {
                     : "bg-white text-slate-600 hover:bg-slate-100 border border-slate-200"
                 }`}
               >
-                <Building2 size={14} />
+                <Building2 size={14} strokeWidth={1.75} />
                 {h.name}
               </button>
             );
@@ -685,7 +706,7 @@ export const LocationsHub = () => {
           <div className="grid gap-8 md:grid-cols-12 items-center">
             <div className="md:col-span-7 space-y-4">
               <div className="flex items-center gap-2 text-blue-600 font-bold text-xs">
-                <MapPin size={16} />
+                <MapPin size={15} strokeWidth={1.75} />
                 {currentHub.area}
               </div>
               <h3 className="text-2xl font-bold text-slate-900">
@@ -702,7 +723,7 @@ export const LocationsHub = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                   {currentHub.features.map((feat) => (
                     <div key={feat} className="flex items-center gap-2 text-xs font-medium text-slate-700">
-                      <Check size={14} className="text-blue-600 shrink-0" />
+                      <CheckCircle2 size={14} strokeWidth={2} className="text-blue-600 shrink-0" />
                       {feat}
                     </div>
                   ))}
@@ -711,10 +732,11 @@ export const LocationsHub = () => {
 
               <div className="pt-4 flex flex-wrap items-center gap-3">
                 <Link href="/contact" className="btn btn-primary text-xs py-2.5 px-5">
-                  Book Center Visit &amp; Demo <ArrowUpRight size={14} />
+                  Book Center Visit &amp; Demo <ArrowUpRight size={14} strokeWidth={2} />
                 </Link>
-                <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200">
-                  ✓ {currentHub.batch}
+                <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1.5">
+                  <CheckCircle2 size={13} strokeWidth={2} className="text-emerald-600 shrink-0" />
+                  {currentHub.batch}
                 </span>
               </div>
             </div>
@@ -759,11 +781,13 @@ export const Testimonials = () => {
               <div>
                 {/* CTC Package & Verification Badge */}
                 <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 border border-emerald-200">
-                    🎯 {t.ctc}
+                  <span className="rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-bold text-emerald-700 border border-emerald-200 flex items-center gap-1">
+                    <TrendingUp size={12} strokeWidth={2} className="text-emerald-600" />
+                    {t.ctc}
                   </span>
-                  <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
-                    ✓ Verified Offer
+                  <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <CheckCircle2 size={11} strokeWidth={2} className="text-blue-600" />
+                    Verified Offer
                   </span>
                 </div>
 
@@ -775,7 +799,7 @@ export const Testimonials = () => {
 
               {/* Student Bio */}
               <div className="mt-6 pt-4 border-t border-slate-100 flex items-center gap-3">
-                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-blue-200 shadow-sm">
+                <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-blue-200 shadow-xs">
                   <Image
                     src={t.image}
                     alt={t.n}
@@ -822,7 +846,7 @@ export const Why = () => {
               <div className="card card-hover flex h-full flex-col justify-between p-6">
                 <div>
                   <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                    <TileIcon size={18} />
+                    <TileIcon size={20} strokeWidth={1.75} />
                   </div>
                   <h3 className="text-base font-bold text-slate-900">{title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-slate-600">{desc}</p>
@@ -864,12 +888,13 @@ export const Pricing = () => {
               <div className="relative z-10">
                 <div className="flex items-center justify-between">
                   <span
-                    className={`rounded-full px-3 py-1 text-xs font-bold ${
+                    className={`rounded-full px-3 py-1 text-xs font-bold flex items-center gap-1.5 ${
                       p.popular
                         ? "bg-blue-600 text-white"
                         : "bg-blue-50 text-blue-700"
                     }`}
                   >
+                    {p.popular && <Sparkles size={12} strokeWidth={2} className="text-blue-200" />}
                     {p.badge}
                   </span>
                   <span className="text-xs text-slate-400 line-through">
@@ -907,7 +932,7 @@ export const Pricing = () => {
                       : "btn-secondary"
                   }`}
                 >
-                  {p.cta} <ArrowUpRight size={14} />
+                  {p.cta} <ArrowUpRight size={14} strokeWidth={2} />
                 </Link>
 
                 <ul className="mt-8 space-y-3 text-xs">
@@ -915,6 +940,7 @@ export const Pricing = () => {
                     <li key={feature} className="flex items-center gap-2.5">
                       <Check
                         size={15}
+                        strokeWidth={2}
                         className={p.popular ? "text-blue-400 shrink-0" : "text-blue-600 shrink-0"}
                       />
                       <span className={p.popular ? "text-slate-200" : "text-slate-700"}>
@@ -977,9 +1003,9 @@ export const Faq = () => {
         {filteredFaqs.map((faq, idx) => (
           <Reveal key={faq.q} delay={idx * 0.5}>
             <details className="card group p-5 transition-all open:border-blue-200 open:shadow-md">
-              <summary className="flex items-center justify-between text-sm md:text-base font-bold text-slate-900 cursor-pointer">
+              <summary className="flex items-center justify-between text-sm md:text-base font-bold text-slate-900 cursor-pointer select-none">
                 <span>{faq.q}</span>
-                <Plus size={18} className="plus-icon shrink-0 text-slate-400" />
+                <Plus size={18} strokeWidth={1.75} className="plus-icon shrink-0 text-slate-400 transition-transform duration-200 group-open:rotate-45" />
               </summary>
               <p className="mt-3 text-xs md:text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
                 {faq.a}
@@ -999,16 +1025,14 @@ export const WhatsAppButton = () => {
       href={`https://wa.me/${site.whatsapp.replace(/\+/g, "")}?text=Hi%20Hirely%20%26%20Jobly%20team%2C%20I%20would%20like%20to%20know%20more%20about%20the%20courses%20and%20counselling.`}
       target="_blank"
       rel="noopener noreferrer"
-      className="whatsapp-float group"
+      className="whatsapp-float group flex items-center gap-2"
       aria-label="Chat with Counsellor on WhatsApp"
     >
-      <MessageCircle size={18} className="animate-bounce" />
+      <MessageCircle size={18} strokeWidth={2} className="animate-bounce" />
       <span className="hidden sm:inline">Chat with Counsellor</span>
     </a>
   );
 };
-
-// Note: WhatsApp button is positioned bottom-left in CSS to avoid overlapping course CTAs
 
 // ─── Footer ───────────────────────────────────────────────────────────────────
 const FOOTER_SECTIONS = {
@@ -1038,7 +1062,7 @@ export const Footer = () => {
           <div className="md:col-span-5 space-y-4">
             <div className="flex items-center gap-2.5 font-bold text-white">
               <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
-                <GraduationCap size={18} />
+                <GraduationCap size={18} strokeWidth={2} />
               </div>
               <span className="text-lg font-extrabold tracking-tight">
                 Hirely <span className="text-blue-400">&amp;</span> Jobly
@@ -1047,10 +1071,19 @@ export const Footer = () => {
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               Hyderabad’s premier outcome-driven tech academy for engineering and B.Tech students. Industry capstones, FAANG mentorship, and guaranteed placement assistance.
             </p>
-            <div className="text-xs text-slate-300 space-y-1">
-              <div>📍 <b>Campus:</b> {site.address}</div>
-              <div>📞 <b>Phone:</b> {site.phone}</div>
-              <div>✉️ <b>Email:</b> {site.email}</div>
+            <div className="text-xs text-slate-300 space-y-2 pt-2">
+              <div className="flex items-start gap-2">
+                <MapPin size={14} strokeWidth={1.75} className="text-blue-400 shrink-0 mt-0.5" />
+                <span><b>Campus:</b> {site.address}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Phone size={14} strokeWidth={1.75} className="text-blue-400 shrink-0" />
+                <span><b>Phone:</b> {site.phone}</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Mail size={14} strokeWidth={1.75} className="text-blue-400 shrink-0" />
+                <span><b>Email:</b> {site.email}</span>
+              </div>
             </div>
           </div>
 

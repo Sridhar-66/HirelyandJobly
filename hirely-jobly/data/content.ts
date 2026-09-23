@@ -63,16 +63,17 @@ export const animatedStatsData: StatItem[] = [
 ];
 
 export const trustBadges = [
-  { label: "⭐ 4.9/5 Rating", desc: "by 5,000+ Students" },
-  { label: "✓ 100% Live", desc: "Mentor-Led Coding" },
-  { label: "🏢 Hyderabad Centers", desc: "Madhapur & Ameerpet" },
-  { label: "🚀 Placement Cell", desc: "Dedicated Mock Interviews" },
+  { label: "4.9/5 Rating", desc: "by 5,000+ Students", icon: "Star" },
+  { label: "100% Live", desc: "Mentor-Led Coding", icon: "MonitorPlay" },
+  { label: "Hyderabad Centers", desc: "Madhapur & Ameerpet", icon: "Building2" },
+  { label: "Placement Cell", desc: "Dedicated Mock Interviews", icon: "ShieldCheck" },
 ];
 
 export const partners = [
-  "Microsoft", "Amazon", "Flipkart", "Swiggy",
+  "Microsoft", "Google", "Amazon", "Swiggy",
   "Razorpay", "Zomato", "Cred", "PhonePe",
-  "TCS Digital", "Infosys", "Cognizant", "Deloitte",
+  "TCS", "Infosys", "Cognizant", "Deloitte",
+  "Adobe", "Uber", "Salesforce",
 ];
 
 export const courseCategories = [
@@ -192,7 +193,8 @@ export const courses = [
 
 export const twoFeatureCards = [
   {
-    badge: "🏢 Classroom Learning",
+    badge: "Classroom Learning",
+    icon: "Building2",
     title: "Learn Offline in Hyderabad",
     desc: "Intensive in-person training with daily mentor guidance at our state-of-the-art tech hubs in Madhapur & Ameerpet.",
     cta: "Visit Campus",
@@ -205,7 +207,8 @@ export const twoFeatureCards = [
     ],
   },
   {
-    badge: "💻 Flexible & Remote",
+    badge: "Flexible & Remote",
+    icon: "Laptop",
     title: "Live Interactive Online",
     desc: "Interactive live classes with real-time doubt clearing, screen sharing, and flexible weekend batches for college students & pros.",
     cta: "Join Live Batch",
@@ -343,7 +346,7 @@ export const plans = [
   },
   {
     name: "Career & Placement Pro",
-    badge: "⭐ Most Popular",
+    badge: "Most Popular",
     popular: true,
     desc: "Complete 2-track bundle with guaranteed placement assistance and mock rounds.",
     price: "₹34,999",
