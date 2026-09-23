@@ -131,17 +131,15 @@ export default function CoursesPage() {
                 </Link>
               </div>
             </div>
-            <div className="relative md:col-span-5 lg:col-span-4 min-h-[320px] md:min-h-[400px] w-full self-stretch flex items-end justify-center md:justify-end overflow-hidden pt-6 px-4 md:px-0">
-              {/* Subtle background glow behind subject */}
-              <div className="absolute right-8 bottom-8 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+            <div className="relative md:col-span-5 lg:col-span-4 h-80 md:h-full min-h-[360px] md:min-h-[420px] w-full self-stretch overflow-hidden">
               <Image
-                src="/images/about/counsellor-subject.png"
+                src="/images/about/counsellor.jpg"
                 alt="Academic counsellor at Hirely and Jobly"
-                width={420}
-                height={550}
-                className="h-full w-auto max-h-[340px] md:max-h-[400px] object-contain object-bottom drop-shadow-2xl z-10"
+                fill
+                className="object-cover object-[center_35%]"
                 priority
               />
+              <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-900 via-transparent to-transparent pointer-events-none" />
             </div>
           </div>
         </div>
