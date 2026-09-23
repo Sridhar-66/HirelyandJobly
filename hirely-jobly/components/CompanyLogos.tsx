@@ -6,12 +6,13 @@ import {
   SiRazorpay,
   SiPhonepe,
   SiTata,
-  SiInfosys,
   SiSwiggy,
   SiUber,
   SiHcl,
   SiVisa,
   SiGoogle,
+  SiCline,
+  SiReddit,
 } from "react-icons/si";
 import { FaMicrosoft, FaAmazon, FaSalesforce } from "react-icons/fa6";
 
@@ -33,38 +34,34 @@ export const companyPartners: CompanyPartner[] = [
   { name: "Zomato",     Icon: SiZomato,     color: "#E23744", label: "zomato" },
   { name: "Razorpay",   Icon: SiRazorpay,   color: "#0284C7", label: "Razorpay" },
   {
-    name: "Flipkart",
+    name: "OpenAI",
     Icon: null,
-    color: "#2874F0",
+    color: "#000000",
     custom: (
       <div className="flex items-center gap-1.5">
-        <div className="w-5 h-5 rounded bg-[#2874F0] flex items-center justify-center text-[#FFE500] font-black text-xs italic shrink-0">
-          f
-        </div>
-        <span className="font-bold italic text-[#2874F0] text-[15px] tracking-tight leading-none">
-          Flipkart
-        </span>
+        <svg viewBox="0 0 41 41" className="w-5 h-5 shrink-0" aria-hidden="true" fill="#000000">
+          <path d="M37.532 16.87a9.963 9.963 0 0 0-.856-8.184 10.078 10.078 0 0 0-10.855-4.835 9.964 9.964 0 0 0-6.651-3.001 10.079 10.079 0 0 0-9.589 6.977 9.967 9.967 0 0 0-6.657 4.834 10.08 10.08 0 0 0 1.24 11.817 9.965 9.965 0 0 0 .856 8.185 10.079 10.079 0 0 0 10.855 4.835 9.965 9.965 0 0 0 6.652 3.001 10.079 10.079 0 0 0 9.589-6.977 9.967 9.967 0 0 0 6.657-4.834 10.079 10.079 0 0 0-1.241-11.818zm-22.73 10.25c0-.436.035-.87.101-1.301l.01-.051-.011.011a7.984 7.984 0 0 1-5.221-7.366c0-4.408 3.592-7.985 8.018-7.985.47 0 .932.043 1.385.124l.05.01-.011-.012a7.978 7.978 0 0 1 4.837-1.606c4.426 0 8.018 3.577 8.018 7.985a7.983 7.983 0 0 1-4.838 7.27l-.011.011.051-.01a8.065 8.065 0 0 1 .101 1.302c0 4.408-3.592 7.985-8.018 7.985a8.01 8.01 0 0 1-4.461-1.367zm-.501-17.955a7.978 7.978 0 0 1 3.624-3.294l-.051.012a6.01 6.01 0 0 0-.05.576 6.015 6.015 0 0 0 4.661 5.848 6.015 6.015 0 0 0-4.661 5.847c0 .194.017.386.05.576l.051.011a7.97 7.97 0 0 1-3.624-3.293 7.984 7.984 0 0 1 0-6.283zm8.417 14.348a6.017 6.017 0 0 0 4.661-5.847 6.017 6.017 0 0 0-4.661-5.848 6.013 6.013 0 0 0-4.66 5.848 6.013 6.013 0 0 0 4.66 5.847zm8.316-10.57a7.97 7.97 0 0 1 3.623 3.293 7.984 7.984 0 0 1 0 6.283 7.978 7.978 0 0 1-3.623 3.294l.051-.012a6.01 6.01 0 0 0 .05-.576 6.015 6.015 0 0 0-4.661-5.847 6.015 6.015 0 0 0 4.661-5.848c0-.193-.017-.385-.05-.576l-.051-.011z"/>
+        </svg>
+        <span className="font-semibold text-[15px] text-gray-900 tracking-tight leading-none">OpenAI</span>
       </div>
     ),
   },
-  { name: "PhonePe",    Icon: SiPhonepe,    color: "#5F259F", label: "PhonePe" },
+  { name: "PhonePe", Icon: SiPhonepe, color: "#5F259F", label: "PhonePe" },
   {
-    name: "CRED",
+    name: "Lovable",
     Icon: null,
-    color: "#0F172A",
+    color: "#FF4D6D",
     custom: (
       <div className="flex items-center gap-1.5">
-        <div className="w-5 h-5 rounded-[4px] bg-slate-950 flex items-center justify-center shrink-0">
-          <span className="text-white font-black text-[11px] leading-none">C</span>
-        </div>
-        <span className="font-black text-slate-950 text-xs tracking-[0.22em] leading-none">
-          CRED
-        </span>
+        <svg viewBox="0 0 24 24" className="w-5 h-5 shrink-0" aria-hidden="true" fill="#FF4D6D">
+          <path d="M12 21.593c-.425-.396-8.991-7.741-8.991-12.937A6.004 6.004 0 0 1 12 3.087a6.004 6.004 0 0 1 8.991 5.569C20.991 13.852 12.425 21.197 12 21.593z"/>
+        </svg>
+        <span className="font-bold text-[15px] tracking-tight leading-none" style={{color:"#FF4D6D"}}>Lovable</span>
       </div>
     ),
   },
-  { name: "TCS",        Icon: SiTata,       color: "#00529B", label: "TCS" },
-  { name: "Infosys",    Icon: SiInfosys,    color: "#007CC3", label: "Infosys" },
+  { name: "TCS",   Icon: SiTata,   color: "#00529B", label: "TCS" },
+  { name: "Cline", Icon: SiCline,  color: "#A259FF", label: "Cline" },
   {
     name: "Deloitte",
     Icon: null,
@@ -97,22 +94,7 @@ export const companyPartners: CompanyPartner[] = [
   },
   { name: "Uber",       Icon: SiUber,       color: "#000000", label: "Uber" },
   { name: "Salesforce", Icon: FaSalesforce, color: "#00A1E0", label: "salesforce" },
-  {
-    name: "Cognizant",
-    Icon: null,
-    color: "#0033A0",
-    custom: (
-      <div className="flex items-center gap-1.5">
-        <svg viewBox="0 0 24 24" className="w-4 h-4 shrink-0" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" stroke="#0033A0" strokeWidth="2.5" fill="none" />
-          <path d="M12 4.5a7.5 7.5 0 0 1 7.5 7.5" stroke="#00A9E0" strokeWidth="2.5" strokeLinecap="round" fill="none" />
-        </svg>
-        <span className="font-bold text-[#0033A0] text-[14px] tracking-tight leading-none">
-          cognizant
-        </span>
-      </div>
-    ),
-  },
+  { name: "Reddit", Icon: SiReddit, color: "#FF4500", label: "Reddit" },
   { name: "HCL",  Icon: SiHcl,  color: "#0072CE" },
   { name: "VISA", Icon: SiVisa, color: "#1A1F71" },
 ];
