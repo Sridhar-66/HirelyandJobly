@@ -105,8 +105,8 @@ export default function CoursesPage() {
 
         {/* Free Academic Counselling Callout */}
         <div className="mt-16 overflow-hidden rounded-3xl bg-slate-900 text-white shadow-xl">
-          <div className="grid md:grid-cols-12 items-center">
-            <div className="md:col-span-8 p-8 md:p-12">
+          <div className="grid md:grid-cols-12 items-stretch">
+            <div className="md:col-span-7 lg:col-span-8 p-8 md:p-12 flex flex-col justify-center">
               <span className="pill mb-3 inline-block bg-blue-500/20 text-blue-300 border-blue-400/30">
                 1-on-1 Academic Mentorship
               </span>
@@ -131,12 +131,16 @@ export default function CoursesPage() {
                 </Link>
               </div>
             </div>
-            <div className="relative hidden md:block md:col-span-4 h-72">
+            <div className="relative md:col-span-5 lg:col-span-4 min-h-[320px] md:min-h-[400px] w-full self-stretch flex items-end justify-center md:justify-end overflow-hidden pt-6 px-4 md:px-0">
+              {/* Subtle background glow behind subject */}
+              <div className="absolute right-8 bottom-8 h-64 w-64 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
               <Image
-                src="/images/about/counsellor.jpg"
+                src="/images/about/counsellor-subject.png"
                 alt="Academic counsellor at Hirely and Jobly"
-                fill
-                className="object-cover object-top"
+                width={420}
+                height={550}
+                className="h-full w-auto max-h-[340px] md:max-h-[400px] object-contain object-bottom drop-shadow-2xl z-10"
+                priority
               />
             </div>
           </div>
