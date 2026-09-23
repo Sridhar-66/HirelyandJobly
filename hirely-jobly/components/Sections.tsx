@@ -21,7 +21,6 @@ import {
   Building2,
   ChevronRight,
   ShieldCheck,
-  GraduationCap,
   TrendingUp,
   MapPin,
   CheckCircle2,
@@ -170,8 +169,15 @@ export const Sec = ({
 
 export const Logo = () => (
   <Link href="/" className="flex items-center gap-2.5 font-bold text-slate-900 group">
-    <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 text-white shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105">
-      <GraduationCap size={18} strokeWidth={2} />
+    <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105 p-1.5">
+      <Image
+        src="/images/logo-white.svg"
+        alt="Hirely and Jobly logo mark"
+        width={24}
+        height={24}
+        className="h-full w-full object-contain"
+        priority
+      />
     </div>
     <span className="text-base tracking-tight font-extrabold">
       Hirely <span className="text-blue-600">&amp;</span> Jobly
@@ -1065,8 +1071,14 @@ export const Footer = () => {
           {/* Brand Column */}
           <div className="md:col-span-4 space-y-4">
             <div className="flex items-center gap-2.5 font-bold text-white">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 text-white shadow-md">
-                <GraduationCap size={18} strokeWidth={2} />
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 shadow-md p-1.5">
+                <Image
+                  src="/images/logo-white.svg"
+                  alt="Hirely and Jobly logo mark"
+                  width={24}
+                  height={24}
+                  className="h-full w-full object-contain"
+                />
               </div>
               <span className="text-lg font-extrabold tracking-tight">
                 Hirely <span className="text-blue-400">&amp;</span> Jobly
