@@ -331,7 +331,6 @@ export const plans = [
       "Sample dataset & project brief access",
       "Notes, templates & practice questions",
       "Completion certificate",
-      "LockedIn merch kit",
       "Live mentor sessions",
       "Community access",
       "Placement support",
@@ -354,7 +353,7 @@ export const plans = [
       "AI-powered resume checker",
       "Internship offer & completion certificate",
       "Private community & peer network",
-      "LockedIn merch kit",
+      "HirelyandJobly merch",
     ],
   },
   {
@@ -372,7 +371,7 @@ export const plans = [
       "Placement assistance & job referrals",
       "Guest lectures & industry case studies",
       "Letter of Recommendation for top performers",
-      "LockedIn merch kit",
+      "HirelyandJobly merch",
     ],
   },
 ];
