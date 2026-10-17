@@ -171,13 +171,13 @@ export const Sec = ({
 
 export const Logo = () => (
   <Link href="/" className="flex items-center gap-2 group">
-    <div className="relative h-9 w-auto transition-transform duration-200 group-hover:scale-105">
+    <div className="relative h-14 w-auto transition-transform duration-200 group-hover:scale-105">
       <Image
         src="/images/brand/logo-with-slogan.png"
         alt="Hirely and Jobly — Learn. Prepare. Get Hired."
-        width={200}
-        height={48}
-        className="h-9 w-auto object-contain"
+        width={360}
+        height={86}
+        className="h-14 w-auto object-contain"
         priority
       />
     </div>
@@ -197,7 +197,7 @@ const NAV_LINKS = [
 export const Nav = ({ activePath = "/" }: { activePath?: string }) => {
   return (
     <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/90 backdrop-blur-md transition-all">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
         <Logo />
 
         <nav className="hidden items-center gap-1 text-xs font-semibold text-slate-600 md:flex" aria-label="Main navigation">
@@ -260,7 +260,7 @@ export const Hero = () => {
 
             <Reveal delay={2}>
               <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 md:text-lg">
-                Industry-crafted courses in Full-Stack, AI/ML, DSA, and UI/UX built specifically for B.Tech &amp; engineering students in Hyderabad with 1-on-1 mentorship and direct placement referrals.
+                Industry-crafted courses in Full-Stack, AI/ML, DSA, and UI/UX built specifically for B.Tech &amp; engineering students in Bangalore with 1-on-1 mentorship and direct placement referrals.
               </p>
             </Reveal>
 
@@ -289,10 +289,10 @@ export const Hero = () => {
               <div className="relative mx-auto max-w-md overflow-visible rounded-3xl border border-slate-200 bg-white p-3 shadow-2xl shadow-blue-500/10">
                 <div className="relative h-80 w-full overflow-hidden rounded-2xl md:h-96">
                   <Image
-                    src="/images/heroes/agniva-home-hero.webp"
+                    src="/images/heroes/hero-student.jpg"
                     alt="Student learning at Hirely and Jobly"
                     fill
-                    className="object-cover object-top"
+                    className="object-cover object-center"
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
@@ -305,7 +305,7 @@ export const Hero = () => {
                           Upcoming Batch
                         </div>
                         <div className="text-xs font-semibold text-slate-900">
-                          Weekend &amp; Evening Batches in Hyderabad
+                          Weekend &amp; Evening Batches · Whitefield, Bangalore &amp; Online
                         </div>
                       </div>
                       <Link
@@ -359,8 +359,8 @@ export const Hero = () => {
                 >
                   <ShieldCheck size={20} strokeWidth={1.75} className="text-blue-400 shrink-0" />
                   <div>
-                    <div className="text-[10px] text-slate-300">Tech Campus</div>
-                    <div className="text-xs font-bold">Whitefield, Bangalore</div>
+                    <div className="text-[10px] text-slate-300">Whitefield Campus</div>
+                    <div className="text-xs font-bold">Enzyme SJR I-Park, Bangalore</div>
                   </div>
                 </motion.div>
               </div>
@@ -462,7 +462,7 @@ const COURSE_TIERS = [
   {
     id: "recorded",
     label: "Recorded",
-    price: "₹2,999",
+    price: "₹4,999",
     badge: "Self-Paced",
     color: "slate",
     features: ["Full recorded lectures", "Study material & notes", "Lifetime LMS access", "Certificate on completion"],
@@ -470,7 +470,7 @@ const COURSE_TIERS = [
   {
     id: "live",
     label: "Live + Mentor",
-    price: "₹4,999",
+    price: "₹7,999",
     badge: "Most Popular",
     color: "blue",
     features: ["Live instructor-led classes", "1:1 mentor sessions", "Daily doubt clearing", "Project review & feedback"],
@@ -478,8 +478,8 @@ const COURSE_TIERS = [
   {
     id: "placement",
     label: "Job Placement",
-    price: "₹8,999",
-    badge: "Best Value",
+    price: "₹12,999",
+    badge: "100% Guarantee",
     color: "emerald",
     features: ["Everything in Live+Mentor", "Placement cell access", "Soft skills & communication", "Mock interviews + referrals"],
   },
@@ -739,17 +739,15 @@ export const LocationsHub = () => {
                 <Link href="/contact" className="btn btn-primary text-xs py-2.5 px-5">
                   Book Center Visit &amp; Demo <ArrowUpRight size={14} strokeWidth={2} />
                 </Link>
-                {"mapUrl" in currentHub && (
-                  <a
-                    href={(currentHub as { mapUrl?: string }).mapUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-secondary text-xs py-2.5 px-4 flex items-center gap-1.5"
-                  >
-                    <MapPin size={13} strokeWidth={2} className="text-blue-600" />
-                    Open in Google Maps
-                  </a>
-                )}
+                <a
+                  href={"mapUrl" in currentHub && (currentHub as { mapUrl?: string }).mapUrl ? (currentHub as { mapUrl?: string }).mapUrl : site.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary text-xs py-2.5 px-4 flex items-center gap-1.5"
+                >
+                  <MapPin size={13} strokeWidth={2} className="text-blue-600" />
+                  Open in Google Maps
+                </a>
                 <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1.5">
                   <CheckCircle2 size={13} strokeWidth={2} className="text-emerald-600 shrink-0" />
                   {currentHub.batch}
@@ -758,19 +756,28 @@ export const LocationsHub = () => {
             </div>
 
             <div className="md:col-span-5">
-              <div className="relative h-60 w-full overflow-hidden rounded-2xl md:h-72">
+              <a
+                href={"mapUrl" in currentHub && (currentHub as { mapUrl?: string }).mapUrl ? (currentHub as { mapUrl?: string }).mapUrl : site.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Open Enzyme SJR I-Park in Google Maps"
+                className="group block relative h-60 w-full overflow-hidden rounded-2xl md:h-72 cursor-pointer shadow-md"
+              >
                 <Image
-                  src="/images/about/about-mentor-session.jpg"
-                  alt="Hirely and Jobly mentor session"
+                  src="/images/brand/office-whitefield.png"
+                  alt="Enzyme SJR I-Park Whitefield Bangalore Office"
                   fill
-                  className="object-cover"
+                  className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
-                <div className="absolute bottom-4 left-4 text-white">
-                  <div className="text-xs font-bold">Offline &amp; Hybrid Lab</div>
-                  <div className="text-[11px] text-slate-200">Equipped for deep technical practice</div>
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/20 to-transparent" />
+                <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-xs text-blue-700 px-3 py-1 rounded-full text-[11px] font-bold flex items-center gap-1.5 shadow-sm">
+                  <MapPin size={12} strokeWidth={2.5} className="text-blue-600" /> View on Google Maps
                 </div>
-              </div>
+                <div className="absolute bottom-4 left-4 text-white">
+                  <div className="text-xs font-bold">Enzyme SJR I-Park, Whitefield</div>
+                  <div className="text-[11px] text-slate-200">Bangalore, Karnataka 560066</div>
+                </div>
+              </a>
             </div>
           </div>
         </div>
@@ -787,7 +794,7 @@ export const Testimonials = () => {
         pill="Proven Placement Track Record"
         title="Stories of students who"
         highlight="cracked top tech roles"
-        sub="Read how engineering students from Hyderabad colleges turned practical mentorship into life-changing job offers."
+        sub="Read how engineering students from Bangalore and across India turned practical mentorship into life-changing job offers."
       />
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -1108,13 +1115,14 @@ export const Pricing = () => {
                 ))}
               </div>
             </div>
-            <div className="md:col-span-6">
-              <div className="relative overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 shadow-md aspect-square max-h-[380px] w-full mx-auto">
+            <div className="md:col-span-6 flex items-center justify-center">
+              <div className="w-full rounded-2xl border border-slate-100 bg-slate-50 shadow-md p-4 flex items-center justify-center">
                 <Image
                   src="/images/brand/goodies-swags.png"
-                  alt="Official Hirely and Jobly Goodies & Swags"
-                  fill
-                  className="object-cover object-center hover:scale-105 transition-transform duration-500"
+                  alt="Official Hirely and Jobly Goodies &amp; Swags"
+                  width={500}
+                  height={500}
+                  className="w-full h-auto max-h-[380px] object-contain hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
@@ -1140,7 +1148,7 @@ export const Faq = () => {
         pill="Frequently Asked Questions"
         title="Got questions? We have"
         highlight="clear answers"
-        sub="Everything you need to know about course tracks, batches, Hyderabad centers, fees, and placement guarantees."
+        sub="Everything you need to know about course tracks, batches, Whitefield campus, fees, and placement guarantees."
       />
 
       {/* FAQ Sub-Tabs */}
@@ -1214,7 +1222,7 @@ const FOOTER_SECTIONS = {
     ["Home", "/"],
     ["All Courses", "/courses"],
     ["About Mission", "/about"],
-    ["Hyderabad Centers", "/#centers"],
+    ["Whitefield Campus", "/#centers"],
     ["Placement Network", "/#stories"],
     ["Book Counselling", "/contact"],
   ],
@@ -1231,13 +1239,13 @@ export const Footer = () => {
               <Image
                 src="/images/brand/logo-with-slogan.png"
                 alt="Hirely and Jobly"
-                width={160}
-                height={44}
-                className="h-10 w-auto object-contain brightness-0 invert"
+                width={220}
+                height={60}
+                className="h-14 w-auto object-contain"
               />
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Hyderabad’s premier outcome-driven tech academy for engineering and B.Tech students. Industry capstones, FAANG mentorship, and guaranteed placement assistance.
+              Bangalore’s premier outcome-driven tech academy for engineering and B.Tech students. Industry capstones, FAANG mentorship, and guaranteed placement assistance.
             </p>
             <div className="text-xs text-slate-300 space-y-2 pt-2">
               <div className="flex items-start gap-2">

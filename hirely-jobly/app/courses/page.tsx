@@ -7,7 +7,7 @@ import { courses } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "All Tech Courses | Hirely and Jobly",
-  description: "Explore 7 job-ready tech courses in AI/ML, Full-Stack, DSA, UI/UX, Cybersecurity, AR/VR, and Game Design for engineering students in Hyderabad.",
+  description: "Explore 7 job-ready tech courses in AI/ML, Full-Stack, DSA, UI/UX, Cybersecurity, AR/VR, and Game Design for engineering students in Bangalore.",
 };
 
 export default function CoursesPage() {
@@ -114,7 +114,7 @@ export default function CoursesPage() {
                 Not sure which track matches your career goal?
               </h2>
               <p className="mt-3 text-xs md:text-sm text-slate-300 leading-relaxed max-w-xl">
-                Speak directly with our senior academic counsellor in Hyderabad. We review your branch, coding experience, and recommend the best roadmap.
+                Speak directly with our senior academic counsellor in Bangalore. We review your branch, coding experience, and recommend the best roadmap.
               </p>
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 <Link
@@ -127,7 +127,7 @@ export default function CoursesPage() {
                   href="/#centers"
                   className="btn btn-secondary py-3 px-6 text-sm"
                 >
-                  Our Hyderabad Centers
+                  Whitefield Tech Campus
                 </Link>
               </div>
             </div>

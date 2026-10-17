@@ -109,7 +109,7 @@ export default function ContactPage() {
             Book your <span className="gradient-text">free demo &amp; counselling</span>
           </h1>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-slate-600 md:text-base">
-            Speak directly with our senior academic counsellor in Hyderabad. We help you choose the right course track, discuss batch timings, and evaluate your eligibility for up to 40% scholarships.
+            Speak directly with our senior academic counsellor in Bangalore. We help you choose the right course track, discuss batch timings, and evaluate your eligibility for up to 40% scholarships.
           </p>
         </div>
 

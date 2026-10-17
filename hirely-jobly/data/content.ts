@@ -6,10 +6,10 @@ export const site = {
   name: "Hirely and Jobly",
   city: "Whitefield, Bangalore",
   email: "hello@hirelyandjobly.com",
-  phone: "+91 95536 85395",
-  whatsapp: "+919553685395",
+  phone: "+91 84948 19484 (Toll-Free)",
+  whatsapp: "+918494819484",
   address: "Enzyme SJR I-Park, Coworking Office Space, Whitefield, Bangalore, Karnataka 560066",
-  mapsUrl: "https://www.google.com/maps/place/Enzyme+SJR+I+Park-+Coworking+Office+space+in+Whitefield/@12.9809745,77.7262588,14z",
+  mapsUrl: "https://www.google.com/maps/place/Enzyme+SJR+I+Park-+Coworking+Office+space+in+Whitefield/@12.9817171,77.6883374,14z/data=!4m10!1m2!2m1!1soffices+in+whitefield!3m6!1s0x3bae1126391d1529:0x1b82b755ea424cb5!8m2!3d12.9809745!4d77.7262588!15sChVvZmZpY2VzIGluIHdoaXRlZmllbGRaFyIVb2ZmaWNlcyBpbiB3aGl0ZWZpZWxkkgEPY293b3JraW5nX3NwYWNlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5PZDBwNlZHdFJSUkFC4AEA-gEECAAQOw!16s%2Fg%2F11t_m09tnm?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D",
 };
 
 export interface StatItem {
@@ -22,7 +22,7 @@ export interface StatItem {
 }
 
 export const stats: [string, string, string][] = [
-  ["5,000+", "Students Trained", "Across top colleges in Telangana"],
+  ["5,000+", "Students Trained", "Across top colleges in Karnataka & India"],
   ["92%", "Placement Rate", "Within 90 days of graduation"],
   ["₹18.5 LPA", "Highest CTC", "Average package ₹6.2 LPA"],
   ["40+", "Hiring Partners", "Startups, Unicorns & MNCs"],
@@ -35,7 +35,7 @@ export const animatedStatsData: StatItem[] = [
     prefix: "",
     suffix: "+",
     label: "Students Trained",
-    desc: "Across top colleges in Telangana",
+    desc: "Across top colleges in Karnataka & India",
   },
   {
     target: 92,
@@ -195,11 +195,11 @@ export const twoFeatureCards = [
   {
     badge: "Classroom Learning",
     icon: "Building2",
-    title: "Learn Offline in Hyderabad",
-    desc: "Intensive in-person training with daily mentor guidance at our state-of-the-art tech campus in Madhapur.",
+    title: "Learn Offline in Whitefield, Bangalore",
+    desc: "Intensive in-person training with daily mentor guidance at our state-of-the-art tech campus in Enzyme SJR I-Park, Whitefield.",
     cta: "Visit Campus",
     link: "/contact#centers",
-    footerLabel: "Madhapur Tech Campus",
+    footerLabel: "Whitefield Tech Campus",
     features: [
       "1-on-1 In-Person Mentorship & Code Reviews",
       "Dedicated High-Speed Coding Labs & Wi-Fi",
@@ -235,7 +235,7 @@ export const benefits = [
   },
   {
     t: "Dedicated Placement Cell",
-    d: "Resume reviews, DSA mock interviews, soft skills training, and warm referrals to our 40+ hiring network in Hyderabad.",
+    d: "Resume reviews, DSA mock interviews, soft skills training, and warm referrals to our 40+ hiring network in Bangalore & Pan-India.",
     tag: "100% Support",
   },
 ];
@@ -248,7 +248,7 @@ export const why = {
   projL: "Production Capstones Built",
   quote: "We don't just teach syntax — we train you to think, build, and communicate like an engineer at a top tech company.",
   rating: "4.9/5",
-  ratingL: "Rated by students across Telangana",
+  ratingL: "Rated by students across Bangalore & Karnataka",
 };
 
 export const tiles: [string, string, string][] = [
@@ -263,7 +263,7 @@ export const tiles: [string, string, string][] = [
 export const testimonials = [
   {
     n: "Ananya Reddy",
-    college: "JNTU Hyderabad (B.Tech CSE, 2025)",
+    college: "RVCE Bangalore (B.Tech CSE, 2025)",
     role: "Software Engineer",
     company: "Zomato",
     ctc: "₹12.5 LPA",
@@ -272,7 +272,7 @@ export const testimonials = [
   },
   {
     n: "Karthik Medishetti",
-    college: "CBIT Hyderabad (B.Tech IT, 2025)",
+    college: "PES University, Bangalore (B.Tech CSE, 2025)",
     role: "Backend Developer",
     company: "Razorpay Partner",
     ctc: "₹9.2 LPA",
@@ -281,7 +281,7 @@ export const testimonials = [
   },
   {
     n: "Sneha Patel",
-    college: "VNR VJIET (B.Tech ECE, 2025)",
+    college: "BMS College of Engineering (B.Tech ECE, 2025)",
     role: "Associate Product Designer",
     company: "Fintech Startup",
     ctc: "₹7.8 LPA",
@@ -290,7 +290,7 @@ export const testimonials = [
   },
   {
     n: "Rohit Varma",
-    college: "Gokaraju Rangaraju (B.Tech CSE, 2025)",
+    college: "MSRIT Bangalore (B.Tech CSE, 2025)",
     role: "Cybersecurity Analyst",
     company: "Security Firm",
     ctc: "₹8.5 LPA",
@@ -342,7 +342,7 @@ export const hubs = [
     address: "Enzyme SJR I-Park, Coworking Office Space, Whitefield, Bangalore, Karnataka 560066",
     features: ["Air-conditioned High-Speed Labs", "Weekend In-Person Hackathons", "Mentor 1-on-1 Desk Reviews", "Placement Drive Hub"],
     batch: "Weekend & Weekday Batches Active",
-    mapUrl: "https://www.google.com/maps/place/Enzyme+SJR+I+Park-+Coworking+Office+space+in+Whitefield/@12.9809745,77.7262588,14z",
+    mapUrl: "https://www.google.com/maps/place/Enzyme+SJR+I+Park-+Coworking+Office+space+in+Whitefield/@12.9817171,77.6883374,14z/data=!4m10!1m2!2m1!1soffices+in+whitefield!3m6!1s0x3bae1126391d1529:0x1b82b755ea424cb5!8m2!3d12.9809745!4d77.7262588!15sChVvZmZpY2VzIGluIHdoaXRlZmllbGRaFyIVb2ZmaWNlcyBpbiB3aGl0ZWZpZWxkkgEPY293b3JraW5nX3NwYWNlmgEkQ2hkRFNVaE5NRzluUzBWSlEwRm5TVU5PZDBwNlZHdFJSUkFC4AEA-gEECAAQOw!16s%2Fg%2F11t_m09tnm?entry=ttu&g_ep=EgoyMDI2MTAxMy4wIKXMDSoASAFQAw%3D%3D",
   },
   {
     id: "online",
@@ -360,7 +360,7 @@ export const plans = [
     badge: "Self-Paced",
     popular: false,
     desc: "Introductory pricing for our first cohort",
-    price: "₹5,000",
+    price: "₹4,999",
     originalPrice: "₹9,999",
     cta: "Pay Now",
     f: [
@@ -378,7 +378,7 @@ export const plans = [
     badge: "MOST CHOSEN",
     popular: true,
     desc: "Our flagship program — 100% AccioJob Certified Training",
-    price: "₹8,000",
+    price: "₹7,999",
     originalPrice: "₹14,999",
     cta: "Pay Now",
     f: [
@@ -398,7 +398,7 @@ export const plans = [
     badge: "100% GUARANTEE",
     popular: false,
     desc: "Everything in Live Mentor + 100% Placement Guarantee backed by AccioJob:",
-    price: "₹13,000",
+    price: "₹12,999",
     originalPrice: "₹24,999",
     cta: "Pay Now",
     f: [
@@ -429,12 +429,12 @@ export const faqs = [
   },
   {
     q: "How does the placement assistance program work?",
-    a: "Once you complete your core modules and capstone projects, our dedicated placement cell prepares your resume, conducts 3-5 rounds of mock technical and HR interviews, and shares your profile with our 40+ hiring partners in Hyderabad and across India.",
+    a: "Once you complete your core modules and capstone projects, our dedicated placement cell prepares your resume, conducts 3-5 rounds of mock technical and HR interviews, and shares your profile with our 40+ hiring partners in Bangalore and across India.",
     category: "placements",
   },
   {
-    q: "Are the classes conducted online or offline in Hyderabad?",
-    a: "We offer both! You can attend in-person lab sessions at our Madhapur (HITEC City) campus in Hyderabad, or attend live interactive classes online from anywhere with real-time TA support.",
+    q: "Are the classes conducted online or offline in Bangalore?",
+    a: "We offer both! You can attend in-person lab sessions at our Whitefield campus (Enzyme SJR I-Park) in Bangalore, or attend live interactive classes online from anywhere with real-time TA support.",
     category: "admissions",
   },
   {
@@ -459,12 +459,12 @@ export const faqs = [
   },
   {
     q: "How do I book a free demo or counselling session?",
-    a: "Click on 'Book Free Demo' or tap the WhatsApp button. Our senior academic counsellor in Hyderabad will reach out to discuss your goals and schedule your free demo class.",
+    a: "Click on 'Book Free Demo' or tap the WhatsApp button. Our senior academic counsellor will reach out to discuss your goals and schedule your free demo class.",
     category: "placements",
   },
   {
     q: "What is the course fee and are there EMI options?",
-    a: "Our programs are structured into 3 accessible tiers: Self-Paced Track (₹2,999), Live Mentor Track (₹4,999), and Career Launch Track (₹8,999). Zero-cost EMI options and merit scholarships are also available.",
+    a: "Our programs are structured into 3 accessible tiers: Self-Paced Track (₹4,999), Live Mentor Track (₹7,999), and Career Launch Track (₹12,999). Zero-cost EMI options and merit scholarships are also available.",
     category: "admissions",
   },
   {

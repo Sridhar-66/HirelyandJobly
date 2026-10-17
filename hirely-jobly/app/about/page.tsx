@@ -7,7 +7,7 @@ import { site } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "About Us | Hirely and Jobly",
-  description: "Learn about Hirely and Jobly — our mission to bridge the gap between engineering college curriculum and modern tech industry demands in Hyderabad.",
+  description: "Learn about Hirely and Jobly — our mission to bridge the gap between engineering college curriculum and modern tech industry demands in Bangalore.",
 };
 
 export default function AboutPage() {
@@ -60,7 +60,7 @@ export default function AboutPage() {
                   Engineering syllabi take years to update. Tech hiring moves in weeks.
                 </h2>
                 <p className="mt-4 text-sm text-slate-600 leading-relaxed">
-                  Thousands of ambitious students across Telangana graduate with theoretical knowledge, but struggle in technical rounds due to a lack of live system building, git collaboration, and modern framework experience.
+                  Thousands of ambitious students across Karnataka graduate with theoretical knowledge, but struggle in technical rounds due to a lack of live system building, git collaboration, and modern framework experience.
                 </p>
               </div>
               <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-3 text-xs text-slate-500 font-medium">
@@ -83,7 +83,7 @@ export default function AboutPage() {
               </div>
               <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-3 text-xs text-slate-700 font-medium">
                 <Sparkles size={16} className="text-amber-500" />
-                <span>7 dedicated career tracks with hybrid Hyderabad lab access</span>
+                <span>7 dedicated career tracks with hybrid Bangalore lab access</span>
               </div>
             </div>
           </div>
@@ -95,7 +95,7 @@ export default function AboutPage() {
             <div className="text-center max-w-xl mx-auto mb-8">
               <Pill>Our Impact in Numbers</Pill>
               <h2 className="mt-3 text-2xl md:text-3xl font-bold text-slate-900">
-                Proven track record across Hyderabad &amp; Telangana
+                Proven track record across Bangalore &amp; Karnataka
               </h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">

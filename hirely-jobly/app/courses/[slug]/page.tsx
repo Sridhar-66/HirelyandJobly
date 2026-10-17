@@ -103,7 +103,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
                 <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-4 pt-6 border-t border-slate-100 text-xs">
                   <div>
                     <span className="text-slate-400 block mb-0.5">Mode</span>
-                    <span className="font-bold text-slate-800">Hyderabad Lab &amp; Live Online</span>
+                    <span className="font-bold text-slate-800">Bangalore Lab &amp; Live Online</span>
                   </div>
                   <div>
                     <span className="text-slate-400 block mb-0.5">Batches</span>
@@ -224,7 +224,7 @@ export default async function CourseDetailPage({ params }: PageProps) {
               </span>
               <h3 className="text-lg font-bold">Have questions on this course?</h3>
               <p className="mt-2 text-xs text-blue-100 leading-relaxed">
-                Connect with our academic team in Hyderabad to review the curriculum and reserve your seat.
+                Connect with our academic team in Bangalore to review the curriculum and reserve your seat.
               </p>
               <Link
                 href="/contact"

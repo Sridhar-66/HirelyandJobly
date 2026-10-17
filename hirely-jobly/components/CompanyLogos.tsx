@@ -161,18 +161,5 @@ export const BackerLogos = () => (
         </div>
       </div>
     </div>
-
-    {/* Tech Mahindra — Backgroundless & Much Bigger */}
-    <div className="flex items-center gap-3.5 opacity-95 hover:opacity-100 transition-opacity">
-      <SiMahindra size={42} className="text-red-500 shrink-0" />
-      <div>
-        <div className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">
-          Backed up by
-        </div>
-        <div className="text-white text-sm font-bold tracking-tight">
-          Tech Mahindra
-        </div>
-      </div>
-    </div>
   </div>
 );
