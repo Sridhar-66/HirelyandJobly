@@ -7,7 +7,7 @@ import { courses } from "@/data/content";
 
 export const metadata: Metadata = {
   title: "All Tech Courses | Hirely and Jobly",
-  description: "Explore 8 job-ready tech courses in AI/ML, Data Analytics & Data Science, Full-Stack, DSA, UI/UX, Cybersecurity, AR/VR, and Game Design for engineering students in Bangalore.",
+  description: "Explore 9 job-ready tech courses in AI/ML, Data Analytics, Data Science, Full-Stack, DSA, UI/UX, Cybersecurity, AR/VR, and Game Design for engineering students in Bangalore.",
 };
 
 export default function CoursesPage() {

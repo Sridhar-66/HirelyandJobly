@@ -276,7 +276,7 @@ export const Hero = () => {
                   href="/courses"
                   className="btn btn-secondary py-3 px-6 text-sm"
                 >
-                  Explore 8 Tracks
+                  Explore 9 Tracks
                 </Link>
               </div>
             </Reveal>
@@ -460,33 +460,33 @@ export { TrustedByLearners };
 // ─── Per-course pricing tiers ─────────────────────────────────────────────────
 const COURSE_TIERS = [
   {
-    id: "recorded",
-    label: "Recorded",
+    id: "basic",
+    label: "Basic",
     price: "₹4,999",
-    badge: "Self-Paced",
+    badge: "Recorded",
     color: "slate",
-    features: ["Full recorded lectures", "Study material & notes", "Lifetime LMS access", "Certificate on completion"],
+    features: ["Full recorded lectures", "Projects & internship cert", "Equal doubt clarification", "Course completion certificate"],
   },
   {
-    id: "live",
-    label: "Live + Mentor",
+    id: "advanced",
+    label: "Advanced",
     price: "₹7,999",
     badge: "Most Popular",
     color: "blue",
-    features: ["Live instructor-led classes", "1:1 mentor sessions", "Daily doubt clearing", "Project review & feedback"],
+    features: ["100% Live interactive classes", "Study & practice materials", "Placement classes & mocks", "Official Goodies & Swags kit"],
   },
   {
-    id: "placement",
-    label: "Job Placement",
+    id: "premium",
+    label: "Premium",
     price: "₹12,999",
     badge: "100% Guarantee",
     color: "emerald",
-    features: ["Everything in Live+Mentor", "Placement cell access", "Soft skills & communication", "Mock interviews + referrals"],
+    features: ["Dedicated placement officer", "Role-specific interview prep", "Personalized resume support", "Support until first full-time job"],
   },
 ];
 
 const CourseCard = ({ c }: { c: typeof courses[0] }) => {
-  const [selectedTier, setSelectedTier] = useState("live");
+  const [selectedTier, setSelectedTier] = useState("advanced");
   const tier = COURSE_TIERS.find((t) => t.id === selectedTier)!;
 
   const tierColorMap: Record<string, { btn: string; border: string; badge: string }> = {
@@ -659,7 +659,7 @@ export const Courses = () => {
       <Reveal delay={2}>
         <div className="mt-12 text-center">
           <Link href="/courses" className="btn btn-secondary py-3 px-8 text-sm">
-            View All 8 Course Syllabi <ArrowUpRight size={14} strokeWidth={2} />
+            View All 9 Course Syllabi <ArrowUpRight size={14} strokeWidth={2} />
           </Link>
         </div>
       </Reveal>
@@ -867,57 +867,62 @@ export const MentorsSection = () => {
           {[...mentors, ...mentors].map((m, idx) => (
             <div
               key={`${m.name}-${idx}`}
-              className="w-[360px] sm:w-[400px] shrink-0 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col justify-between"
+              className="w-[360px] sm:w-[400px] shrink-0 rounded-3xl border border-slate-200 bg-white p-6 shadow-md hover:shadow-2xl hover:border-blue-400 transition-all duration-300 flex flex-col justify-between group"
             >
               <div>
                 {/* Top Header: Company Pill + Experience Pill */}
                 <div className="flex items-center justify-between gap-2 mb-4">
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 border border-blue-200">
-                    <Building2 size={13} strokeWidth={2} className="text-blue-600" />
+                  <span className="inline-flex items-center gap-1.5 rounded-xl bg-slate-900 px-3.5 py-1.5 text-xs font-bold text-white shadow-xs">
+                    <Building2 size={13} strokeWidth={2.5} className="text-blue-400" />
                     {m.company}
                   </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">
-                    <Sparkles size={11} strokeWidth={2} className="text-amber-500" />
-                    {m.experience}
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 border border-emerald-200 px-3 py-1 text-xs font-bold text-emerald-700">
+                    <Sparkles size={12} strokeWidth={2.5} className="text-amber-500" />
+                    {m.experience} Exp
                   </span>
                 </div>
 
-                {/* Mentor Avatar & Details */}
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 border-blue-100 shadow-md">
-                    <Image
-                      src={m.image}
-                      alt={m.name}
-                      fill
-                      className="object-cover object-top"
-                    />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                {/* Big Hero Mentor Image */}
+                <div className="relative h-60 w-full overflow-hidden rounded-2xl border border-slate-100 bg-slate-900 shadow-inner mb-4 group-hover:scale-[1.02] transition-transform duration-500">
+                  <Image
+                    src={m.image}
+                    alt={m.name}
+                    fill
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent" />
+                  <div className="absolute bottom-3 left-4 right-4 text-white">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-blue-300">
+                      Senior Industry Tech Leader
+                    </div>
+                    <h3 className="text-xl font-extrabold text-white leading-tight">
                       {m.name}
                     </h3>
-                    <div className="text-xs font-semibold text-blue-600 mt-0.5">
-                      {m.role}
+                    <div className="text-xs font-semibold text-slate-200 mt-0.5">
+                      {m.role} @ <span className="text-white font-bold">{m.company}</span>
                     </div>
-                    {"highlight" in m && (
-                      <div className="text-[11px] text-slate-500 mt-1 font-medium leading-tight">
-                        {(m as { highlight?: string }).highlight}
-                      </div>
-                    )}
                   </div>
                 </div>
+
+                {/* Highlight Credential Box */}
+                {"highlight" in m && (
+                  <div className="mb-4 rounded-xl bg-blue-50/80 border border-blue-100 p-2.5 text-xs font-semibold text-blue-900 flex items-center gap-2">
+                    <Sparkles size={14} className="text-blue-600 shrink-0" />
+                    <span className="line-clamp-1">{(m as { highlight?: string }).highlight}</span>
+                  </div>
+                )}
               </div>
 
-              {/* Bottom: Expertise Tags */}
+              {/* Bottom: Core Expertise */}
               <div className="pt-3 border-t border-slate-100">
                 <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
-                  Core Expertise
+                  Core Expertise &amp; Stack
                 </div>
                 <div className="flex flex-wrap gap-1.5">
                   {m.expertise.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-slate-50 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 border border-slate-200"
+                      className="rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-700 border border-slate-200/80"
                     >
                       {tag}
                     </span>
@@ -1063,6 +1068,87 @@ export const Pricing = () => {
           </Reveal>
         ))}
       </div>
+
+      {/* Course Track Comparison Table (Basic vs Advanced vs Premium) */}
+      <Reveal delay={1}>
+        <div className="mt-14 overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-xl">
+          <div className="bg-slate-900 p-6 md:p-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <span className="pill mb-2 inline-block bg-blue-500/20 text-blue-300 border-blue-400/30">
+                Course Track Comparison
+              </span>
+              <h3 className="text-xl md:text-2xl font-black tracking-tight">
+                Detailed Track Feature Comparison
+              </h3>
+              <p className="mt-1 text-xs md:text-sm text-slate-300">
+                Choose the right learning format and career support level for your goals
+              </p>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-semibold">
+              <span className="rounded-lg bg-blue-600 px-3 py-1.5 text-white">Advanced Track: Most Popular</span>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto">
+            <table className="w-full text-left border-collapse text-xs md:text-sm">
+              <thead>
+                <tr className="border-b border-slate-200 bg-slate-50/80">
+                  <th className="p-4 md:p-5 font-bold text-slate-900 w-2/5">Feature</th>
+                  <th className="p-4 md:p-5 font-bold text-slate-800 w-1/5 text-center">
+                    <div>Basic Track</div>
+                    <div className="text-xs font-extrabold text-blue-600 mt-0.5">₹4,999</div>
+                  </th>
+                  <th className="p-4 md:p-5 font-bold text-blue-700 w-1/5 text-center bg-blue-50/60 border-x border-blue-200">
+                    <div className="flex items-center justify-center gap-1">
+                      Advanced Track
+                      <Sparkles size={12} className="text-amber-500" />
+                    </div>
+                    <div className="text-xs font-extrabold text-blue-700 mt-0.5">₹7,999</div>
+                  </th>
+                  <th className="p-4 md:p-5 font-bold text-emerald-800 w-1/5 text-center">
+                    <div>Premium Track</div>
+                    <div className="text-xs font-extrabold text-emerald-600 mt-0.5">₹12,999</div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-100">
+                {[
+                  { f: "Full Course Access", b: "✓", a: "✓", p: "✓" },
+                  { f: "Classes Format", b: "Recorded", a: "100% Live", p: "100% Live" },
+                  { f: "Projects & Real-world Assignments", b: "✓", a: "✓", p: "✓" },
+                  { f: "Doubt Clarification", b: "✓ Equal", a: "✓ Priority", p: "✓ 1-on-1 Dedicated" },
+                  { f: "Notes & Curated Study Materials", b: "—", a: "✓ Included", p: "✓ Included" },
+                  { f: "Practice Materials & Question Banks", b: "—", a: "✓ Included", p: "✓ Included" },
+                  { f: "Placement Assistance Classes", b: "—", a: "✓ Included", p: "✓ Same as Advanced" },
+                  { f: "Placement Testing & Mock Interviews", b: "—", a: "✓ Included", p: "✓ Same as Advanced" },
+                  { f: "Full Course Certificate", b: "✓ Verified", a: "✓ Verified", p: "✓ Verified" },
+                  { f: "Internship Certificate", b: "✓ Verified", a: "✓ Verified", p: "✓ Verified" },
+                  { f: "Official Goodies & Swags / Milestones", b: "—", a: "✓ Welcome Kit", p: "✓ Same Kit" },
+                  { f: "Dedicated Personal Placement Officer", b: "—", a: "—", p: "✓ Dedicated" },
+                  { f: "Direct Placement Drives & Opportunities", b: "—", a: "—", p: "✓ 400+ Partners" },
+                  { f: "Personalized 1-on-1 Resume Optimization", b: "—", a: "—", p: "✓ Included" },
+                  { f: "Company & Role-Specific Interview Support", b: "—", a: "—", p: "✓ Included" },
+                  { f: "Post-Interview Improvement Analysis", b: "—", a: "—", p: "✓ Included" },
+                  { f: "Support Until First Full-time Job", b: "—", a: "—", p: "✓ 100% Guaranteed" },
+                ].map((row, idx) => (
+                  <tr key={row.f} className={idx % 2 === 0 ? "bg-white" : "bg-slate-50/40"}>
+                    <td className="p-3.5 md:p-4 font-semibold text-slate-800">{row.f}</td>
+                    <td className="p-3.5 md:p-4 text-center text-slate-600 font-medium">
+                      {row.b === "—" ? <span className="text-slate-300 font-bold">—</span> : <span className="text-slate-800 font-semibold">{row.b}</span>}
+                    </td>
+                    <td className="p-3.5 md:p-4 text-center font-bold text-blue-700 bg-blue-50/40 border-x border-blue-200">
+                      {row.a === "—" ? <span className="text-slate-300 font-bold">—</span> : <span>{row.a}</span>}
+                    </td>
+                    <td className="p-3.5 md:p-4 text-center font-bold text-emerald-700">
+                      {row.p === "—" ? <span className="text-slate-300 font-bold">—</span> : <span>{row.p}</span>}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </Reveal>
 
       {/* AccioJob 100% Guarantee Banner */}
       <Reveal delay={1}>
