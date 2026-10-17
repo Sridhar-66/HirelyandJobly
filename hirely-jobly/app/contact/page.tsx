@@ -31,7 +31,7 @@ export default function ContactPage() {
     phone: "",
     college: "",
     course: "",
-    centerPreference: "madhapur",
+    centerPreference: "whitefield",
     message: "",
   });
 
@@ -137,7 +137,7 @@ export default function ContactPage() {
                         phone: "",
                         college: "",
                         course: "",
-                        centerPreference: "madhapur",
+                        centerPreference: "whitefield",
                         message: "",
                       });
                     }}
@@ -253,7 +253,7 @@ export default function ContactPage() {
                         onChange={handleChange}
                         className="field"
                       >
-                        <option value="madhapur">Madhapur (HITEC City Campus)</option>
+                        <option value="whitefield">Whitefield (Enzyme SJR I-Park, Bangalore Campus)</option>
                         <option value="online">Live Interactive Online</option>
                       </select>
                     </div>
@@ -289,14 +289,26 @@ export default function ContactPage() {
           <div className="lg:col-span-5 space-y-6">
             <div className="card p-6" id="centers">
               <h3 className="font-bold text-slate-900 text-base mb-4">
-                Hyderabad Training Centers
+                Campus &amp; Training Hubs
               </h3>
               <div className="space-y-4 text-xs">
                 {hubs.map((hub) => (
                   <div key={hub.id} className="pb-3 border-b border-slate-100 last:border-0 last:pb-0">
-                    <div className="font-bold text-slate-900 flex items-center gap-1.5 text-xs">
-                      <MapPin size={14} strokeWidth={1.75} className="text-blue-600 shrink-0" />
-                      {hub.name}
+                    <div className="font-bold text-slate-900 flex items-center justify-between gap-1.5 text-xs">
+                      <div className="flex items-center gap-1.5">
+                        <MapPin size={14} strokeWidth={1.75} className="text-blue-600 shrink-0" />
+                        {hub.name}
+                      </div>
+                      {"mapUrl" in hub && (
+                        <a
+                          href={(hub as { mapUrl?: string }).mapUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[11px] font-semibold text-blue-600 hover:underline"
+                        >
+                          View Map
+                        </a>
+                      )}
                     </div>
                     <p className="mt-1 text-slate-600 leading-relaxed pl-5">
                       {hub.address}

@@ -121,7 +121,28 @@ export const PartnerLogosMarquee = () => (
 
 // ─── Footer backer logos ───────────────────────────────────────────────────────
 export const BackerLogos = () => (
-  <div className="flex flex-col gap-5">
+  <div className="flex flex-col gap-4">
+    {/* AccioJob — Backed by AccioJob */}
+    <div className="flex items-center gap-3.5 opacity-95 hover:opacity-100 transition-opacity">
+      <div className="bg-white rounded-lg px-2.5 py-1.5 flex items-center justify-center shrink-0 shadow-xs">
+        <Image
+          src="/images/brand/acciojob.png"
+          alt="AccioJob"
+          width={90}
+          height={26}
+          className="h-6 w-auto object-contain"
+        />
+      </div>
+      <div>
+        <div className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">
+          Backed by
+        </div>
+        <div className="text-white text-sm font-bold tracking-tight">
+          AccioJob
+        </div>
+      </div>
+    </div>
+
     {/* IIT Delhi — Backgroundless & Much Bigger */}
     <div className="flex items-center gap-3.5 opacity-95 hover:opacity-100 transition-opacity">
       <Image
@@ -129,7 +150,7 @@ export const BackerLogos = () => (
         alt="IIT Delhi"
         width={70}
         height={50}
-        className="h-12 w-auto object-contain shrink-0"
+        className="h-11 w-auto object-contain shrink-0"
       />
       <div>
         <div className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">
@@ -143,7 +164,7 @@ export const BackerLogos = () => (
 
     {/* Tech Mahindra — Backgroundless & Much Bigger */}
     <div className="flex items-center gap-3.5 opacity-95 hover:opacity-100 transition-opacity">
-      <SiMahindra size={48} className="text-red-500 shrink-0" />
+      <SiMahindra size={42} className="text-red-500 shrink-0" />
       <div>
         <div className="text-slate-400 text-[10px] font-bold uppercase tracking-wider">
           Backed up by

@@ -35,6 +35,7 @@ import {
   Phone,
   Mail,
   Rocket,
+  Gift,
 } from "lucide-react";
 
 // Icon lookup map for tiles
@@ -169,20 +170,17 @@ export const Sec = ({
 );
 
 export const Logo = () => (
-  <Link href="/" className="flex items-center gap-2.5 font-bold text-slate-900 group">
-    <div className="relative flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 shadow-md shadow-blue-500/25 transition-transform duration-200 group-hover:scale-105 p-1.5">
+  <Link href="/" className="flex items-center gap-2 group">
+    <div className="relative h-9 w-auto transition-transform duration-200 group-hover:scale-105">
       <Image
-        src="/images/logo-white.svg"
-        alt="Hirely and Jobly logo mark"
-        width={24}
-        height={24}
-        className="h-full w-full object-contain"
+        src="/images/brand/logo-with-slogan.png"
+        alt="Hirely and Jobly — Learn. Prepare. Get Hired."
+        width={200}
+        height={48}
+        className="h-9 w-auto object-contain"
         priority
       />
     </div>
-    <span className="text-base tracking-tight font-extrabold">
-      Hirely <span className="text-blue-600">&amp;</span> Jobly
-    </span>
   </Link>
 );
 
@@ -361,8 +359,8 @@ export const Hero = () => {
                 >
                   <ShieldCheck size={20} strokeWidth={1.75} className="text-blue-400 shrink-0" />
                   <div>
-                    <div className="text-[10px] text-slate-300">Hyderabad Campus</div>
-                    <div className="text-xs font-bold">Madhapur Tech Campus</div>
+                    <div className="text-[10px] text-slate-300">Tech Campus</div>
+                    <div className="text-xs font-bold">Whitefield, Bangalore</div>
                   </div>
                 </motion.div>
               </div>
@@ -669,19 +667,19 @@ export const Courses = () => {
   );
 };
 
-// ─── Hyderabad Training Hubs Section ──────────────────────────────────────────
+// ─── Campus & Training Hubs Section ──────────────────────────────────────────
 export const LocationsHub = () => {
-  const [activeHub, setActiveHub] = useState("madhapur");
+  const [activeHub, setActiveHub] = useState("whitefield");
 
   const currentHub = hubs.find((h) => h.id === activeHub) || hubs[0];
 
   return (
     <Sec id="centers" className="bg-slate-50/70 rounded-3xl my-8">
       <Head
-        pill="Hyderabad Training Hubs"
-        title="Learn offline in Hyderabad or"
+        pill="Campus & Training Centers"
+        title="Learn in-person at our campus or"
         highlight="live interactive online"
-        sub="State-of-the-art coding labs, high-speed workstations, and dedicated mentor desks across prime Hyderabad tech corridors."
+        sub="State-of-the-art coding labs, high-speed workstations, and dedicated mentor desks at Enzyme SJR I-Park, Whitefield and live online."
       />
 
       {/* Hub Tabs */}
@@ -741,6 +739,17 @@ export const LocationsHub = () => {
                 <Link href="/contact" className="btn btn-primary text-xs py-2.5 px-5">
                   Book Center Visit &amp; Demo <ArrowUpRight size={14} strokeWidth={2} />
                 </Link>
+                {"mapUrl" in currentHub && (
+                  <a
+                    href={(currentHub as { mapUrl?: string }).mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-secondary text-xs py-2.5 px-4 flex items-center gap-1.5"
+                  >
+                    <MapPin size={13} strokeWidth={2} className="text-blue-600" />
+                    Open in Google Maps
+                  </a>
+                )}
                 <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-200 flex items-center gap-1.5">
                   <CheckCircle2 size={13} strokeWidth={2} className="text-emerald-600 shrink-0" />
                   {currentHub.batch}
@@ -1016,6 +1025,102 @@ export const Pricing = () => {
           </Reveal>
         ))}
       </div>
+
+      {/* AccioJob 100% Guarantee Banner */}
+      <Reveal delay={1}>
+        <div className="mt-12 rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-blue-700 p-8 md:p-10 text-white shadow-xl">
+          <div className="grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-8 space-y-3">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold backdrop-blur-xs text-white">
+                <ShieldCheck size={14} className="text-emerald-400" />
+                100% Placement Guarantee Track
+              </div>
+              <h3 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+                Backed by AccioJob. 100% Job Placement Guarantee.
+              </h3>
+              <p className="text-sm md:text-base text-blue-100 max-w-2xl leading-relaxed">
+                Hirely and Jobly is proudly backed by <b>AccioJob</b> — empowering our learners with industry-tested curricula, direct hiring drives across 400+ tech companies, and a complete 100% placement guarantee on our Career Launch track.
+              </p>
+              <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-medium text-blue-100">
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 size={15} className="text-emerald-400" />
+                  Full Tuition Refund Policy
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 size={15} className="text-emerald-400" />
+                  400+ Hiring Partners Network
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <CheckCircle2 size={15} className="text-emerald-400" />
+                  Direct Referral Pipeline
+                </span>
+              </div>
+            </div>
+            <div className="md:col-span-4 flex flex-col items-center justify-center p-6 bg-white/10 rounded-2xl border border-white/20 backdrop-blur-sm text-center">
+              <div className="text-xs uppercase tracking-widest text-blue-200 font-bold mb-2">
+                Strategic Partner
+              </div>
+              <div className="bg-white rounded-xl p-3 shadow-md inline-block">
+                <Image
+                  src="/images/brand/acciojob.png"
+                  alt="AccioJob"
+                  width={140}
+                  height={40}
+                  className="h-8 w-auto object-contain"
+                />
+              </div>
+              <div className="mt-3 text-xs text-white font-semibold">
+                Official Placement Ecosystem
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
+
+      {/* Goodies & Swags Showcase */}
+      <Reveal delay={2}>
+        <div className="mt-8 rounded-3xl border border-slate-200 bg-white p-8 md:p-10 shadow-lg">
+          <div className="grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-6 space-y-4">
+              <div className="inline-flex items-center gap-2 rounded-full bg-amber-50 border border-amber-200 px-3.5 py-1 text-xs font-bold text-amber-800">
+                <Gift size={14} className="text-amber-600" />
+                Free with Live Mentor &amp; Career Launch Tracks
+              </div>
+              <h3 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Exclusive Hirely &amp; Jobly Goodies &amp; Swags Kit
+              </h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Every student enrolled in our cohorts gets the official Hirely and Jobly welcome kit shipped straight to their doorstep to kickstart their developer journey in style!
+              </p>
+              <div className="grid grid-cols-2 gap-3 pt-2">
+                {[
+                  "Branded Premium Hoodie / Tee",
+                  "Insulated Steel Tumbler",
+                  "Developer Sticker Pack",
+                  "Engineering Notebook & Pen",
+                  "Laptop Sleeve / Pouch",
+                  "Exclusive Member Badge",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+                    <CheckCircle2 size={14} className="text-blue-600 shrink-0" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="md:col-span-6">
+              <div className="relative overflow-hidden rounded-2xl border border-slate-100 bg-slate-50 shadow-md aspect-square max-h-[380px] w-full mx-auto">
+                <Image
+                  src="/images/brand/goodies-swags.png"
+                  alt="Official Hirely and Jobly Goodies & Swags"
+                  fill
+                  className="object-cover object-center hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Reveal>
     </Sec>
   );
 };
@@ -1122,19 +1227,14 @@ export const Footer = () => {
         <div className="grid gap-10 md:grid-cols-12 pb-12 border-b border-slate-800">
           {/* Brand Column */}
           <div className="md:col-span-4 space-y-4">
-            <div className="flex items-center gap-2.5 font-bold text-white">
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-blue-600 shadow-md p-1.5">
-                <Image
-                  src="/images/logo-white.svg"
-                  alt="Hirely and Jobly logo mark"
-                  width={24}
-                  height={24}
-                  className="h-full w-full object-contain"
-                />
-              </div>
-              <span className="text-lg font-extrabold tracking-tight">
-                Hirely <span className="text-blue-400">&amp;</span> Jobly
-              </span>
+            <div className="flex items-center gap-2.5">
+              <Image
+                src="/images/brand/logo-with-slogan.png"
+                alt="Hirely and Jobly"
+                width={160}
+                height={44}
+                className="h-10 w-auto object-contain brightness-0 invert"
+              />
             </div>
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
               Hyderabad’s premier outcome-driven tech academy for engineering and B.Tech students. Industry capstones, FAANG mentorship, and guaranteed placement assistance.
@@ -1142,7 +1242,14 @@ export const Footer = () => {
             <div className="text-xs text-slate-300 space-y-2 pt-2">
               <div className="flex items-start gap-2">
                 <MapPin size={14} strokeWidth={1.75} className="text-blue-400 shrink-0 mt-0.5" />
-                <span><b>Campus:</b> {site.address}</span>
+                <a
+                  href={"mapsUrl" in site ? (site as { mapsUrl?: string }).mapsUrl : undefined}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  <b>Campus:</b> {site.address}
+                </a>
               </div>
               <div className="flex items-center gap-2">
                 <Phone size={14} strokeWidth={1.75} className="text-blue-400 shrink-0" />
@@ -1200,7 +1307,7 @@ export const Footer = () => {
 
         <div className="mt-8 flex flex-col items-center justify-between gap-4 text-xs text-slate-500 sm:flex-row">
           <div>
-            © {new Date().getFullYear()} {site.name}. All rights reserved. Hyderabad, Telangana.
+            © {new Date().getFullYear()} {site.name}. All rights reserved. Whitefield, Bangalore.
           </div>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-slate-400 transition-colors">

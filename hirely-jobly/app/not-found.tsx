@@ -18,7 +18,7 @@ export default function NotFound() {
         Page Not Found
       </h1>
       <p className="text-sm md:text-base text-slate-600 max-w-sm leading-relaxed mb-8">
-        Looks like this page took a wrong turn at Madhapur. Let&apos;s get you back on track.
+        Looks like this page took a wrong turn at Whitefield. Let&apos;s get you back on track.
       </p>
       <div className="flex flex-wrap items-center justify-center gap-3">
         <Link

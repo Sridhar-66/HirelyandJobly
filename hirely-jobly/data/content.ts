@@ -4,11 +4,12 @@
 
 export const site = {
   name: "Hirely and Jobly",
-  city: "Hyderabad, Telangana",
+  city: "Whitefield, Bangalore",
   email: "hello@hirelyandjobly.com",
   phone: "+91 95536 85395",
   whatsapp: "+919553685395",
-  address: "Plot 42, Silicon Valley, Madhapur, Hyderabad, Telangana 500081",
+  address: "Enzyme SJR I-Park, Coworking Office Space, Whitefield, Bangalore, Karnataka 560066",
+  mapsUrl: "https://www.google.com/maps/place/Enzyme+SJR+I+Park-+Coworking+Office+space+in+Whitefield/@12.9809745,77.7262588,14z",
 };
 
 export interface StatItem {
@@ -65,8 +66,8 @@ export const animatedStatsData: StatItem[] = [
 export const trustBadges = [
   { label: "4.9/5 Rating", desc: "by 5,000+ Students", icon: "Star" },
   { label: "100% Live", desc: "Mentor-Led Coding", icon: "MonitorPlay" },
-  { label: "Hyderabad Campus", desc: "Madhapur Tech Campus", icon: "Building2" },
-  { label: "Placement Cell", desc: "Dedicated Mock Interviews", icon: "ShieldCheck" },
+  { label: "Tech Campus", desc: "Enzyme SJR I-Park, Whitefield", icon: "Building2" },
+  { label: "Placement Cell", desc: "100% Job Guarantee Track", icon: "ShieldCheck" },
 ];
 
 export const partners = [
@@ -335,12 +336,13 @@ export const mentors = [
 
 export const hubs = [
   {
-    id: "madhapur",
-    name: "Madhapur Tech Campus",
-    area: "HITEC City / Madhapur",
-    address: "Plot 42, Silicon Valley, Near Metro Station, Madhapur, Hyderabad",
+    id: "whitefield",
+    name: "Whitefield Tech Campus",
+    area: "Enzyme SJR I-Park, Whitefield, Bangalore",
+    address: "Enzyme SJR I-Park, Coworking Office Space, Whitefield, Bangalore, Karnataka 560066",
     features: ["Air-conditioned High-Speed Labs", "Weekend In-Person Hackathons", "Mentor 1-on-1 Desk Reviews", "Placement Drive Hub"],
     batch: "Weekend & Weekday Batches Active",
+    mapUrl: "https://www.google.com/maps/place/Enzyme+SJR+I+Park-+Coworking+Office+space+in+Whitefield/@12.9809745,77.7262588,14z",
   },
   {
     id: "online",
@@ -358,8 +360,8 @@ export const plans = [
     badge: "Self-Paced",
     popular: false,
     desc: "Introductory pricing for our first cohort",
-    price: "₹2,999",
-    originalPrice: "₹5,999",
+    price: "₹5,000",
+    originalPrice: "₹9,999",
     cta: "Pay Now",
     f: [
       "Recorded content sequences",
@@ -375,9 +377,9 @@ export const plans = [
     name: "Live Mentor Track",
     badge: "MOST CHOSEN",
     popular: true,
-    desc: "Our flagship program",
-    price: "₹4,999",
-    originalPrice: "₹9,999",
+    desc: "Our flagship program — 100% AccioJob Certified Training",
+    price: "₹8,000",
+    originalPrice: "₹14,999",
     cta: "Pay Now",
     f: [
       "Live instructor-led sessions + recordings",
@@ -388,25 +390,26 @@ export const plans = [
       "AI-powered resume checker",
       "Internship offer & completion certificate",
       "Private community & peer network",
-      "HirelyandJobly merch",
+      "Exclusive Hirely & Jobly Goodies & Swags kit",
     ],
   },
   {
     name: "Career Launch Track",
-    badge: "Career Launch",
+    badge: "100% GUARANTEE",
     popular: false,
-    desc: "Everything in Live Mentor, plus:",
-    price: "₹8,999",
-    originalPrice: "₹16,999",
+    desc: "Everything in Live Mentor + 100% Placement Guarantee backed by AccioJob:",
+    price: "₹13,000",
+    originalPrice: "₹24,999",
     cta: "Pay Now",
     f: [
+      "100% Placement Guarantee Assistance backed by AccioJob",
       "Career assessment & personalized roadmap",
       "Soft skills & business communication training",
       "Mock technical & HR interviews with feedback",
-      "Placement assistance & job referrals",
+      "Direct placement drives & referral portal",
       "Guest lectures & industry case studies",
       "Letter of Recommendation for top performers",
-      "HirelyandJobly merch",
+      "Premium Hirely & Jobly Goodies & Swags kit",
     ],
   },
 ];
