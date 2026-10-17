@@ -170,14 +170,14 @@ export const Sec = ({
 );
 
 export const Logo = () => (
-  <Link href="/" className="flex items-center gap-2 group">
-    <div className="relative h-14 w-auto transition-transform duration-200 group-hover:scale-105">
+  <Link href="/" className="flex items-center gap-2 group shrink-0">
+    <div className="relative h-20 sm:h-24 md:h-28 w-auto transition-transform duration-200 group-hover:scale-105">
       <Image
         src="/images/brand/logo-with-slogan.png"
         alt="Hirely and Jobly — Learn. Prepare. Get Hired."
-        width={360}
-        height={86}
-        className="h-14 w-auto object-contain"
+        width={560}
+        height={140}
+        className="h-20 sm:h-24 md:h-28 w-auto object-contain"
         priority
       />
     </div>
@@ -196,20 +196,20 @@ const NAV_LINKS = [
 
 export const Nav = ({ activePath = "/" }: { activePath?: string }) => {
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/90 backdrop-blur-md transition-all">
-      <div className="mx-auto flex h-20 max-w-6xl items-center justify-between px-4">
+    <header className="sticky top-0 z-40 border-b border-slate-100 bg-white/95 backdrop-blur-md transition-all">
+      <div className="mx-auto flex h-28 md:h-32 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Logo />
 
-        <nav className="hidden items-center gap-1 text-xs font-semibold text-slate-600 md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-1.5 lg:gap-3 text-sm lg:text-base font-bold text-slate-700 md:flex" aria-label="Main navigation">
           {NAV_LINKS.map(([label, href]) => {
             const isActive = activePath === href;
             return (
               <Link
                 key={label}
                 href={href}
-                className={`rounded-full px-3.5 py-1.5 transition-all ${
+                className={`rounded-full px-4 py-2 transition-all ${
                   isActive
-                    ? "bg-blue-50 font-bold text-blue-700 shadow-xs"
+                    ? "bg-blue-50 font-extrabold text-blue-700 shadow-xs"
                     : "hover:bg-slate-50 hover:text-slate-900"
                 }`}
               >
@@ -222,9 +222,9 @@ export const Nav = ({ activePath = "/" }: { activePath?: string }) => {
         <div className="flex items-center gap-3">
           <Link
             href="/contact"
-            className="btn btn-primary text-xs py-2 px-5"
+            className="btn btn-primary text-sm font-bold py-3 px-6 shadow-md shadow-blue-500/20"
           >
-            Book Free Demo <ArrowUpRight size={14} strokeWidth={2} />
+            Book Free Demo <ArrowUpRight size={15} strokeWidth={2.5} />
           </Link>
         </div>
       </div>
@@ -276,7 +276,7 @@ export const Hero = () => {
                   href="/courses"
                   className="btn btn-secondary py-3 px-6 text-sm"
                 >
-                  Explore 7 Tracks
+                  Explore 8 Tracks
                 </Link>
               </div>
             </Reveal>
@@ -659,7 +659,7 @@ export const Courses = () => {
       <Reveal delay={2}>
         <div className="mt-12 text-center">
           <Link href="/courses" className="btn btn-secondary py-3 px-8 text-sm">
-            View All 7 Course Syllabi <ArrowUpRight size={14} strokeWidth={2} />
+            View All 8 Course Syllabi <ArrowUpRight size={14} strokeWidth={2} />
           </Link>
         </div>
       </Reveal>
@@ -853,7 +853,7 @@ export const Testimonials = () => {
 // ─── Meet the Mentors Section ─────────────────────────────────────────────────
 export const MentorsSection = () => {
   return (
-    <Sec id="mentors">
+    <Sec id="mentors" className="overflow-hidden">
       <Head
         pill="Learn from the Best"
         title="Industry engineers who"
@@ -861,41 +861,72 @@ export const MentorsSection = () => {
         sub="Our mentors are practicing engineers from top tech companies — not just instructors. They bring real production experience directly to your cohort."
       />
 
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        {mentors.map((m, idx) => (
-          <Reveal key={m.name} delay={idx}>
-            <div className="card card-hover flex flex-col items-center text-center p-6 gap-4">
-              {/* Avatar */}
-              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-2 border-blue-100 shadow-md">
-                <Image
-                  src={m.image}
-                  alt={m.name}
-                  fill
-                  className="object-cover object-top"
-                />
-              </div>
-
-              {/* Name & Role */}
+      {/* Infinite Moving Marquee of Big Rectangle Cards */}
+      <div className="relative mt-12 w-full overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+        <div className="marquee-mentors flex gap-6 py-4">
+          {[...mentors, ...mentors].map((m, idx) => (
+            <div
+              key={`${m.name}-${idx}`}
+              className="w-[360px] sm:w-[400px] shrink-0 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-xl hover:border-blue-300 transition-all duration-300 flex flex-col justify-between"
+            >
               <div>
-                <div className="text-sm font-bold text-slate-900">{m.name}</div>
-                <div className="text-xs font-semibold text-blue-600 mt-0.5">{m.role}</div>
-                <div className="text-[11px] text-slate-500 mt-0.5">@ {m.company} · {m.experience}</div>
+                {/* Top Header: Company Pill + Experience Pill */}
+                <div className="flex items-center justify-between gap-2 mb-4">
+                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 border border-blue-200">
+                    <Building2 size={13} strokeWidth={2} className="text-blue-600" />
+                    {m.company}
+                  </span>
+                  <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-0.5 text-[11px] font-semibold text-slate-600">
+                    <Sparkles size={11} strokeWidth={2} className="text-amber-500" />
+                    {m.experience}
+                  </span>
+                </div>
+
+                {/* Mentor Avatar & Details */}
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl border-2 border-blue-100 shadow-md">
+                    <Image
+                      src={m.image}
+                      alt={m.name}
+                      fill
+                      className="object-cover object-top"
+                    />
+                  </div>
+                  <div>
+                    <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                      {m.name}
+                    </h3>
+                    <div className="text-xs font-semibold text-blue-600 mt-0.5">
+                      {m.role}
+                    </div>
+                    {"highlight" in m && (
+                      <div className="text-[11px] text-slate-500 mt-1 font-medium leading-tight">
+                        {(m as { highlight?: string }).highlight}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
 
-              {/* Expertise Tags */}
-              <div className="flex flex-wrap justify-center gap-1.5">
-                {m.expertise.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700 border border-blue-100"
-                  >
-                    {tag}
-                  </span>
-                ))}
+              {/* Bottom: Expertise Tags */}
+              <div className="pt-3 border-t border-slate-100">
+                <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">
+                  Core Expertise
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {m.expertise.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-slate-50 px-2.5 py-0.5 text-[11px] font-semibold text-slate-700 border border-slate-200"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
-          </Reveal>
-        ))}
+          ))}
+        </div>
       </div>
     </Sec>
   );
@@ -1116,13 +1147,12 @@ export const Pricing = () => {
               </div>
             </div>
             <div className="md:col-span-6 flex items-center justify-center">
-              <div className="w-full rounded-2xl border border-slate-100 bg-slate-50 shadow-md p-4 flex items-center justify-center">
+              <div className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
                 <Image
                   src="/images/brand/goodies-swags.png"
-                  alt="Official Hirely and Jobly Goodies &amp; Swags"
-                  width={500}
-                  height={500}
-                  className="w-full h-auto max-h-[380px] object-contain hover:scale-105 transition-transform duration-500"
+                  alt="Exclusive Hirely &amp; Jobly Goodies &amp; Swags Kit"
+                  fill
+                  className="object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>

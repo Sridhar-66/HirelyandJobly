@@ -83,7 +83,7 @@ export default function AboutPage() {
               </div>
               <div className="mt-8 pt-6 border-t border-slate-100 flex items-center gap-3 text-xs text-slate-700 font-medium">
                 <Sparkles size={16} className="text-amber-500" />
-                <span>7 dedicated career tracks with hybrid Bangalore lab access</span>
+                <span>8 dedicated career tracks with hybrid Bangalore lab access</span>
               </div>
             </div>
           </div>
