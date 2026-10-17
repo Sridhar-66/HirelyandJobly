@@ -38,12 +38,12 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="absolute inset-y-0 right-0 hidden w-[40%] md:block overflow-hidden rounded-r-3xl opacity-60" aria-hidden="true">
+          <div className="absolute inset-y-0 right-0 hidden w-[40%] md:block overflow-hidden rounded-r-3xl opacity-70" aria-hidden="true">
             <Image
-              src="/images/about/about-classroom.jpg"
-              alt="Classroom at Hirely and Jobly training centre"
+              src="/images/heroes/about_heroImg1.webp"
+              alt="Hirely and Jobly training center"
               fill
-              className="object-cover object-left"
+              className="object-cover object-center"
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/60 to-transparent" />
@@ -118,6 +118,41 @@ export default function AboutPage() {
                 <div className="text-4xl md:text-5xl font-extrabold text-blue-600">4.9/5</div>
                 <div className="text-xs font-bold text-slate-800 mt-1">Student Rating</div>
                 <div className="text-[11px] text-slate-500">Verified reviews</div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Certificate Showcase */}
+        <section className="mb-16">
+          <div className="card overflow-hidden p-8 md:p-10">
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div>
+                <Pill>Industry-Recognized Certificate</Pill>
+                <h2 className="mt-3 text-2xl md:text-3xl font-bold text-slate-900">
+                  Earn a certificate that opens doors at top companies
+                </h2>
+                <p className="mt-4 text-sm text-slate-600 leading-relaxed">
+                  Upon completing your capstone project, you receive a verified digital certificate with a unique validation link — recognized by our 40+ hiring partners across India.
+                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5">
+                    <ShieldCheck size={14} className="text-blue-600" /> Blockchain-Verified
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5">
+                    <Award size={14} className="text-amber-500" /> Industry Recognized
+                  </div>
+                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 bg-slate-50 border border-slate-200 rounded-full px-3 py-1.5">
+                    <Users size={14} className="text-emerald-600" /> Shared with Recruiters
+                  </div>
+                </div>
+              </div>
+              <div className="relative h-56 md:h-64 overflow-hidden rounded-2xl border border-slate-200 shadow-lg bg-slate-50">
+                <Image
+                  src="/images/certificates/new_certificate_transformer.webp"
+                  alt="Hirely and Jobly completion certificate"
+                  fill
+                  className="object-contain p-4"
+                />
               </div>
             </div>
           </div>

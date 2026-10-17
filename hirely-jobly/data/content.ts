@@ -293,8 +293,43 @@ export const testimonials = [
     role: "Cybersecurity Analyst",
     company: "Security Firm",
     ctc: "₹8.5 LPA",
-    image: "/images/avatars/avatar-1.jpg",
+    image: "/images/avatars/1777896434212-course-student-avatar-icon.webp",
     q: "The hands-on penetration testing labs and CTF challenges were gold. They teach real toolchains like Burp Suite and Metasploit, not just textbook theory.",
+  },
+];
+
+export const mentors = [
+  {
+    name: "Nikhil Raman",
+    role: "Senior Software Engineer",
+    company: "Google",
+    expertise: ["System Design", "DSA", "Full-Stack"],
+    image: "/images/mentors/1774939630694-NikhilRaman2x.webp",
+    experience: "8+ Years",
+  },
+  {
+    name: "Harsh Agarwal",
+    role: "Lead Frontend Engineer",
+    company: "Razorpay",
+    expertise: ["React", "Next.js", "TypeScript"],
+    image: "/images/mentors/harsh.webp",
+    experience: "6+ Years",
+  },
+  {
+    name: "Mehtab Alam",
+    role: "ML Research Engineer",
+    company: "Microsoft",
+    expertise: ["AI/ML", "PyTorch", "LLMs"],
+    image: "/images/mentors/mehtab-alam.webp",
+    experience: "7+ Years",
+  },
+  {
+    name: "Shubham Dubey",
+    role: "DevOps & Cloud Architect",
+    company: "AWS",
+    expertise: ["Docker", "Kubernetes", "CI/CD"],
+    image: "/images/mentors/shubham-dubey.webp",
+    experience: "5+ Years",
   },
 ];
 

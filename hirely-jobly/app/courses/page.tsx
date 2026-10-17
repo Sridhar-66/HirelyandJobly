@@ -133,10 +133,10 @@ export default function CoursesPage() {
             </div>
             <div className="relative md:col-span-5 lg:col-span-4 h-80 md:h-full min-h-[360px] md:min-h-[420px] w-full self-stretch overflow-hidden">
               <Image
-                src="/images/about/counsellor.jpg"
+                src="/images/heroes/career_hero.webp"
                 alt="Academic counsellor at Hirely and Jobly"
                 fill
-                className="object-cover object-[center_35%]"
+                className="object-cover object-center"
                 priority
               />
               <div className="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-slate-900 via-transparent to-transparent pointer-events-none" />

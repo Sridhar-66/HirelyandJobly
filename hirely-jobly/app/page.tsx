@@ -6,6 +6,7 @@ import {
   Courses,
   LocationsHub,
   Why,
+  MentorsSection,
   Testimonials,
   Pricing,
   Faq,
@@ -23,6 +24,7 @@ export default function Home() {
         <Courses />
         <LocationsHub />
         <Why />
+        <MentorsSection />
         <Testimonials />
         <Pricing />
         <Faq />

@@ -68,6 +68,7 @@ import {
   why,
   tiles,
   testimonials,
+  mentors,
   hubs,
   plans,
   faqCategories,
@@ -290,10 +291,10 @@ export const Hero = () => {
               <div className="relative mx-auto max-w-md overflow-visible rounded-3xl border border-slate-200 bg-white p-3 shadow-2xl shadow-blue-500/10">
                 <div className="relative h-80 w-full overflow-hidden rounded-2xl md:h-96">
                   <Image
-                    src="/images/heroes/hero-student.jpg"
+                    src="/images/heroes/agniva-home-hero.webp"
                     alt="Student learning at Hirely and Jobly"
                     fill
-                    className="object-cover object-right-center"
+                    className="object-cover object-top"
                     priority
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent" />
@@ -750,8 +751,8 @@ export const LocationsHub = () => {
             <div className="md:col-span-5">
               <div className="relative h-60 w-full overflow-hidden rounded-2xl md:h-72">
                 <Image
-                  src="/images/about/about-classroom.jpg"
-                  alt="Hirely and Jobly classroom center"
+                  src="/images/about/about-mentor-session.jpg"
+                  alt="Hirely and Jobly mentor session"
                   fill
                   className="object-cover"
                 />
@@ -824,6 +825,57 @@ export const Testimonials = () => {
                     {t.college}
                   </div>
                 </div>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </Sec>
+  );
+};
+
+// ─── Meet the Mentors Section ─────────────────────────────────────────────────
+export const MentorsSection = () => {
+  return (
+    <Sec id="mentors">
+      <Head
+        pill="Learn from the Best"
+        title="Industry engineers who"
+        highlight="mentor every student"
+        sub="Our mentors are practicing engineers from top tech companies — not just instructors. They bring real production experience directly to your cohort."
+      />
+
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        {mentors.map((m, idx) => (
+          <Reveal key={m.name} delay={idx}>
+            <div className="card card-hover flex flex-col items-center text-center p-6 gap-4">
+              {/* Avatar */}
+              <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-2xl border-2 border-blue-100 shadow-md">
+                <Image
+                  src={m.image}
+                  alt={m.name}
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+
+              {/* Name & Role */}
+              <div>
+                <div className="text-sm font-bold text-slate-900">{m.name}</div>
+                <div className="text-xs font-semibold text-blue-600 mt-0.5">{m.role}</div>
+                <div className="text-[11px] text-slate-500 mt-0.5">@ {m.company} · {m.experience}</div>
+              </div>
+
+              {/* Expertise Tags */}
+              <div className="flex flex-wrap justify-center gap-1.5">
+                {m.expertise.map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-full bg-blue-50 px-2.5 py-0.5 text-[10px] font-semibold text-blue-700 border border-blue-100"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
           </Reveal>
